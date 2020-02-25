@@ -4,12 +4,15 @@ const {
 	DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
 	CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env;
+
 const isNetlifyProduction = NETLIFY_ENV === 'production';
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
 require('dotenv').config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
+
+console.log(NETLIFY_ENV);
 
 module.exports = {
 	siteMetadata: {
