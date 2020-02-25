@@ -12,8 +12,6 @@ require('dotenv').config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
 
-console.log(NETLIFY_ENV);
-
 module.exports = {
 	siteMetadata: {
 		title: 'griffen.design',
