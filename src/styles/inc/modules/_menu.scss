@@ -1,0 +1,13 @@
+.menu-link {
+	@include dark-mode {
+		color: $c-dark-copy;
+	}
+
+	color: $c-copy;
+}
+
+.menu {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+}

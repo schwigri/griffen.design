@@ -1,0 +1,94 @@
+.site-title {
+	@include dark-mode {
+		color: $c-dark-copy;
+	}
+
+	color: $c-copy;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0;
+	text-decoration: none;
+
+	&:focus,
+	&:hover {
+		color: $c-copy;
+	}
+}
+
+.site-title-container {
+	@include breakpoint(sm) {
+		display: block;
+	}
+
+	@include breakpoint(md) {
+		width: calc(50% - 2em);
+	}
+
+	display: none;
+	flex-grow: 2;
+	width: calc(50% - 1em);
+}
+
+.stars-link {
+	@include breakpoint(md) {
+		height: 3em;
+		width: 3em;
+	}
+
+	display: block;
+	height: 2em;
+	left: 0;
+	position: absolute;
+	top: 50%;
+	transform: translate3d(0, -50%, 0);
+	width: 2em;
+}
+
+.stars-container {
+	@include breakpoint(md) {
+		width: 3em;
+	}
+
+	height: auto;
+	flex-grow: 1;
+	position: relative;
+	width: 2em;
+
+	.stars {
+		height: 100%;
+		width: auto;
+	}
+}
+
+.header-inner {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+
+	.menu {
+		@include breakpoint(sm) {
+			width: calc(50% - 1em);
+		}
+
+		@include breakpoint(md) {
+			width: calc(50% - 2em);
+		}
+
+		flex-grow: 2;
+		width: calc(100% - 2em);
+	}
+}
+
+.site-header {
+	@include dark-mode {
+		background-image: linear-gradient(to bottom, $c-dark-background, rgba($c-dark-background, .9), rgba($c-dark-background, 0));
+	}
+
+	background-image: linear-gradient(to bottom, $c-background, rgba($c-background, .9), rgba($c-background, 0));
+	box-sizing: border-box;
+	padding: 2em;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 3;
+}

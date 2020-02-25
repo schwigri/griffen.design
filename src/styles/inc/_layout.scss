@@ -1,0 +1,26 @@
+.main-content {
+	transform-origin: center top;
+}
+
+.site-main {
+	@include dark-mode {
+		background-color: $c-dark-background;
+		color: $c-dark-copy;
+	}
+
+	background-color: $c-background;
+	color: $c-copy;
+	padding-top: $s-header-height;
+	padding-bottom: 4em;
+	position: relative;
+	transform: translate3d(0, 0, 0);
+	z-index: 2;
+}
+
+.md-plus {
+	@include breakpoint(md) {
+		display: initial;
+	}
+
+	display: none;
+}

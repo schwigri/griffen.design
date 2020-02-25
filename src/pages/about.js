@@ -5,8 +5,8 @@ import SEO from '../components/SEO';
 function IndexPage() {
 	return (
 		<>
-			<SEO title="hi" titleSuffix=" - what" description="howdy" />
-			<p>Hi</p>
+			<SEO title="About" titleSuffix=" - what" description="howdy" />
+			<p>About</p>
 		</>
 	);
 }

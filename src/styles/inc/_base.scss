@@ -1,9 +1,39 @@
+:root {
+	--safe-area-inset-top: 0;
+	--safe-area-inset-right: 0;
+	--safe-area-inset-bottom: 0;
+	--safe-area-inset-left: 0;
+
+	@supports (top: constant(safe-area-inset-top)) {
+		--safe-area-inset-top: constant(safe-area-inset-top);
+		--safe-area-inset-right: constant(safe-area-inset-right);
+		--safe-area-inset-bottom: constant(safe-area-inset-bottom);
+		--safe-area-inset-left: constant(safe-area-inset-left);
+	}
+
+	@supports (top: env(safe-area-inset-top)) {
+		--safe-area-inset-top: env(safe-area-inset-top);
+		--safe-area-inset-right: env(safe-area-inset-right);
+		--safe-area-inset-bottom: env(safe-area-inset-bottom);
+		--safe-area-inset-left: env(safe-area-inset-left);
+	}
+}
+
 html {
+	@include breakpoint(md) {
+		font-size: 78.125%;
+	}
+
 	font-size: 62.5%;
 	height: 100%;
 }
 
 body {
+	@include dark-mode {
+		background-color: $c-dark-thread;
+	}
+
+	background-color: $c-thread;
 	font-family: $f-copy;
 	font-size: 1.6rem;
 	height: 100%;
@@ -18,8 +48,57 @@ h4 {
 	margin: 1em 0 .5em;
 }
 
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 1.666em;
+}
+
 p {
 	font-size: 1em;
 	line-height: 1.4;
 	margin: 0 0 1em;
+}
+
+a {
+	@include dark-mode {
+		color: $c-dark-theme;
+	}
+
+	color: $c-theme;
+	text-decoration: underline;
+	text-decoration-style: solid;
+
+	&:focus,
+	&:hover {
+		@include dark-mode {
+			color: $c-dark-accent;
+		}
+
+		color: $c-accent;
+	}
+
+	&:active {
+		text-decoration-style: dashed;
+	}
+}
+
+@keyframes blink {
+	0% {
+		text-decoration: none;
+	}
+
+	49% {
+		text-decoration: none;
+	}
+
+	50% {
+		text-decoration: underline;
+	}
+
+	100% {
+		text-decoration: underline;
+	}
 }

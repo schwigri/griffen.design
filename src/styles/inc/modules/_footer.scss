@@ -1,0 +1,36 @@
+.privacy-link {
+	&::before {
+		content: '/';
+		margin: 0 .5em;
+	}
+}
+
+.footer-inner {
+	@include breakpoint(md) {
+		padding: 4em;
+	}
+
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2em;
+
+	& > p {
+		margin: 0;
+	}
+}
+
+.site-footer {
+	@include dark-mode {
+		background-color: $c-dark-thread;
+		color: $c-dark-copy;
+	}
+
+	background-color: $c-thread;
+	color: $c-copy;
+	bottom: 0;
+	padding-bottom: var(--safe-area-inset-bottom);
+	position: sticky;
+	z-index: 1;
+}
