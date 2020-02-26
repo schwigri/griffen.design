@@ -6,7 +6,7 @@ function Page({ children }) {
 }
 
 Page.propTypes = {
-	children: PropTypes.node.isRequired,
+	children: PropTypes.node,
 };
 
 export default Page;

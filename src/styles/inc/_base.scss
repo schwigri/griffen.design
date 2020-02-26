@@ -1,8 +1,17 @@
 :root {
+	@include breakpoint(sm) {
+		--s-footer-height: 8.6rem;
+	}
+
+	@include breakpoint(md) {
+		--s-footer-height: 15rem;
+	}
+
 	--safe-area-inset-top: 0;
 	--safe-area-inset-right: 0;
 	--safe-area-inset-bottom: 0;
 	--safe-area-inset-left: 0;
+	--s-footer-height: 12.4rem;
 
 	@supports (top: constant(safe-area-inset-top)) {
 		--safe-area-inset-top: constant(safe-area-inset-top);
@@ -25,7 +34,6 @@ html {
 	}
 
 	font-size: 62.5%;
-	height: 100%;
 }
 
 body {
@@ -36,7 +44,6 @@ body {
 	background-color: $c-thread;
 	font-family: $f-copy;
 	font-size: 1.6rem;
-	height: 100%;
 	margin: 0;
 }
 
@@ -62,6 +69,19 @@ p {
 	margin: 0 0 1em;
 }
 
+ol,
+ul {
+	line-height: 1;
+	margin: 0 0 1em;
+	padding-left: 2em;
+
+	& > li {
+		line-height: 1.4;
+		margin: 0 0 .5em;
+		padding-left: 1em;
+	}
+}
+
 a {
 	@include dark-mode {
 		color: $c-dark-theme;
@@ -71,6 +91,12 @@ a {
 	text-decoration: underline;
 	text-decoration-style: solid;
 
+	&[target='_blank']::after {
+		content: ' ↗️';
+		font-size: .8em;
+	}
+
+	&[aria-current='page'],
 	&:focus,
 	&:hover {
 		@include dark-mode {

@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
+import { Link, graphql, useStaticQuery } from 'gatsby';
 import { motion, AnimatePresence } from 'framer-motion';
-import uniqid from 'uniqid';
 
 import Header from './Header';
-import Menu from './Menu';
 import Footer from './Footer';
 
 const variants = {
 	hidden: {
 		opacity: 0,
 		scale: 0.8,
-		translateY: '1em',
+		transform: 'translateY(1em)',
 	},
 	visible: {
 		opacity: 1,
 		scale: 1,
-		translateY: 0,
+		transform: 'translateY(0)',
 		transition: {
 			delay: 0.6,
 		},
@@ -26,11 +24,43 @@ const variants = {
 	exit: {
 		opacity: 0,
 		scale: 0.8,
-		translateY: '-1em',
+		transform: 'translateY(-1em)',
 	},
 };
 
-function Layout({ locale, home = false, children }) {
+function Layout({ locale, id = '', home = false, children }) {
+	const data = useStaticQuery(
+		graphql`
+			query LayoutQuery {
+				menus: allDatoCmsMenu {
+					edges {
+						node {
+							locale
+							links {
+								id
+								title
+								slug
+							}
+						}
+					}
+				}
+			}
+		`
+	);
+
+	const menuLinks = data.menus.edges
+		.filter(x => locale === x.node.locale)[0]
+		.node.links.map(item => {
+			const linkSlug =
+				locale === 'en' ? `/${item.slug}/` : `/${locale}/${item.slug}/`;
+
+			return (
+				<Link className="menu-link" to={linkSlug} key={`menu-link-${item.id}`}>
+					{item.title}
+				</Link>
+			);
+		});
+
 	const [colorScheme, setColorScheme] = useState('light');
 	const [colorSchemeWatcher, setColorSchemeWatcher] = useState(false);
 
@@ -53,8 +83,6 @@ function Layout({ locale, home = false, children }) {
 		}
 	}, []);
 
-	// const shouldReduceMotion = useReducedMotion();
-
 	return (
 		<>
 			<Helmet>
@@ -67,23 +95,30 @@ function Layout({ locale, home = false, children }) {
 					name="apple-mobile-web-app-status-bar-style"
 					content={colorScheme === 'light' ? 'default' : 'black-translucent'}
 				/>
+				{locale === 'ja' && (
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;display=swap&amp;subset=japanese"
+					/>
+				)}
 			</Helmet>
 
 			<Header locale={locale} home={home}>
-				<Menu>
-					<Link to="/about" className="menu-link">About</Link>
-				</Menu>
+				<nav className="menu">{menuLinks}</nav>
 			</Header>
 
 			<main className="site-main">
 				<AnimatePresence>
 					<motion.div
-						key={uniqid('main-content-')}
+						key={`main-content-${id}`}
 						className="main-content"
 						initial="hidden"
 						animate="visible"
 						exit="exit"
 						variants={variants}
+						style={{
+							translateY: '0',
+						}}
 					>
 						{children}
 					</motion.div>
@@ -97,6 +132,7 @@ function Layout({ locale, home = false, children }) {
 
 Layout.propTypes = {
 	locale: PropTypes.string.isRequired,
+	id: PropTypes.string,
 	home: PropTypes.bool,
 	children: PropTypes.node.isRequired,
 };

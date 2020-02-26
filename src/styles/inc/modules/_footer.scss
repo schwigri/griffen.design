@@ -1,7 +1,11 @@
 .privacy-link {
 	&::before {
-		content: '/';
-		margin: 0 .5em;
+		@include breakpoint(sm) {
+			content: '/';
+			margin: 0 .5em;
+		}
+
+		content: '';
 	}
 }
 
@@ -17,7 +21,22 @@
 	padding: 2em;
 
 	& > p {
+		@include breakpoint(sm) {
+			display: block;
+		}
+
+		display: flex;
+		flex-direction: column;
 		margin: 0;
+		text-align: center;
+
+		span {
+			@include breakpoint(sm) {
+				margin: 0;
+			}
+
+			margin: .5em 0;
+		}
 	}
 }
 

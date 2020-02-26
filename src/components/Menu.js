@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Menu({ children }) {
-	return <nav className="menu">{children}</nav>;
+	return ;
 }
 
 Menu.propTypes = {
