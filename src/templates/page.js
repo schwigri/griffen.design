@@ -28,7 +28,10 @@ function PageTemplate({ data }) {
 					}
 
 					return (
-						<section key={btoa(item.id)} className="section">
+						<section
+							key={Buffer.from(item.id).toString('base64')}
+							className="section"
+						>
 							{sectionContent}
 						</section>
 					);

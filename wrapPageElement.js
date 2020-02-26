@@ -9,7 +9,10 @@ function wrapPageElement({ element, props }) {
 
 	const locale = pageContext && pageContext.locale ? pageContext.locale : 'en';
 
-	const id = pageContext && pageContext.id ? btoa(pageContext.id): uniqid();
+	const id =
+		pageContext && pageContext.id
+			? Buffer.from(pageContext.id).toString('base64')
+			: uniqid();
 
 	const home = pageContext && pageContext.home ? pageContext.home : false;
 
@@ -29,6 +32,11 @@ wrapPageElement.propTypes = {
 			home: PropTypes.bool,
 		}).isRequired,
 	}),
+	pageContext: PropTypes.shape({
+		locale: PropTypes.string.isRequired,
+		id: PropTypes.string.isRequired,
+		home: PropTypes.bool,
+	}).isRequired,
 };
 
 export default wrapPageElement;

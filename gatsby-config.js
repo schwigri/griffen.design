@@ -1,3 +1,7 @@
+require('dotenv').config({
+	path: `.env.${process.env.NODE_ENV}`,
+});
+
 const {
 	NODE_ENV,
 	URL: NETLIFY_SITE_URL = 'https://www.griffen.design',
@@ -7,10 +11,6 @@ const {
 
 const isNetlifyProduction = NETLIFY_ENV === 'production';
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-
-require('dotenv').config({
-	path: `.env.${process.env.NODE_ENV}`,
-});
 
 module.exports = {
 	siteMetadata: {
