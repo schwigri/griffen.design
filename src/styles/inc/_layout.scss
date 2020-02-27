@@ -22,8 +22,12 @@
 	font-family: $f-heading;
 }
 
+.centered {
+	text-align: center;
+}
+
 .subtitle {
-	color: #666;
+	color: var(--c-subtitle);
 	font-size: 1.2em;
 	font-family: $f-heading;
 }
@@ -48,6 +52,11 @@
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 1220px;
+
+	& > h1,
+	& > .subtitle {
+		text-align: center;
+	}
 }
 
 .site-main {
@@ -55,7 +64,7 @@
 		margin: 0 0 0 6em;
 	}
 
-	background-color: $c-background;
+	background-color: var(--c-background);
 	box-sizing: border-box;
 	overflow: auto;
 	padding-bottom: 4em;

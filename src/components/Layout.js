@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -7,10 +7,37 @@ import Header from './Header';
 import Footer from './Footer';
 
 function Layout({ locale, id = '', variants = {}, children }) {
+	const [colorScheme, setColorScheme] = useState('light');
+	const [colorSchemeListener, setColorSchemeListener] = useState(false);
+
+	useEffect(() => {
+		let colorSchemeQuery;
+
+		if (window && !colorSchemeListener) {
+			console.log('Hi');
+			setColorSchemeListener(true);
+			colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+			if (colorSchemeQuery.matches) {
+				setColorScheme('dark');
+			} else {
+				setColorScheme('light');
+			}
+
+			colorSchemeQuery.addListener(() => {
+				if (colorSchemeQuery.matches) {
+					setColorScheme('dark');
+				} else {
+					setColorScheme('light');
+				}
+			});
+		}
+	}, [colorScheme, colorSchemeListener]);
+
 	return (
 		<div className="site">
 			<Helmet>
-				<html lang={locale} />
+				<html lang={locale} className={colorScheme} />
 				{locale === 'ja' && (
 					<link
 						rel="stylesheet"

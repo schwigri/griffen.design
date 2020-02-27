@@ -13,6 +13,22 @@
 	--safe-area-inset-left: 0;
 	--s-footer-height: 12.4rem;
 
+	// Colors.
+	--c-background: #{$c-background};
+	--c-header-background: #{$c-header-background};
+	--c-copy: #{$c-copy};
+	--c-heading: #{$c-heading};
+	--c-subtitle: #{$c-subtitle};
+	--c-theme: #{$c-theme};
+	--c-accent: #{$c-accent};
+	--c-thread: #{$c-thread};
+
+	--c-link-accent: #{$c-link-accent};
+	--c-lang-link-hover: #{$c-lang-link-hover};
+	--c-header-link-accent: #{$c-header-link-accent};
+	--c-card-shadow: #{$c-card-shadow};
+	--c-card-hover-shadow: #{$c-card-hover-shadow};
+
 	@supports (top: constant(safe-area-inset-top)) {
 		--safe-area-inset-top: constant(safe-area-inset-top);
 		--safe-area-inset-right: constant(safe-area-inset-right);
@@ -28,14 +44,30 @@
 	}
 }
 
+.dark {
+	--c-background: #{$c-dark-background};
+	--c-header-background: #{$c-dark-header-background};
+	--c-copy: #{$c-dark-copy};
+	--c-heading: #{$c-dark-heading};
+	--c-subtitle: #{$c-dark-subtitle};
+	--c-theme: #{$c-dark-theme};
+	--c-accent: #{$c-dark-accent};
+	--c-thread: #{$c-dark-thread};
+	--c-link-accent: #{$c-dark-link-accent};
+	--c-lang-link-hover: #{$c-dark-lang-link-hover};
+	--c-header-link-accent: #{$c-dark-header-link-accent};
+	--c-card-shadow: #{$c-dark-card-shadow};
+	--c-card-hover-shadow: #{$c-dark-card-hover-shadow};
+}
+
 html {
 	font-size: 62.5%;
 	height: 100%;
 }
 
 body {
-	background-color: $c-thread;
-	color: #555;
+	background-color: var(--c-thread);
+	color: var(--c-copy);
 	font-family: $f-copy;
 	font-size: 1.6rem;
 	height: 100%;
@@ -48,7 +80,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: #333;
+	color: var(--c-heading);
 	font-family: $f-heading;
 	font-weight: 600;
 	line-height: 1;
@@ -84,20 +116,20 @@ ul {
 }
 
 a:not(.special-link) {
-	border-bottom: 2px solid rgba($c-theme, .25);
-	color: $c-theme;
+	border-bottom: 2px solid var(--c-link-accent);
+	color: var(--c-theme);
 	font-weight: 500;
 	text-decoration: none;
 	transition: border-bottom-color .3s, background-color .3s;
 
 	&:focus,
 	&:hover {
-		background-color: rgba($c-theme, .15);
-		border-bottom-color: $c-theme;
+		background-color: var(--c-link-accent);
+		border-bottom-color: var(--c-theme);
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 .125em #fff, 0 0 0 .25em $c-theme;
+		box-shadow: 0 0 0 .125em #fff, 0 0 0 .25em var(--c-theme);
 		outline: none;
 	}
 

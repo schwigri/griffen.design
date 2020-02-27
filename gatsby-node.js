@@ -41,20 +41,20 @@ exports.createPages = async ({ graphql, actions }) => {
 			}
 		}
 	`).then(result => {
-		// result.data.homes.edges.forEach(item => {
-		// 	const { id, locale } = item.node;
-		// 	const homeSlug = locale === 'en' ? '/' : `/${locale}/`;
+		result.data.homes.edges.forEach(item => {
+			const { id, locale } = item.node;
+			const homeSlug = locale === 'en' ? '/' : `/${locale}/`;
 
-		// 	createPage({
-		// 		path: homeSlug,
-		// 		component: path.resolve('./src/templates/index.js'),
-		// 		context: {
-		// 			id,
-		// 			locale,
-		// 			home: true,
-		// 		},
-		// 	});
-		// });
+			createPage({
+				path: homeSlug,
+				component: path.resolve('./src/templates/index.js'),
+				context: {
+					id,
+					locale,
+					home: true,
+				},
+			});
+		});
 
 		result.data.pages.edges.forEach(item => {
 			const { id, locale, slug, _allSlugLocales } = item.node;

@@ -77,7 +77,7 @@ function IndexPage() {
 
 						<div className="projects opposite">
 							<div className="left">
-								<article className="project medium">
+								<article className="project medium increase-readability">
 									<div className="project-background">
 										<img src="https://www.griffen.me/static/05b11779fa8a43eb9380de4846e2b471/89b76/sdot-tile.png" alt="" />
 									</div>

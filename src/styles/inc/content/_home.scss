@@ -17,6 +17,7 @@
 	@include breakpoint(sm) {
 		align-items: flex-end;
 		margin-right: 2em;
+		margin-top: 2em;
 	}
 }
 
@@ -41,6 +42,10 @@
 	top: 0;
 	width: 100%;
 	z-index: 1;
+
+	.gatsby-image-wrapper {
+		transition: opacity .3s,
+	}
 
 	img {
 		height: 100%;
@@ -84,7 +89,7 @@
 
 	p {
 		@include breakpoint(xl) {
-			padding: 0 4em;
+			padding: 0 3em;
 			text-align: center;
 		}
 
@@ -97,6 +102,7 @@
 .project-title {
 	@include breakpoint(xl) {
 		color: #fff;
+		text-align: center;
 	}
 
 	font-size: 1.8em;
@@ -107,13 +113,12 @@
 	@include breakpoint(xl) {
 		border-bottom: 0;
 		border-radius: 2px;
-		box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px, rgba(71, 63, 79, 0.08) 0px 2px 4px;
 		height: 0;
 		padding-bottom: calc(9 / 16 * 65%);
 		width: 65%;
 	}
 
-	box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px, rgba(71, 63, 79, 0.08) 0px 2px 4px;
+	box-shadow: var(--c-card-shadow);
 	box-sizing: border-box;
 	margin: 0 0 2em;
 	overflow: hidden;
@@ -130,9 +135,10 @@
 
 	&:hover {
 		.project-background {
+			.gatsby-image-wrapper,
 			img {
 				@include breakpoint(xl) {
-					opacity: .25;
+					opacity: .1;
 				}
 			}
 		}
@@ -140,6 +146,17 @@
 		.project-foreground {
 			@include breakpoint(xl) {
 				opacity: 1;
+			}
+		}
+	}
+
+	&.increase-readability {
+		&:hover {
+			.project-background {
+				img,
+				.gatsby-image-wrapper {
+					opacity: .05;
+				}
 			}
 		}
 	}
@@ -189,7 +206,7 @@
 
 			&:hover {
 				@include breakpoint(xl) {
-					box-shadow: rgba(46, 41, 51, 0.08) 0px 4px 8px, rgba(71, 63, 79, 0.16) 0px 8px 16px;
+					box-shadow: var(--c-card-hover-shadow);
 					transform: scale(1.05);
 				}
 			}
@@ -198,12 +215,20 @@
 
 	&.opposite {
 		.left {
+			@include breakpoint(sm) {
+				margin-top: 0;
+			}
+
 			@include breakpoint(xl) {
 				margin-top: 4em;
 			}
 		}
 
 		.right {
+			@include breakpoint(sm) {
+				margin-top: 2em;
+			}
+
 			@include breakpoint(xl) {
 				margin-top: 0;
 			}

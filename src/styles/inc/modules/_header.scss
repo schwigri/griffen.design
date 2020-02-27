@@ -42,12 +42,12 @@
 .nav-link {
 	@include breakpoint(md) {
 		border-bottom: 0;
-		border-left: 2px solid rgba($c-copy, .15);
+		border-left: 2px solid var(--c-header-link-accent);
 		margin-left: 0;
 		margin-top: 1em;
 	}
 
-	border-bottom: 2px solid rgba($c-copy, .15);
+	border-bottom: 2px solid var(--c-header-link-accent);
 	color: inherit;
 	font-weight: 500;
 	text-decoration: none;
@@ -56,21 +56,21 @@
 
 	&:hover {
 		@include breakpoint(md) {
-			border-left-color: $c-copy;
+			border-left-color: var(--c-copy);
 		}
 
-		background-color: rgba($c-copy, .15);
-		border-bottom-color: $c-copy;
+		background-color: var(--c-header-link-accent);
+		border-bottom-color: var(--c-copy);
 	}
 
 	&[aria-current='page'] {
 		@include breakpoint(md) {
 			border-bottom: 0;
-			border-left: 2px solid rgba($c-theme, .15);
+			border-left: 2px solid var(--c-link-accent);
 		}
 
-		border-bottom: 2px solid $c-theme;
-		color: $c-theme;
+		border-bottom: 2px solid var(--c-theme);
+		color: var(--c-theme);
 	}
 }
 
@@ -92,8 +92,8 @@
 
 .site-header {
 	@include breakpoint(md) {
-		background-color: #fff;
-		box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px, rgba(71, 63, 79, 0.08) 0px 2px 4px;
+		background-color: var(--c-background);
+		box-shadow: var(--c-card-shadow);
 		height: 100%;
 		padding: 1em 0 2em;
 		width: 6em;
@@ -102,7 +102,7 @@
 
 	align-items: center;
 	background-color: transparent;
-	background-image: linear-gradient(to bottom, $c-background, rgba($c-background, .65), rgba($c-background, 0));
+	background-image: var(--c-header-background);
 	box-sizing: border-box;
 	display: flex;
 	height: 4em;
