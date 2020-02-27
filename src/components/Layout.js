@@ -22,33 +22,35 @@ function Layout({ locale, id = '', variants = {}, children }) {
 			<Header locale={locale} id={id} />
 
 			<AnimatePresence>
-				<motion.main
-					key={`main-content-${id}`}
-					className="site-main"
-					initial="hidden"
-					animate="visible"
-					exit="exit"
-					variants={{
-						hidden: {
-							opacity: 0,
-						},
-						visible: {
-							opacity: 1,
-							transition: {
-								duration: 0.25,
-								delay: 0.5,
+				<main className="site-main" key={`main-${id}`}>
+					<motion.div
+						key={`main-content-${id}`}
+						className="main-content"
+						initial="hidden"
+						animate="visible"
+						exit="exit"
+						variants={{
+							hidden: {
+								opacity: 0,
 							},
-						},
-						exit: {
-							opacity: 0,
-							transition: {
-								duration: 0.25,
+							visible: {
+								opacity: 1,
+								transition: {
+									duration: 0.25,
+									delay: 0.5,
+								},
 							},
-						},
-					}}
-				>
-					{children}
-				</motion.main>
+							exit: {
+								opacity: 0,
+								transition: {
+									duration: 0.25,
+								},
+							},
+						}}
+					>
+						{children}
+					</motion.div>
+				</main>
 
 				<Footer locale={locale} id={`footer-${id}`} variants={variants} />
 			</AnimatePresence>

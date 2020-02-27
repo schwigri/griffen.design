@@ -1,14 +1,14 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-
-import * as Graphics from '../graphics/graphics';
 import { Link } from 'gatsby';
-import { AnimatePresence, motion } from 'framer-motion';
+
+import SEO from '../components/SEO';
 
 function IndexPage() {
 
 	return (
 		<>
+			<SEO title="UX Designer. Developer. Language enthusiast." titleSuffix=" – Griffen Schwiesow" description="This is a draft!" />
+
 			<section className="section intro">
 						<h1>Hi, I&rsquo;m Griffen Schwiesow!</h1>
 						<p className="subtitle">UX Designer. Full-stack developer. Language enthusiast.</p>

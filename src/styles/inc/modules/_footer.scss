@@ -72,17 +72,20 @@
 		flex-direction: row;
 		margin-left: 6em;
 		padding: 2em;
+		padding-bottom: calc(2em + var(--safe-area-inset-bottom));
 	}
 
 	@include breakpoint(lg) {
 		padding: 4em;
+		padding-bottom: calc(4em + var(--safe-area-inset-bottom));
 	}
 
-	background-color: cornsilk;
+	background-color: $c-thread;
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 2em;
+	padding-bottom: calc(2em + var(--safe-area-inset-bottom));
 	position: sticky;
 }
