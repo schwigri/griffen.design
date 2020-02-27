@@ -10,84 +10,57 @@
 	word-wrap: normal;
 }
 
-.accent-image {
-	@include breakpoint(sm) {
-		width: calc(100% - (4 * 1.6rem));
-	}
-
-	@include breakpoint(md) {
-		display: inline-block;
-		float: left;
-		margin: 0 2em;
-		margin-left: calc(50vw - (#{$s-copy-width} / 2) - 15rem);
-		max-width: 30rem;
-	}
-
-	display: block;
-	position: relative;
-	margin: 0 auto 1em;
-	width: 100%;
-
-	&.right {
-		@include breakpoint(md) {
-			float: right;
-			margin: 0 2em;
-			margin-left: 2em;
-			margin-right: calc(50vw - (#{$s-copy-width} / 2) - 15rem);
-		}
-	}
-
-	&.small {
-		@include breakpoint(md) {
-			max-width: 22rem;
-			margin-left: calc(50vw - (#{$s-copy-width} / 2) - 11rem);
-		}
-
-		&.right {
-			@include breakpoint(md) {
-				margin-left: 2em;
-				margin-right: calc(50vw - (#{$s-copy-width} / 2) - 11rem);
-			}
-		}
-	}
-
-	img {
-		width: 100%;
-	}
-
-	figcaption {
-		margin: .5em 0;
-		font-size: .8em;
-		font-style: italic;
-		text-align: center;
-	}
-}
-
-.main-content {
-	transform-origin: center top;
-}
-
-.site-main {
-	@include dark-mode {
-		background-color: $c-dark-background;
-		color: $c-dark-copy;
-	}
-
-	background-color: $c-background;
-	box-sizing: border-box;
-	color: $c-copy;
-	overflow: auto;
-	padding-top: $s-header-height;
-	padding-bottom: 4em;
-	position: relative;
-	transform: translate3d(0, 0, 0);
-	z-index: 2;
-}
-
 .md-plus {
 	@include breakpoint(md) {
 		display: initial;
 	}
 
 	display: none;
+}
+
+.heading {
+	font-family: $f-heading;
+}
+
+.subtitle {
+	color: #666;
+	font-size: 1.2em;
+	font-family: $f-heading;
+}
+
+.section-header {
+	margin: 4em 0;
+	text-align: center;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+}
+
+.section {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1220px;
+}
+
+.site-main {
+	@include breakpoint(md) {
+		margin: 0 0 0 6em;
+	}
+
+	background-color: $c-background;
+	box-sizing: border-box;
+	margin: 4em 0 0;
+	overflow: auto;
+	padding-bottom: 4em;
+	position: relative;
+	transform: translate3d(0, 0, 0);
+	z-index: 2;
 }

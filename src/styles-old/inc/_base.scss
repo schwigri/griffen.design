@@ -29,27 +29,28 @@
 }
 
 html {
+	@include breakpoint(md) {
+		font-size: 78.125%;
+	}
+
 	font-size: 62.5%;
-	height: 100%;
 }
 
 body {
-	color: #555;
+	@include dark-mode {
+		background-color: $c-dark-thread;
+	}
+
+	background-color: $c-thread;
 	font-family: $f-copy;
 	font-size: 1.6rem;
-	height: 100%;
 	margin: 0;
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-	color: #333;
-	font-family: $f-heading;
-	font-weight: 600;
+h4 {
 	line-height: 1;
 	margin: 1em 0 .5em;
 }
@@ -64,13 +65,12 @@ h2 {
 
 p {
 	font-size: 1em;
-	line-height: 1.5;
+	line-height: 1.4;
 	margin: 0 0 1em;
 }
 
 ol,
 ul {
-	box-sizing: border-box;
 	line-height: 1;
 	margin: 0 0 1em;
 	padding-left: 2em;
@@ -82,29 +82,49 @@ ul {
 	}
 }
 
-a:not(.special-link) {
-	border-bottom: 2px solid rgba($c-theme, .25);
-	color: $c-theme;
-	font-weight: 500;
-	text-decoration: none;
-	transition: border-bottom-color .3s, background-color .3s;
-
-	&:focus,
-	&:hover {
-		background-color: rgba($c-theme, .15);
-		border-bottom-color: $c-theme;
+a {
+	@include dark-mode {
+		color: $c-dark-theme;
 	}
 
-	&:focus {
-		box-shadow: 0 0 0 .125em #fff, 0 0 0 .25em $c-theme;
-		outline: none;
+	color: $c-theme;
+	text-decoration: underline;
+	text-decoration-style: solid;
+
+	&[target='_blank']::after {
+		content: ' ↗️';
+		font-size: .8em;
+	}
+
+	&[aria-current='page'],
+	&:focus,
+	&:hover {
+		@include dark-mode {
+			color: $c-dark-accent;
+		}
+
+		color: $c-accent;
 	}
 
 	&:active {
-		border-bottom-style: dashed;
+		text-decoration-style: dashed;
 	}
 }
 
-abbr[title] {
-	cursor: help;
+@keyframes blink {
+	0% {
+		text-decoration: none;
+	}
+
+	49% {
+		text-decoration: none;
+	}
+
+	50% {
+		text-decoration: underline;
+	}
+
+	100% {
+		text-decoration: underline;
+	}
 }

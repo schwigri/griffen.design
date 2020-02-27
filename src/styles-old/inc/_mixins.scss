@@ -1,0 +1,18 @@
+@mixin breakpoint($breakpoint) {
+	$width: map-get($breakpoints, $breakpoint);
+	@media (min-width: $width) {
+		@content;
+	}
+}
+
+@mixin reduced-motion {
+	@media (prefers-reduced-motion: reduce) {
+		@content;
+	}
+}
+
+@mixin dark-mode {
+	@media (prefers-color-scheme: dark) {
+		@content;
+	}
+}

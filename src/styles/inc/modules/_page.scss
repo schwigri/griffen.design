@@ -1,20 +1,86 @@
-.page-content {
+.page-title {
+	text-align: center;
+}
+
+.page {
+	@include breakpoint(md) {
+		padding-top: 4em;
+	}
+
+	padding-top: 2em;
+
 	h1,
 	h2,
 	h3,
 	h4,
+	h5,
+	h6,
 	p,
 	ol,
 	ul {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: $s-copy-width;
+		width: calc(100% - 3.2rem);
+	}
+
+	& > .subtitle {
+		text-align: center;
+	}
+}
+
+
+
+.accent-image {
+	@include breakpoint(sm) {
+		margin: 0 auto 2em;
 		width: calc(100% - (4 * 1.6rem));
 	}
 
-	ol,
-	ul {
-		max-width: calc(#{$s-copy-width} - 2em);
-		width: calc(100% - (4 * 1.6rem) - 2em);
+	@include breakpoint(md) {
+		display: inline-block;
+		float: left;
+		margin: 0 2em 2em;
+		margin-left: calc(50% - (#{$s-copy-width} / 2) - 15rem);
+		max-width: 30rem;
+	}
+
+	display: block;
+	position: relative;
+	margin: 0 auto 1em;
+	width: 100%;
+
+	&.right-image {
+		@include breakpoint(md) {
+			float: right;
+			margin: 0 2em;
+			margin-left: 2em;
+			margin-right: calc(50% - (#{$s-copy-width} / 2) - 15rem);
+		}
+	}
+
+	&.small {
+		@include breakpoint(md) {
+			max-width: 22rem;
+			margin-left: calc(50% - (#{$s-copy-width} / 2) - 11rem);
+		}
+
+		&.right-image {
+			@include breakpoint(md) {
+				margin-left: 2em;
+				margin-right: calc(50% - (#{$s-copy-width} / 2) - 11rem);
+			}
+		}
+	}
+
+	img {
+		width: 100%;
+	}
+
+	figcaption {
+		margin: .5em 0;
+		font-size: .8em;
+		font-style: italic;
+		text-align: center;
 	}
 }

@@ -12,14 +12,13 @@ $c-dark-accent: hsl(1, 79, 58);
 $c-dark-thread: hsl(48, 100, 7);
 
 // Fonts.
-$f-copy: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
-$f-heading: Prompt, $f-copy;
+$f-copy: 'Work Sans', 'M PLUS 1p', sans-serif;
 
 // Sizes.
 $s-content-width: 96rem;
-$s-copy-width: 65rem;
+$s-copy-width: 54rem;
 $s-header-height: 8.3rem;
-$s-footer-height: 10rem;
+$s-footer-height: 8.6rem;
 
 // Breakpoints.
 $width-xs: 0;

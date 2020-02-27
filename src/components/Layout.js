@@ -1,100 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Link, graphql, useStaticQuery } from 'gatsby';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import Header from './Header';
 import Footer from './Footer';
 
-const variants = {
-	hidden: {
-		opacity: 0,
-		scale: 0.8,
-		transform: 'translateY(1em)',
-	},
-	visible: {
-		opacity: 1,
-		scale: 1,
-		transform: 'translateY(0)',
-		transition: {
-			delay: 0.6,
-		},
-	},
-	exit: {
-		opacity: 0,
-		scale: 0.8,
-		transform: 'translateY(-1em)',
-	},
-};
-
-function Layout({ locale, id = '', home = false, children }) {
-	const data = useStaticQuery(
-		graphql`
-			query LayoutQuery {
-				menus: allDatoCmsMenu {
-					edges {
-						node {
-							locale
-							links {
-								id
-								title
-								slug
-							}
-						}
-					}
-				}
-			}
-		`
-	);
-
-	const menuLinks = data.menus.edges
-		.filter(x => locale === x.node.locale)[0]
-		.node.links.map(item => {
-			const linkSlug =
-				locale === 'en' ? `/${item.slug}/` : `/${locale}/${item.slug}/`;
-
-			return (
-				<Link className="menu-link" to={linkSlug} key={`menu-link-${item.id}`}>
-					{item.title}
-				</Link>
-			);
-		});
-
-	const [colorScheme, setColorScheme] = useState('light');
-	const [colorSchemeWatcher, setColorSchemeWatcher] = useState(false);
-
-	const watchColorScheme = e => {
-		setColorScheme(e.matches ? 'dark' : 'light');
-	};
-
-	useEffect(() => {
-		if (window && !colorSchemeWatcher) {
-			setColorSchemeWatcher(true);
-
-			const theColorSchemeWatcher = window.matchMedia(
-				'(prefers-color-scheme: dark)'
-			);
-			theColorSchemeWatcher.addListener(watchColorScheme);
-
-			return () => {
-				theColorSchemeWatcher.removeListener(watchColorScheme);
-			};
-		}
-	}, []);
-
+function Layout({ locale, id = '', variants = {}, children }) {
 	return (
-		<>
+		<div className="site">
 			<Helmet>
 				<html lang={locale} />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
-				/>
-				<meta
-					name="apple-mobile-web-app-status-bar-style"
-					content={colorScheme === 'light' ? 'default' : 'black-translucent'}
-				/>
 				{locale === 'ja' && (
 					<link
 						rel="stylesheet"
@@ -103,37 +19,57 @@ function Layout({ locale, id = '', home = false, children }) {
 				)}
 			</Helmet>
 
-			<Header locale={locale} home={home}>
-				<nav className="menu">{menuLinks}</nav>
-			</Header>
+			<Header locale={locale} id={id} />
 
-			<main className="site-main">
-				<AnimatePresence>
-					<motion.div
-						key={`main-content-${id}`}
-						className="main-content"
-						initial="hidden"
-						animate="visible"
-						exit="exit"
-						variants={variants}
-						style={{
-							translateY: '0',
-						}}
-					>
-						{children}
-					</motion.div>
-				</AnimatePresence>
-			</main>
+			<AnimatePresence>
+				<motion.main
+					key={`main-content-${id}`}
+					className="site-main"
+					initial="hidden"
+					animate="visible"
+					exit="exit"
+					variants={{
+						hidden: {
+							opacity: 0,
+						},
+						visible: {
+							opacity: 1,
+							transition: {
+								duration: 0.25,
+								delay: 0.5,
+							},
+						},
+						exit: {
+							opacity: 0,
+							transition: {
+								duration: 0.25,
+							},
+						},
+					}}
+				>
+					{children}
+				</motion.main>
 
-			<Footer locale={locale} />
-		</>
+				<Footer locale={locale} id={`footer-${id}`} variants={variants} />
+			</AnimatePresence>
+		</div>
 	);
 }
 
 Layout.propTypes = {
 	locale: PropTypes.string.isRequired,
 	id: PropTypes.string,
-	home: PropTypes.bool,
+	variants: PropTypes.shape({
+		en: PropTypes.shape({
+			link: PropTypes.string.isRequired,
+		}).isRequired,
+		de: PropTypes.shape({
+			link: PropTypes.string.isRequired,
+		}).isRequired,
+		ja: PropTypes.shape({
+			link: PropTypes.string.isRequired,
+		}).isRequired,
+	}),
 	children: PropTypes.node.isRequired,
 };
 

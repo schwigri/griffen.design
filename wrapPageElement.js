@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
 import Layout from './src/components/Layout';
+import { useStaticQuery, graphql } from 'gatsby';
 
 function wrapPageElement({ element, props }) {
 	const { pageContext } = props;
@@ -14,10 +15,22 @@ function wrapPageElement({ element, props }) {
 			? Buffer.from(pageContext.id).toString('base64')
 			: uniqid();
 
-	const home = pageContext && pageContext.home ? pageContext.home : false;
+	let variants = null;
+
+	if (pageContext && pageContext._allSlugLocales) {
+		variants = {};
+		pageContext._allSlugLocales.forEach(slugLocale => {
+			variants[slugLocale.locale] = {
+				link:
+					slugLocale.locale === 'en'
+						? `/${slugLocale.value}/`
+						: `/${slugLocale.locale}/${slugLocale.value}/`,
+			};
+		});
+	}
 
 	return (
-		<Layout locale={locale} id={id} home={home} {...props}>
+		<Layout locale={locale} id={id} variants={variants} {...props}>
 			{element}
 		</Layout>
 	);
@@ -35,7 +48,12 @@ wrapPageElement.propTypes = {
 	pageContext: PropTypes.shape({
 		locale: PropTypes.string.isRequired,
 		id: PropTypes.string.isRequired,
-		home: PropTypes.bool,
+		_allSlugLocales: PropTypes.arrayOf(
+			PropTypes.shape({
+				locale: PropTypes.string.isRequired,
+				value: PropTypes.string.isRequired,
+			})
+		),
 	}).isRequired,
 };
 

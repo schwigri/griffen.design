@@ -19,6 +19,10 @@ exports.createPages = async ({ graphql, actions }) => {
 						id
 						locale
 						slug
+						_allSlugLocales {
+							locale
+							value
+						}
 					}
 				}
 			}
@@ -28,28 +32,32 @@ exports.createPages = async ({ graphql, actions }) => {
 						id
 						locale
 						slug
+						_allSlugLocales {
+							locale
+							value
+						}
 					}
 				}
 			}
 		}
 	`).then(result => {
-		result.data.homes.edges.forEach(item => {
-			const { id, locale } = item.node;
-			const homeSlug = locale === 'en' ? '/' : `/${locale}/`;
+		// result.data.homes.edges.forEach(item => {
+		// 	const { id, locale } = item.node;
+		// 	const homeSlug = locale === 'en' ? '/' : `/${locale}/`;
 
-			createPage({
-				path: homeSlug,
-				component: path.resolve('./src/templates/index.js'),
-				context: {
-					id,
-					locale,
-					home: true,
-				},
-			});
-		});
+		// 	createPage({
+		// 		path: homeSlug,
+		// 		component: path.resolve('./src/templates/index.js'),
+		// 		context: {
+		// 			id,
+		// 			locale,
+		// 			home: true,
+		// 		},
+		// 	});
+		// });
 
 		result.data.pages.edges.forEach(item => {
-			const { id, locale, slug } = item.node;
+			const { id, locale, slug, _allSlugLocales } = item.node;
 			const pageSlug = locale === 'en' ? `/${slug}` : `/${locale}/${slug}/`;
 
 			createPage({
@@ -58,12 +66,13 @@ exports.createPages = async ({ graphql, actions }) => {
 				context: {
 					id,
 					locale,
+					_allSlugLocales,
 				},
 			});
 		});
 
 		result.data.privacyPolicies.edges.forEach(item => {
-			const { id, locale, slug } = item.node;
+			const { id, locale, slug, _allSlugLocales } = item.node;
 			const privacyPolicySlug =
 				locale === 'en' ? `/${slug}` : `/${locale}/${slug}/`;
 
@@ -73,6 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
 				context: {
 					id,
 					locale,
+					_allSlugLocales,
 				},
 			});
 		});
