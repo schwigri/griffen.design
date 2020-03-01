@@ -220,6 +220,10 @@
 	&:hover {
 		.project {
 			@include breakpoint(xl) {
+				@include reduced-motion {
+					transform: scale(1);
+				}
+
 				transform: scale(.95);
 			}
 
@@ -227,6 +231,10 @@
 			&:focus,
 			&:hover {
 				@include breakpoint(xl) {
+					@include reduced-motion {
+						transform: scale(1);
+					}
+
 					box-shadow: var(--c-card-hover-shadow);
 					transform: scale(1.05);
 				}

@@ -59,6 +59,10 @@
 	}
 }
 
+.main-content {
+	transition: transform .25s;
+}
+
 .site-main {
 	@include double-breakpoint(md, md) {
 		margin: 0 0 0 6em;

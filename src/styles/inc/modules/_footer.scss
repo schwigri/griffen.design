@@ -32,7 +32,7 @@
 	height: 3.6rem;
 	justify-content: center;
 	text-decoration: none;
-	transition: background-color .3s;
+	transition: .3s;
 	width: 3.6rem;
 
 	// &:hover {
@@ -85,6 +85,10 @@
 	@include breakpoint(lg) {
 		padding: 4em;
 		padding-bottom: calc(4em + var(--safe-area-inset-bottom));
+	}
+
+	@include reduced-motion {
+		position: relative;
 	}
 
 	background-color: var(--c-thread);

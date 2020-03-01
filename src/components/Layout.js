@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 import Header from './Header';
 import Footer from './Footer';
 
 function Layout({ locale, id = '', variants = {}, children }) {
+	const shouldReduceMotion = useReducedMotion();
+
 	const [colorScheme, setColorScheme] = useState('light');
 	const [colorSchemeListener, setColorSchemeListener] = useState(false);
 
@@ -64,9 +66,13 @@ function Layout({ locale, id = '', variants = {}, children }) {
 						variants={{
 							hidden: {
 								opacity: 0,
+								transform: shouldReduceMotion
+									? 'translateY(0)'
+									: 'translateY(4em)',
 							},
 							visible: {
 								opacity: 1,
+								transform: 'translateY(0)',
 								transition: {
 									duration: 0.25,
 									delay: 0.5,
@@ -74,6 +80,9 @@ function Layout({ locale, id = '', variants = {}, children }) {
 							},
 							exit: {
 								opacity: 0,
+								transform: shouldReduceMotion
+									? 'translateY(0)'
+									: 'translateY(4em)',
 								transition: {
 									duration: 0.25,
 								},
