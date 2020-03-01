@@ -6,15 +6,31 @@ import marked from 'marked';
 import createDOMPurify from 'dompurify';
 import Parser from 'html-react-parser';
 
-const Article = ({ project, size }) => {
-	let classes = 'project';
-
-	if (size) classes += ` ${size}`;
+const Article = ({ project, size = '' }) => {
+	const classes = `project ${size}`;
 
 	const projectSlug =
 		project.locale === 'en'
 			? `/${project.slug}`
 			: `/${project.locale}/${project.slug}/`;
+
+	const readMoreLinkText =
+		project.locale === 'en' ? (
+			<>
+				Read more
+				<span className="sr-only"> about ${project.title}</span>
+			</>
+		) : project.locale === 'de' ? (
+			<>
+				Lesen Sie mehr
+				<span className="sr-only"> über ${project.title}</span>
+			</>
+		) : (
+			<>
+				<span className="sr-only">${project.title} について</span>
+				もっと読む
+			</>
+		);
 
 	const [projectDescription, setProjectDescription] = useState('');
 
@@ -37,9 +53,8 @@ const Article = ({ project, size }) => {
 				<p className="subtitle">{project.subtitle}</p>
 				{projectDescription}
 				<p>
-					<Link to={projectSlug}>
-						Read more
-						<span className="sr-only"> about {project.title}</span>
+					<Link to={projectSlug} className="project-link">
+						{readMoreLinkText}
 					</Link>
 				</p>
 			</div>

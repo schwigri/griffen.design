@@ -32,6 +32,7 @@
 	height: 3.6rem;
 	justify-content: center;
 	text-decoration: none;
+	transition: background-color .3s;
 	width: 3.6rem;
 
 	// &:hover {
@@ -55,6 +56,11 @@
 		background-color: var(--c-lang-link-hover);
 	}
 
+	&:focus {
+		box-shadow: 0 0 0 .25em var(--c-thread), 0 0 0 .5em var(--c-theme);
+		outline: none;
+	}
+
 	// &[aria-current='page'],
 	&.current {
 		background-color: var(--c-background);
@@ -70,9 +76,10 @@
 .site-footer {
 	@include breakpoint(md) {
 		flex-direction: row;
+	}
+
+	@include double-breakpoint(md, md) {
 		margin-left: 6em;
-		padding: 2em;
-		padding-bottom: calc(2em + var(--safe-area-inset-bottom));
 	}
 
 	@include breakpoint(lg) {
@@ -86,6 +93,14 @@
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 2em;
+	padding-left: calc(2em + var(--safe-area-inset-left));
+	padding-right: calc(2em + var(--safe-area-inset-right));
 	padding-bottom: calc(2em + var(--safe-area-inset-bottom));
 	position: sticky;
+
+	a:not(.special-link) {
+		&:focus {
+			box-shadow: 0 0 0 .25em var(--c-thread), 0 0 0 .5em var(--c-theme);
+		}
+	}
 }

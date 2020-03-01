@@ -1,5 +1,5 @@
 .stars {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		height: 4em;
 	}
 
@@ -8,28 +8,45 @@
 }
 
 .stars-container {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		height: calc(50% - 75px);
 	}
 
 	left: 0;
 	top: 0;
 	z-index: 4;
+
+	.special-link {
+		border-radius: 100%;
+		display: inline-block;
+		transition: box-shadow .3s;
+
+		&:focus {
+			box-shadow: 0 0 0 .5em var(--c-background), 0 0 0 .75em var(--c-theme);
+			outline: none;
+		}
+	}
 }
 
 .site-title {
 	color: inherit;
 	font-size: 1em;
 	text-decoration: none;
+	transition: box-shadow .3s;
+
+	&:focus {
+		box-shadow: 0 0 0 .25em var(--c-background), 0 0 0 .5em var(--c-copy);
+		outline: none;
+	}
 }
 
 .site-title-container {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		display: block;
 	}
 
 	&:not(:lang(ja)) {
-		@include breakpoint(md) {
+		@include double-breakpoint(md, md) {
 			transform: scale(-1);
 		}
 	}
@@ -40,7 +57,7 @@
 }
 
 .nav-link {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		border-bottom: 0;
 		border-left: 2px solid var(--c-header-link-accent);
 		margin-left: 0;
@@ -54,8 +71,9 @@
 	transition: .3s;
 	margin-left: 1em;
 
+	&:focus,
 	&:hover {
-		@include breakpoint(md) {
+		@include double-breakpoint(md, md) {
 			border-left-color: var(--c-copy);
 		}
 
@@ -63,8 +81,13 @@
 		border-bottom-color: var(--c-copy);
 	}
 
+	&:focus {
+		box-shadow: 0 0 0 .25em var(--c-background), 0 0 0 .5em var(--c-copy);
+		outline: none;
+	}
+
 	&[aria-current='page'] {
-		@include breakpoint(md) {
+		@include double-breakpoint(md, md) {
 			border-bottom: 0;
 			border-left: 2px solid var(--c-link-accent);
 		}
@@ -76,14 +99,14 @@
 
 .site-nav {
 	&:not(:lang(ja)) {
-		@include breakpoint(md) {
+		@include double-breakpoint(md, md) {
 			transform: scale(-1);
 		}
 	}
 }
 
 .site-nav-container {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		display: flex;
 		height: calc(50% - (150px / 2));
 		justify-content: flex-end;
@@ -91,7 +114,7 @@
 }
 
 .site-header {
-	@include breakpoint(md) {
+	@include double-breakpoint(md, md) {
 		background-color: var(--c-background);
 		box-shadow: var(--c-card-shadow);
 		height: 100%;
@@ -110,6 +133,9 @@
 	left: 0;
 	opacity: 1;
 	padding: 0 1em;
+	padding-left: calc(1em + var(--safe-area-inset-left));
+	padding-right: calc(1em + var(--safe-area-inset-right));
+	padding-top: calc(1em + var(--safe-area-inset-top));
 	position: fixed;
 	top: 0;
 	transition: opacity .25s, transform .25s;

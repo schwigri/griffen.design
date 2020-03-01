@@ -5,6 +5,14 @@
 	}
 }
 
+@mixin double-breakpoint($width-breakpoint, $height-breakpoint) {
+	$width: map-get($breakpoints, $width-breakpoint);
+	$height: map-get($breakpoints-height, $height-breakpoint);
+	@media (min-width: $width) and (min-height: $height) {
+		@content;
+	}
+}
+
 @mixin reduced-motion {
 	@media (prefers-reduced-motion: reduce) {
 		@content;

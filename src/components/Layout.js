@@ -14,7 +14,6 @@ function Layout({ locale, id = '', variants = {}, children }) {
 		let colorSchemeQuery;
 
 		if (window && !colorSchemeListener) {
-			console.log('Hi');
 			setColorSchemeListener(true);
 			colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -38,6 +37,12 @@ function Layout({ locale, id = '', variants = {}, children }) {
 		<div className="site">
 			<Helmet>
 				<html lang={locale} className={colorScheme} />
+
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, shrink-to-fit=no, 	viewport-fit=cover"
+				/>
+
 				{locale === 'ja' && (
 					<link
 						rel="stylesheet"

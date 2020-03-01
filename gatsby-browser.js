@@ -1,5 +1,6 @@
 import './src/styles/design.scss';
 import 'typeface-prompt';
+import 'typeface-work-sans';
 
 import CustomLayout from './wrapPageElement';
 
