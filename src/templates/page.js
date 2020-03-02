@@ -10,7 +10,7 @@ import Page from '../components/Page';
 
 function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
-	const { metaTags, title, content } = data.page;
+	const { metaTags, content } = data.page;
 
 	const [pageContent, setPageContent] = useState(null);
 
@@ -43,7 +43,7 @@ function PageTemplate({ data }) {
 	return (
 		<>
 			<SEO
-				title={title}
+				title={metaTags.title}
 				titleSuffix={titleSuffix}
 				description={metaTags.description}
 			/>

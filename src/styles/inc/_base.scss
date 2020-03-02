@@ -22,6 +22,7 @@
 	--c-theme: #{$c-theme};
 	--c-accent: #{$c-accent};
 	--c-thread: #{$c-thread};
+	--c-separator: #{$c-separator};
 
 	--c-link-accent: #{$c-link-accent};
 	--c-lang-link-hover: #{$c-lang-link-hover};
@@ -100,6 +101,50 @@ p {
 	font-size: 1em;
 	line-height: 1.5;
 	margin: 0 0 1em;
+}
+
+figure {
+	margin: 0 0 1em;
+
+	img {
+		height: auto;
+		width: 100%;
+	}
+
+	figcaption {
+		font-size: .9em;
+		font-style: italic;
+		padding: .5em;
+	}
+}
+
+blockquote {
+	border-left: .25em solid var(--c-separator);
+	box-sizing: border-box;
+	margin: 2em 0;
+	padding: .5em 1em;
+	padding-left: 1em;
+
+	p {
+		font-size: 2em;
+		font-style: italic;
+		font-weight: 700;
+		line-height: 1;
+		margin-bottom: .25em;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	cite {
+		font-size: .5em;
+		font-weight: 400;
+
+		&::before {
+			content: '— ';
+		}
+	}
 }
 
 ol,

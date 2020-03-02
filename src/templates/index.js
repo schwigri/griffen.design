@@ -169,7 +169,7 @@ export const query = graphql`
 						locale
 						slug
 						title
-						subtitle
+						thumbnailSubtitle
 						description
 						thumbnail {
 							fluid(maxWidth: 562) {

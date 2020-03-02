@@ -10,6 +10,20 @@
 	word-wrap: normal;
 }
 
+.wide {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $s-content-width;
+	width: 100%;
+}
+
+.full {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	width: 100%;
+}
+
 .md-plus {
 	@include breakpoint(md) {
 		display: initial;

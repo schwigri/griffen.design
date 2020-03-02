@@ -26,6 +26,19 @@ exports.createPages = async ({ graphql, actions }) => {
 					}
 				}
 			}
+			projects: allDatoCmsProject {
+				edges {
+					node {
+						id
+						locale
+						slug
+						_allSlugLocales {
+							locale
+							value
+						}
+					}
+				}
+			}
 			privacyPolicies: allDatoCmsPrivacyPolicy {
 				edges {
 					node {
@@ -58,11 +71,26 @@ exports.createPages = async ({ graphql, actions }) => {
 
 		result.data.pages.edges.forEach(item => {
 			const { id, locale, slug, _allSlugLocales } = item.node;
-			const pageSlug = locale === 'en' ? `/${slug}` : `/${locale}/${slug}/`;
+			const pageSlug = locale === 'en' ? `/${slug}/` : `/${locale}/${slug}/`;
 
 			createPage({
 				path: pageSlug,
 				component: path.resolve('./src/templates/page.js'),
+				context: {
+					id,
+					locale,
+					_allSlugLocales,
+				},
+			});
+		});
+
+		result.data.projects.edges.forEach(item => {
+			const { id, locale, slug, _allSlugLocales } = item.node;
+			const projectSlug = locale === 'en' ? `/${slug}/` : `/${locale}/${slug}/`;
+
+			createPage({
+				path: projectSlug,
+				component: path.resolve('./src/templates/project.js'),
 				context: {
 					id,
 					locale,

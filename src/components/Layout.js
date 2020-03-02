@@ -73,7 +73,7 @@ function Layout({ locale, id = '', variants = {}, children }) {
 								y: 0,
 								transition: {
 									delay: 0.6,
-									ease: 'easeOut',
+									ease: 'easeIn',
 								},
 							},
 							exit: {

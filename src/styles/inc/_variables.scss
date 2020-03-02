@@ -4,6 +4,7 @@ $c-header-background: linear-gradient(to bottom, $c-background, rgba($c-backgrou
 $c-copy: #555;
 $c-heading: #333;
 $c-subtitle: #666;
+$c-separator: #ddd;
 $c-theme: hsl(219, 100, 54);
 $c-accent: hsl(1, 79, 52);
 $c-thread: hsl(48, 100, 93);
@@ -53,6 +54,7 @@ $breakpoints: (
 	md: $width-md,
 	lg: $width-lg,
 	xl: $width-xl,
+	content: $s-content-width,
 );
 
 $breakpoints-height: (
