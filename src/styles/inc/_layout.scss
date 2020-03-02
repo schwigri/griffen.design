@@ -11,7 +11,7 @@
 }
 
 .md-plus {
-	@include double-breakpoint(md, md) {
+	@include breakpoint(md) {
 		display: initial;
 	}
 

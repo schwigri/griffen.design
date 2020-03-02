@@ -67,25 +67,20 @@ function Layout({ locale, id = '', variants = {}, children }) {
 							hidden: {
 								opacity: 0,
 								y: shouldReduceMotion ? 0 : 64,
-								transition: {
-									duration: 0.25,
-								},
 							},
 							visible: {
 								opacity: 1,
 								y: 0,
 								transition: {
-									duration: 0.25,
-									delay: 0.5,
-									ease: 'easeInOut',
+									delay: 0.6,
+									ease: 'easeOut',
 								},
 							},
 							exit: {
 								opacity: 0,
 								y: shouldReduceMotion ? 0 : 64,
 								transition: {
-									duration: 0.25,
-									ease: 'easeInOut',
+									ease: 'easeOut',
 								},
 							},
 						}}
