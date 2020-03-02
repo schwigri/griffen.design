@@ -66,25 +66,26 @@ function Layout({ locale, id = '', variants = {}, children }) {
 						variants={{
 							hidden: {
 								opacity: 0,
-								transform: shouldReduceMotion
-									? 'translateY(0)'
-									: 'translateY(4em)',
+								y: shouldReduceMotion ? 0 : 64,
+								transition: {
+									duration: 0.25,
+								},
 							},
 							visible: {
 								opacity: 1,
-								transform: 'translateY(0)',
+								y: 0,
 								transition: {
 									duration: 0.25,
 									delay: 0.5,
+									ease: 'easeInOut',
 								},
 							},
 							exit: {
 								opacity: 0,
-								transform: shouldReduceMotion
-									? 'translateY(0)'
-									: 'translateY(4em)',
+								y: shouldReduceMotion ? 0 : 64,
 								transition: {
 									duration: 0.25,
+									ease: 'easeInOut',
 								},
 							},
 						}}
