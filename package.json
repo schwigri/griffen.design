@@ -12,6 +12,7 @@
 		"format": "prettier --config ./.prettierrc --write \"src/**/**/*.js\" && prettier --config ./.prettierrc --write \"src/**/*.js\""
 	},
 	"dependencies": {
+		"detect-browser-language": "0.0.2",
 		"dompurify": "^2.0.8",
 		"dotenv": "^8.2.0",
 		"framer-motion": "^1.8.4",

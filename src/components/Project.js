@@ -32,16 +32,22 @@ const Article = ({ project, size = '' }) => {
 			</>
 		);
 
+	const [projectTitle, setProjectTitle] = useState('');
+	const [projectSubtitle, setProjectSubtitle] = useState('');
 	const [projectDescription, setProjectDescription] = useState('');
 
 	useEffect(() => {
 		if (window && !projectDescription) {
 			const DOMPurify = createDOMPurify(window);
+			setProjectTitle(Parser(DOMPurify.sanitize(marked(project.title))));
+			setProjectSubtitle(
+				Parser(DOMPurify.sanitize(marked(project.thumbnailSubtitle)))
+			);
 			setProjectDescription(
 				Parser(DOMPurify.sanitize(marked(project.description)))
 			);
 		}
-	});
+	}, [projectTitle, projectSubtitle, projectDescription]);
 
 	return (
 		<article className={classes}>
@@ -49,8 +55,8 @@ const Article = ({ project, size = '' }) => {
 				<Img fluid={project.thumbnail.fluid} />
 			</div>
 			<div className="project-foreground">
-				<h1 className="project-title">{project.title}</h1>
-				<p className="subtitle">{project.subtitle}</p>
+				<h1 className="project-title">{projectTitle}</h1>
+				<p className="subtitle">{projectSubtitle}</p>
 				{projectDescription}
 				<p>
 					<Link to={projectSlug} className="project-link">
@@ -67,7 +73,7 @@ Article.propTypes = {
 		locale: PropTypes.string.isRequired,
 		slug: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired,
-		subtitle: PropTypes.string.isRequired,
+		thumbnailSubtitle: PropTypes.string.isRequired,
 		description: PropTypes.string.isRequired,
 		thumbnail: PropTypes.shape({
 			fluid: PropTypes.object.isRequired,

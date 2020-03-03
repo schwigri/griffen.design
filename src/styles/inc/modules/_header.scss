@@ -115,6 +115,7 @@
 
 .site-header {
 	@include double-breakpoint(md, md) {
+		animation-name: showHeaderFromLeft;
 		background-color: var(--c-background);
 		box-shadow: var(--c-card-shadow);
 		height: 100%;
@@ -124,6 +125,7 @@
 	}
 
 	align-items: center;
+	animation: showHeaderFromTop .6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
 	background-color: transparent;
 	background-image: var(--c-header-background);
 	box-sizing: border-box;
@@ -140,5 +142,25 @@
 	top: 0;
 	transition: opacity .25s, transform .25s;
 	width: 100%;
-	z-index: 3;
+	z-index: 4;
+}
+
+@keyframes showHeaderFromTop {
+	from {
+		transform: translate3d(0, -150%, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes showHeaderFromLeft {
+	from {
+		transform: translate3d(-150%, 0, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
 }

@@ -82,6 +82,7 @@ h3,
 h4,
 h5,
 h6 {
+	clear: both;
 	color: var(--c-heading);
 	font-family: $f-heading;
 	font-weight: 600;
@@ -159,6 +160,10 @@ ul {
 		margin: 0 0 .5em;
 		padding-left: 1em;
 	}
+}
+
+button {
+	cursor: pointer;
 }
 
 a:not(.special-link) {

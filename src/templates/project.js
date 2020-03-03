@@ -14,10 +14,21 @@ function ProjectTemplate({ data }) {
 
 	const [introContent, setIntroContent] = useState(null);
 	const [projectContent, setProjectContent] = useState(null);
+	const [projectTitle, setProjectTitle] = useState('');
+	const [projectSubtitle, setProjectSubtitle] = useState('');
 
 	useEffect(() => {
-		if (window && !introContent) {
+		if (window && (!introContent || !projectTitle || !projectSubtitle)) {
 			const DOMPurify = createDOMPurify(window);
+
+			setProjectTitle(
+				Parser(DOMPurify.sanitize(marked(title)))[0].props.children
+			);
+
+			setProjectSubtitle(
+				Parser(DOMPurify.sanitize(marked(subtitle)))[0].props.children
+			);
+
 			const projectIntro = [];
 			intro.forEach(introItem => {
 				projectIntro.push(
@@ -29,7 +40,7 @@ function ProjectTemplate({ data }) {
 			});
 			setIntroContent(projectIntro);
 		}
-	}, [introContent]);
+	}, [introContent, projectTitle, projectSubtitle]);
 
 	useEffect(() => {
 		if (window && !projectContent) {
@@ -62,9 +73,11 @@ function ProjectTemplate({ data }) {
 			/>
 
 			<Page>
-				<section className="section intro">
-					<h1>{title}</h1>
-					<p className="subtitle">{subtitle}</p>
+				<section className="section">
+					<h1>{projectTitle ? projectTitle : title}</h1>
+					<p className="subtitle">
+						{projectSubtitle ? projectSubtitle : subtitle}
+					</p>
 					<div className="project-intro">{introContent}</div>
 				</section>
 				{projectContent}
