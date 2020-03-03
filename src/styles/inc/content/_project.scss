@@ -1,3 +1,35 @@
+.project-navigation {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 45%;
+
+	span {
+		font-size: .9em;
+	}
+
+	a {
+		font-size: 1.2em;
+		margin-top: .5em;
+	}
+}
+
+.next-project {
+	align-items: flex-end;
+	float: right;
+}
+
+.previous-project {
+	float: left;
+}
+
+.project-navigation-container {
+	margin: 4em auto 0;
+	max-width: $s-copy-width;
+	width: calc(100% - 4em);
+}
+
 .project-intro {
 	@include breakpoint(sm) {
 		grid-template-columns: repeat(2, 1fr);

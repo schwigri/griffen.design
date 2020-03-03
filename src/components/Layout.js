@@ -37,7 +37,7 @@ function Layout({ locale, id = '', variants = {}, children }) {
 	useEffect(() => {
 		if (!userLanguage) {
 			const detectBrowserLanguage = require('detect-browser-language');
-			setUserLanguage(detectBrowserLanguage());
+			setUserLanguage(detectBrowserLanguage().substring(0, 2));
 
 			const userSettings = sessionStorage.getItem('hide-lang-notice')
 				? JSON.parse(sessionStorage.getItem('hide-lang-notice'))
@@ -45,7 +45,7 @@ function Layout({ locale, id = '', variants = {}, children }) {
 			if (
 				userSettings &&
 				userSettings.hide === true &&
-				userSettings.lang === detectBrowserLanguage()
+				userSettings.lang === detectBrowserLanguage().substring(0, 2)
 			) {
 				setNoticeVisible(false);
 			} else {
@@ -67,7 +67,8 @@ function Layout({ locale, id = '', variants = {}, children }) {
 		if (
 			userLanguage &&
 			availableLanguages[userLanguage] &&
-			locale !== userLanguage
+			locale !== userLanguage &&
+			noticeVisible
 		) {
 			const toLink =
 				variants && variants[userLanguage]
@@ -75,7 +76,27 @@ function Layout({ locale, id = '', variants = {}, children }) {
 					: `/${userLanguage}/`;
 
 			return (
-				<div className="language-notice" data-visible={noticeVisible}>
+				<motion.div
+					key="lang-notice"
+					className="language-notice"
+					data-visible={noticeVisible}
+					variants={{
+						hidden: {
+							opacity: 0,
+							y: shouldReduceMotion ? 0 : -50,
+						},
+						visible: {
+							opacity: 1,
+							y: 0,
+							transition: {
+								delay: 0.9,
+							},
+						},
+					}}
+					initial="hidden"
+					animate="visible"
+					exit="hidden"
+				>
 					<p>
 						<Link to={toLink}>{availableLanguages[userLanguage].message}</Link>
 					</p>
@@ -85,7 +106,7 @@ function Layout({ locale, id = '', variants = {}, children }) {
 							<Graphics.Close />
 						</span>
 					</button>
-				</div>
+				</motion.div>
 			);
 		}
 	};
@@ -131,9 +152,9 @@ function Layout({ locale, id = '', variants = {}, children }) {
 
 			<Header locale={locale} id={id} />
 
-			{langNotice()}
-
 			<AnimatePresence>
+				{langNotice()}
+
 				<main className="site-main" key={`main-${id}`}>
 					<motion.div
 						key={`main-content-${id}`}

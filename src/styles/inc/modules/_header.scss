@@ -68,7 +68,7 @@
 	color: inherit;
 	font-weight: 500;
 	text-decoration: none;
-	transition: .3s;
+	transition: background-color .3s, border-bottom-color .3s, box-shadow .3s, color .3s;
 	margin-left: 1em;
 
 	&:focus,
@@ -115,6 +115,10 @@
 
 .site-header {
 	@include double-breakpoint(md, md) {
+		@include reduced-motion {
+			animation: none;
+		}
+
 		animation-name: showHeaderFromLeft;
 		background-color: var(--c-background);
 		box-shadow: var(--c-card-shadow);
@@ -122,6 +126,10 @@
 		padding: 1em 0 2em;
 		width: 6em;
 		writing-mode: vertical-lr;
+	}
+
+	@include reduced-motion {
+		animation: none;
 	}
 
 	align-items: center;

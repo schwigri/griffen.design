@@ -39,9 +39,12 @@ const Article = ({ project, size = '' }) => {
 	useEffect(() => {
 		if (window && !projectDescription) {
 			const DOMPurify = createDOMPurify(window);
-			setProjectTitle(Parser(DOMPurify.sanitize(marked(project.title))));
+			setProjectTitle(
+				Parser(DOMPurify.sanitize(marked(project.title)))[0].props.children
+			);
 			setProjectSubtitle(
-				Parser(DOMPurify.sanitize(marked(project.thumbnailSubtitle)))
+				Parser(DOMPurify.sanitize(marked(project.thumbnailSubtitle)))[0].props
+					.children
 			);
 			setProjectDescription(
 				Parser(DOMPurify.sanitize(marked(project.description)))

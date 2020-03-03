@@ -1,6 +1,7 @@
 import './src/styles/design.scss';
 import 'typeface-prompt';
 import 'typeface-work-sans';
+import 'focus-within-polyfill';
 
 import CustomLayout from './wrapPageElement';
 
@@ -23,6 +24,3 @@ export const shouldUpdateScroll = ({
 	}
 	return false;
 };
-
-// require('./src/styles/design.scss');
-// require('typeface-work-sans');

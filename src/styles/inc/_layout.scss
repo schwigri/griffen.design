@@ -78,6 +78,7 @@
 	background-color: transparent;
 	border: 0;
 	margin: 0 0 0 1em;
+	padding: 0;
 
 	.icon {
 		height: 2em;
@@ -88,6 +89,7 @@
 .language-notice {
 	@include double-breakpoint(md, md) {
 		padding: 2em 2em 2em 8em;
+		padding-top: 2em;
 	}
 
 	align-items: center;
@@ -98,19 +100,21 @@
 	justify-content: flex-end;
 	left: 0;
 	padding: 1em;
+	padding-top: 5em;
 	position: fixed;
 	top: 0;
-	transition: transform .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	// transition: transform .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	width: 100%;
 	z-index: 3;
 
-	&[data-visible='true'] {
-		animation: showNotice .3s .3s backwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	}
+	// &[data-visible='true'] {
+	// 	animation: showNotice .3s .3s backwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	// }
 
-	&[data-visible='false'] {
-		transform: translate3d(0, -200%, 0);
-	}
+	// &[data-visible='false'] {
+	// 	animation: showNotice .3s reverse cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	// 	transform: translate3d(0, -200%, 0);
+	// }
 
 	p {
 		margin-bottom: 0;

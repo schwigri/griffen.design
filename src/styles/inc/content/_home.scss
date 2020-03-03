@@ -140,7 +140,6 @@
 	}
 
 	&:focus-within,
-	&:focus,
 	&:hover {
 		.project-background {
 			.gatsby-image-wrapper,
@@ -160,7 +159,6 @@
 
 	&.increase-readability {
 		&:focus-within,
-		&:focus,
 		&:hover {
 			.project-background {
 				img,
@@ -228,7 +226,6 @@
 			}
 
 			&:focus-within,
-			&:focus,
 			&:hover {
 				@include breakpoint(xl) {
 					@include reduced-motion {
