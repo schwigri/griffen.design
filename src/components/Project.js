@@ -55,7 +55,9 @@ const Article = ({ project, size = '' }) => {
 	return (
 		<article className={classes}>
 			<div className="project-background">
-				<Img fluid={project.thumbnail.fluid} />
+				<Link to={projectSlug} className="special-link">
+					<Img fluid={project.thumbnail.fluid} />
+				</Link>
 			</div>
 			<div className="project-foreground">
 				<h1 className="project-title">{projectTitle}</h1>

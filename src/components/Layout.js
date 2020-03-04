@@ -73,6 +73,8 @@ function Layout({ locale, id = '', variants = {}, children }) {
 			const toLink =
 				variants && variants[userLanguage]
 					? variants[userLanguage].link
+					: 'en' === userLanguage
+					? '/'
 					: `/${userLanguage}/`;
 
 			return (

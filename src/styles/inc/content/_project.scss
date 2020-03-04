@@ -1,9 +1,13 @@
 .project-navigation {
+	@include breakpoint(sm) {
+		width: 45%;
+	}
+
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 45%;
+	width: 100%;
 
 	span {
 		font-size: .9em;
