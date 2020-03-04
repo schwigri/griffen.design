@@ -122,6 +122,29 @@ function Footer({ locale, id = '', variants }) {
 			<div className="copyright-container">
 				<span className="copyright">{copyrightText}</span>
 				<span className="privacy-link-container">{privacyLink}</span>
+				<span className="privacy-link-container">
+					<a
+						href="https://github.com/schwigri/griffen.design"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<abbr title="Made with love, peace, and React">
+							<span
+								className="emoji"
+								role="img"
+								aria-label="Sparkling heart emoji"
+							>
+								💖
+							</span>
+							<span className="emoji" role="img" aria-label="Peace-sign emoji">
+								✌️
+							</span>
+							<span className="emoji" role="img" aria-label="Atom symbol emoji">
+								⚛️
+							</span>
+						</abbr>
+					</a>
+				</span>
 			</div>
 
 			<div className="locale-select">

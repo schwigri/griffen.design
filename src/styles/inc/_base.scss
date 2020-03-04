@@ -76,6 +76,22 @@ body {
 	margin: 0;
 }
 
+abbr[title] {
+	cursor: help;
+	text-decoration: none;
+	position: relative;
+
+	&::after {
+		border-bottom: 1px dotted var(--c-copy);
+		bottom: 0;
+		content: '';
+		height: 0;
+		left: 0;
+		position: absolute;
+		width: 100%;
+	}
+}
+
 h1,
 h2,
 h3,
@@ -88,6 +104,12 @@ h6 {
 	font-weight: 600;
 	line-height: 1;
 	margin: 1em 0 .5em;
+
+	abbr[title] {
+		&::after {
+			bottom: .25em;
+		}
+	}
 }
 
 h1 {
@@ -187,8 +209,4 @@ a:not(.special-link) {
 	&:active {
 		border-bottom-style: dashed;
 	}
-}
-
-abbr[title] {
-	cursor: help;
 }
