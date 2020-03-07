@@ -4,6 +4,7 @@
 	}
 
 	margin: .5em 0 1em;
+	text-align: center;
 
 	&::before {
 		@include breakpoint(md) {
@@ -75,6 +76,15 @@
 	align-items: center;
 	display: flex;
 	justify-content: center;
+}
+
+.code-link[title] {
+	&::after {
+		@include no-hover {
+			content: '\A(' attr(title) ')';
+			white-space: pre;
+		}
+	}
 }
 
 .site-footer {

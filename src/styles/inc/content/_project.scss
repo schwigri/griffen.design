@@ -16,6 +16,14 @@
 	a {
 		font-size: 1.2em;
 		margin-top: .5em;
+
+		abbr[title] {
+			&::after {
+				@include no-hover {
+					display: none;
+				}
+			}
+		}
 	}
 }
 

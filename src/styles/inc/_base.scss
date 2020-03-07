@@ -82,6 +82,17 @@ abbr[title] {
 	position: relative;
 
 	&::after {
+		@include no-hover {
+			border-bottom: 0;
+			bottom: auto;
+			content: ' (' attr(title) ')';
+			display: inline;
+			height: auto;
+			left: auto;
+			position: relative;
+			width: auto;
+		}
+
 		border-bottom: 1px dotted var(--c-copy);
 		bottom: 0;
 		content: '';
@@ -107,6 +118,10 @@ h6 {
 
 	abbr[title] {
 		&::after {
+			@include no-hover {
+				bottom: auto;
+			}
+
 			bottom: .25em;
 		}
 	}

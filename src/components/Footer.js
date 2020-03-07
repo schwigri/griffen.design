@@ -128,7 +128,10 @@ function Footer({ locale, id = '', variants }) {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<abbr title="Made with love, peace, and React">
+						<abbr
+							title="Made with love, peace, and React"
+							className="code-link"
+						>
 							<span
 								className="emoji"
 								role="img"

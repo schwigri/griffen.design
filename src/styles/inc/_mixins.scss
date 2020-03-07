@@ -13,6 +13,22 @@
 	}
 }
 
+@mixin pointer($pointer) {
+	@media (pointer: $pointer) {
+		@content;
+	}
+}
+
+@mixin no-hover {
+	@media (pointer: coarse) {
+		@content;
+	}
+
+	@media (pointer: none) {
+		@content;
+	}
+}
+
 @mixin reduced-motion {
 	@media (prefers-reduced-motion: reduce) {
 		@content;
