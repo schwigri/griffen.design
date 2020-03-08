@@ -4,6 +4,7 @@ import { graphql, Link } from 'gatsby';
 import marked from 'marked';
 import createDOMPurify from 'dompurify';
 import Parser from 'html-react-parser';
+import ReactCompareImage from 'react-compare-image';
 
 import SEO from '../components/SEO';
 import Page from '../components/Page';
@@ -29,6 +30,11 @@ function ProjectTemplate({ data, pageContext }) {
 	useEffect(() => {
 		if (window && (!introContent || !projectTitle || !projectSubtitle)) {
 			const DOMPurify = createDOMPurify(window);
+			DOMPurify.addHook('afterSanitizeAttributes', node => {
+				if ('target' in node) {
+					node.setAttribute('target', '_blank');
+				}
+			});
 
 			setProjectTitle(
 				Parser(DOMPurify.sanitize(marked(title)))[0].props.children
@@ -62,11 +68,30 @@ function ProjectTemplate({ data, pageContext }) {
 			});
 
 			content.forEach(contentSection => {
-				sections.push(
-					<section className="section" key={contentSection.id}>
-						{Parser(DOMPurify.sanitize(marked(contentSection.content)))}
-					</section>
-				);
+				if ('DatoCmsImageComparison' === contentSection.__typename) {
+					sections.push(
+						<section className="section" key={contentSection.id}>
+							<figure className="wide">
+								<ReactCompareImage
+									leftImage={contentSection.imageOne.url}
+									leftImageAlt={contentSection.imageOne.alt}
+									rightImage={contentSection.imageTwo.url}
+									rightImageAlt={contentSection.imageTwo.alt}
+								/>
+
+								{contentSection.caption && (
+									<figcaption>{contentSection.caption}</figcaption>
+								)}
+							</figure>
+						</section>
+					);
+				} else {
+					sections.push(
+						<section className="section" key={contentSection.id}>
+							{Parser(DOMPurify.sanitize(marked(contentSection.content)))}
+						</section>
+					);
+				}
 			});
 
 			setProjectContent(sections);
@@ -158,13 +183,28 @@ ProjectTemplate.propTypes = {
 				})
 			).isRequired,
 			content: PropTypes.arrayOf(
-				PropTypes.shape({
-					id: PropTypes.string.isRequired,
-					classes: PropTypes.string,
-					content: PropTypes.string.isRequired,
-				})
+				PropTypes.oneOfType([
+					PropTypes.shape({
+						id: PropTypes.string.isRequired,
+						classes: PropTypes.string,
+						content: PropTypes.string.isRequired,
+					}),
+					PropTypes.shape({
+						id: PropTypes.string.isRequired,
+						vertical: PropTypes.bool.isRequired,
+						imageOne: PropTypes.shape({
+							url: PropTypes.string.isRequired,
+							alt: PropTypes.string.isRequired,
+						}).isRequired,
+						imageTwo: PropTypes.shape({
+							url: PropTypes.string.isRequired,
+							alt: PropTypes.string.isRequired,
+						}).isRequired,
+						caption: PropTypes.string,
+					}),
+				]).isRequired
 			).isRequired,
-		}).isRequired,
+		}),
 		projects: PropTypes.shape({
 			edges: PropTypes.arrayOf(
 				PropTypes.shape({
@@ -210,6 +250,19 @@ export const query = graphql`
 					id
 					classes
 					content
+				}
+				... on DatoCmsImageComparison {
+					id
+					vertical
+					imageOne {
+						url
+						alt
+					}
+					imageTwo {
+						url
+						alt
+					}
+					caption
 				}
 			}
 		}

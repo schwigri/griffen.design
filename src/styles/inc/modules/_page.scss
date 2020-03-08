@@ -25,6 +25,11 @@
 		width: calc(100% - 3.2rem);
 	}
 
+	figcaption {
+		margin: .5em 1.6rem;
+		padding: 0;
+	}
+
 	& > .subtitle {
 		text-align: center;
 	}
