@@ -114,6 +114,10 @@
 }
 
 .site-header {
+	@include breakpoint(sm) {
+		min-width: initial;
+	}
+
 	@include double-breakpoint(md, md) {
 		@include reduced-motion {
 			animation: none;
