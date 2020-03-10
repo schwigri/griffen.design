@@ -9,7 +9,7 @@ import { Link } from 'gatsby';
 
 import * as Graphics from '../graphics/graphics';
 
-function Layout({ locale, id = '', variants = {}, children }) {
+function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 	const shouldReduceMotion = useReducedMotion();
 	const availableLanguages = {
 		en: {
@@ -151,10 +151,14 @@ function Layout({ locale, id = '', variants = {}, children }) {
 					content={'light' === colorScheme ? 'default' : 'black-translucent'}
 				/>
 
-				<link
-					rel="stylesheet"
-					href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;display=swap&amp;subset=japanese"
-				/>
+				{(locale === 'ja' || jaFont) && (
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;display=swap&amp;subset=japanese"
+					/>
+				)}
+
+				<link rel="preconnect" href="https://www.datocms-assets.com" />
 			</Helmet>
 
 			<Header locale={locale} id={id} />
@@ -204,6 +208,7 @@ function Layout({ locale, id = '', variants = {}, children }) {
 Layout.propTypes = {
 	locale: PropTypes.string.isRequired,
 	id: PropTypes.string,
+	jaFont: PropTypes.bool,
 	variants: PropTypes.shape({
 		en: PropTypes.shape({
 			link: PropTypes.string.isRequired,

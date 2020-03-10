@@ -23,6 +23,11 @@ exports.createPages = async ({ graphql, actions }) => {
 							locale
 							value
 						}
+						content {
+							... on DatoCmsSection {
+								content
+							}
+						}
 					}
 				}
 			}
@@ -73,6 +78,19 @@ exports.createPages = async ({ graphql, actions }) => {
 			const { id, locale, slug, _allSlugLocales } = item.node;
 			const pageSlug = locale === 'en' ? `/${slug}/` : `/${locale}/${slug}/`;
 
+			let jaFont = false;
+			item.node.content.forEach(section => {
+				if (
+					!jaFont &&
+					section.content &&
+					section.content.match(
+						/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/
+					)
+				) {
+					jaFont = true;
+				}
+			});
+
 			createPage({
 				path: pageSlug,
 				component: path.resolve('./src/templates/page.js'),
@@ -80,6 +98,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					id,
 					locale,
 					_allSlugLocales,
+					jaFont,
 				},
 			});
 		});

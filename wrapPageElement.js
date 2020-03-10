@@ -29,7 +29,13 @@ function wrapPageElement({ element, props }) {
 	}
 
 	return (
-		<Layout locale={locale} id={id} variants={variants} {...props}>
+		<Layout
+			locale={locale}
+			id={id}
+			variants={variants}
+			jaFont={pageContext.jaFont ? pageContext.jaFont : false}
+			{...props}
+		>
 			{element}
 		</Layout>
 	);
@@ -53,6 +59,7 @@ wrapPageElement.propTypes = {
 				value: PropTypes.string.isRequired,
 			})
 		),
+		jaFont: PropTypes.bool,
 	}).isRequired,
 };
 
