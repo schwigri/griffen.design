@@ -23,7 +23,9 @@ function Error404Page() {
 					I’m sorry, but the page you’re looking for isn’t here.
 				</p>
 				<p>
-					If you think this is a mistake, please let me know by emailing me at <a href="mailto:schwigri@pm.me">schwigri@pm.me</a> or creating an issue on my GitHub repository. Sorry about that!
+					If you think this is a mistake, please let me know by emailing me at{' '}
+					<a href="mailto:schwigri@pm.me">schwigri@pm.me</a> or creating an
+					issue on my GitHub repository. Sorry about that!
 				</p>
 			</Page>
 		</>

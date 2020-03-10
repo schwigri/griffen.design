@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
 import Layout from './src/components/Layout';
-import { useStaticQuery, graphql } from 'gatsby';
 
 function wrapPageElement({ element, props }) {
 	const { pageContext } = props;
