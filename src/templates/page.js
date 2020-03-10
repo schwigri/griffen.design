@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import marked from 'marked';
-import createDOMPurify from 'dompurify';
-import Parser from 'html-react-parser';
+import ReactMarkdown from 'react-markdown/with-html';
 
 import SEO from '../components/SEO';
 import Page from '../components/Page';
@@ -12,33 +10,25 @@ function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
 	const { metaTags, content } = data.page;
 
-	const [pageContent, setPageContent] = useState(null);
-
-	useEffect(() => {
-		if (window && !pageContent) {
-			const DOMPurify = createDOMPurify(window);
-			setPageContent(
-				content.map(item => {
-					let sectionContent = null;
-
-					if ('DatoCmsSection' === item.__typename) {
-						sectionContent = Parser(
-							DOMPurify.sanitize(marked(item.content ? item.content : ''))
-						);
-					}
-
-					return (
-						<section
-							key={Buffer.from(item.id).toString('base64')}
-							className="section"
-						>
-							{sectionContent}
-						</section>
-					);
-				})
+	const pageContent = content.map(item => {
+		let sectionContent = null;
+		if ('DatoCmsSection' === item.__typename) {
+			sectionContent = (
+				<ReactMarkdown
+					source={item.content ? item.content : ''}
+					escapeHtml={false}
+				/>
 			);
 		}
-	}, [pageContent]);
+		return (
+			<section
+				key={Buffer.from(item.id).toString('base64')}
+				className="section"
+			>
+				{sectionContent}
+			</section>
+		);
+	});
 
 	return (
 		<>

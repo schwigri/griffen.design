@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import marked from 'marked';
-import createDOMPurify from 'dompurify';
-import Parser from 'html-react-parser';
+import ReactMarkdown from 'react-markdown/with-html';
 import uniqid from 'uniqid';
 
 import SEO from '../components/SEO';
@@ -13,96 +11,83 @@ function IndexTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
 	const { metaTags, content } = data.home;
 
-	const [pageContent, setPageContent] = useState(null);
+	const projectSizes = ['large', 'medium', 'medium', 'small'];
+	const pageContent = content.map(item => {
+		let sectionContent = null;
 
-	useEffect(() => {
-		if (window && !pageContent && content) {
-			const projectSizes = ['large', 'medium', 'medium', 'small'];
-			const DOMPurify = createDOMPurify(window);
-			setPageContent(
-				content.map(item => {
-					let sectionContent = null;
+		if ('DatoCmsSection' === item.__typename) {
+			sectionContent = (
+				<ReactMarkdown
+					source={item.content ? item.content : ''}
+					escapeHtml={false}
+				/>
+			);
+		} else if ('DatoCmsCollection' === item.__typename) {
+			sectionContent = [];
+			if (item.title || item.description) {
+				sectionContent.push(
+					<header key={uniqid()} className="section-header">
+						{item.title && <h2>{item.title}</h2>}
+						{item.description && <p className="subtitle">{item.description}</p>}
+					</header>
+				);
+			}
 
-					if ('DatoCmsSection' === item.__typename) {
-						sectionContent = Parser(
-							DOMPurify.sanitize(marked(item.content ? item.content : ''))
-						);
-					} else if ('DatoCmsCollection' === item.__typename) {
-						sectionContent = [];
-						if (item.title || item.description) {
-							sectionContent.push(
-								<header key={uniqid()} className="section-header">
-									{item.title && <h2>{item.title}</h2>}
-									{item.description && (
-										<p className="subtitle">{item.description}</p>
-									)}
-								</header>
-							);
-						}
+			let sectionLeftContent = [];
+			let sectionRightContent = [];
 
-						let sectionLeftContent = [];
-						let sectionRightContent = [];
-
-						if (item.projects && item.projects.length > 0) {
-							item.projects.forEach((project, index) => {
-								const projectArticle = (
-									<Article
-										key={uniqid()}
-										project={project}
-										size={projectSizes[index]}
-									/>
-								);
-								if (item.classes.indexOf('opposite') > -1) {
-									if (0 === index % 2) {
-										sectionRightContent.push(projectArticle);
-									} else {
-										sectionLeftContent.push(projectArticle);
-									}
-								} else {
-									if (0 === index % 2) {
-										sectionLeftContent.push(projectArticle);
-									} else {
-										sectionRightContent.push(projectArticle);
-									}
-								}
-							});
-						}
-
-						const sectionLeft = (
-							<div className="left">{sectionLeftContent}</div>
-						);
-
-						const sectionRight = (
-							<div className="right">{sectionRightContent}</div>
-						);
-
-						let projectsClasses = 'projects';
-						if (item.classes.indexOf('opposite') > -1)
-							projectsClasses += ' opposite';
-
-						sectionContent.push(
-							<div className={projectsClasses} key={uniqid()}>
-								{sectionLeft}
-								{sectionRight}
-							</div>
-						);
-					}
-
-					let sectionClasses = 'section';
-					if (item.classes) sectionClasses += ` ${item.classes}`;
-
-					return (
-						<section
-							key={Buffer.from(item.id).toString('base64')}
-							className={sectionClasses}
-						>
-							{sectionContent}
-						</section>
+			if (item.projects && item.projects.length > 0) {
+				item.projects.forEach((project, index) => {
+					const projectArticle = (
+						<Article
+							key={uniqid()}
+							project={project}
+							size={projectSizes[index]}
+						/>
 					);
-				})
+					if (item.classes.indexOf('opposite') > -1) {
+						if (0 === index % 2) {
+							sectionRightContent.push(projectArticle);
+						} else {
+							sectionLeftContent.push(projectArticle);
+						}
+					} else {
+						if (0 === index % 2) {
+							sectionLeftContent.push(projectArticle);
+						} else {
+							sectionRightContent.push(projectArticle);
+						}
+					}
+				});
+			}
+
+			const sectionLeft = <div className="left">{sectionLeftContent}</div>;
+
+			const sectionRight = <div className="right">{sectionRightContent}</div>;
+
+			let projectsClasses = 'projects';
+			if (item.classes.indexOf('opposite') > -1) projectsClasses += ' opposite';
+
+			sectionContent.push(
+				<div className={projectsClasses} key={uniqid()}>
+					{sectionLeft}
+					{sectionRight}
+				</div>
 			);
 		}
-	}, [pageContent]);
+
+		let sectionClasses = 'section';
+		if (item.classes) sectionClasses += ` ${item.classes}`;
+
+		return (
+			<section
+				key={Buffer.from(item.id).toString('base64')}
+				className={sectionClasses}
+			>
+				{sectionContent}
+			</section>
+		);
+	});
 
 	return (
 		<>

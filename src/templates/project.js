@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
-import marked from 'marked';
-import createDOMPurify from 'dompurify';
-import Parser from 'html-react-parser';
+import ReactMarkdown from 'react-markdown/with-html';
 import ReactCompareImage from 'react-compare-image';
 
 import SEO from '../components/SEO';
@@ -22,81 +20,61 @@ function ProjectTemplate({ data, pageContext }) {
 		position !== 1 &&
 		projects.filter(x => position - 1 === x.node.position)[0].node;
 
-	const [introContent, setIntroContent] = useState(null);
-	const [projectContent, setProjectContent] = useState(null);
-	const [projectTitle, setProjectTitle] = useState('');
-	const [projectSubtitle, setProjectSubtitle] = useState('');
+	const nowrapTypes = ['text', 'emphasis', 'strong', 'html'];
 
-	useEffect(() => {
-		if (window && (!introContent || !projectTitle || !projectSubtitle)) {
-			const DOMPurify = createDOMPurify(window);
-			DOMPurify.addHook('afterSanitizeAttributes', node => {
-				if ('target' in node) {
-					node.setAttribute('target', '_blank');
-				}
-			});
+	const projectTitle = (
+		<ReactMarkdown
+			source={title}
+			escapeHtml={false}
+			allowedTypes={nowrapTypes}
+			unwrapDisallowed={true}
+		/>
+	);
 
-			setProjectTitle(
-				Parser(DOMPurify.sanitize(marked(title)))[0].props.children
+	const projectSubtitle = (
+		<ReactMarkdown
+			source={subtitle}
+			escapeHtml={false}
+			allowedTypes={nowrapTypes}
+			unwrapDisallowed={true}
+		/>
+	);
+
+	const projectIntro = intro.map(introItem => {
+		return (
+			<div key={introItem.id} className="project-challenge">
+				<h2>{introItem.title}</h2>
+				<ReactMarkdown source={introItem.description} escapeHtml={false} />
+			</div>
+		);
+	});
+
+	const projectContent = content.map(contentSection => {
+		if ('DatoCmsImageComparison' === contentSection.__typename) {
+			return (
+				<section className="section" key={contentSection.id}>
+					<figure className="wide">
+						<ReactCompareImage
+							leftImage={contentSection.imageOne.url}
+							leftImageAlt={contentSection.imageOne.alt}
+							rightImage={contentSection.imageTwo.url}
+							rightImageAlt={contentSection.imageTwo.alt}
+						/>
+
+						{contentSection.caption && (
+							<figcaption>{contentSection.caption}</figcaption>
+						)}
+					</figure>
+				</section>
 			);
-
-			setProjectSubtitle(
-				Parser(DOMPurify.sanitize(marked(subtitle)))[0].props.children
+		} else {
+			return (
+				<section className="section" key={contentSection.id}>
+					<ReactMarkdown source={contentSection.content} escapeHtml={false} />
+				</section>
 			);
-
-			const projectIntro = [];
-			intro.forEach(introItem => {
-				projectIntro.push(
-					<div key={introItem.id} className="project-challenge">
-						<h2>{introItem.title}</h2>
-						{Parser(DOMPurify.sanitize(marked(introItem.description)))}
-					</div>
-				);
-			});
-			setIntroContent(projectIntro);
 		}
-	}, [introContent, projectTitle, projectSubtitle]);
-
-	useEffect(() => {
-		if (window && !projectContent) {
-			const sections = [];
-			const DOMPurify = createDOMPurify(window);
-			DOMPurify.addHook('afterSanitizeAttributes', node => {
-				if ('target' in node) {
-					node.setAttribute('target', '_blank');
-				}
-			});
-
-			content.forEach(contentSection => {
-				if ('DatoCmsImageComparison' === contentSection.__typename) {
-					sections.push(
-						<section className="section" key={contentSection.id}>
-							<figure className="wide">
-								<ReactCompareImage
-									leftImage={contentSection.imageOne.url}
-									leftImageAlt={contentSection.imageOne.alt}
-									rightImage={contentSection.imageTwo.url}
-									rightImageAlt={contentSection.imageTwo.alt}
-								/>
-
-								{contentSection.caption && (
-									<figcaption>{contentSection.caption}</figcaption>
-								)}
-							</figure>
-						</section>
-					);
-				} else {
-					sections.push(
-						<section className="section" key={contentSection.id}>
-							{Parser(DOMPurify.sanitize(marked(contentSection.content)))}
-						</section>
-					);
-				}
-			});
-
-			setProjectContent(sections);
-		}
-	}, [projectContent]);
+	});
 
 	return (
 		<>
@@ -112,7 +90,7 @@ function ProjectTemplate({ data, pageContext }) {
 					<p className="subtitle">
 						{projectSubtitle ? projectSubtitle : subtitle}
 					</p>
-					<div className="project-intro">{introContent}</div>
+					<div className="project-intro">{projectIntro}</div>
 				</section>
 
 				{projectContent}
@@ -134,7 +112,12 @@ function ProjectTemplate({ data, pageContext }) {
 										: `/${locale}/${previousProject.slug}/`
 								}
 							>
-								{Parser(marked(previousProject.title))[0].props.children}
+								<ReactMarkdown
+									source={previousProject.title}
+									escapeHtml={false}
+									allowedTypes={nowrapTypes}
+									unwrapDisallowed={true}
+								/>
 							</Link>
 						</div>
 					)}
@@ -150,7 +133,12 @@ function ProjectTemplate({ data, pageContext }) {
 										: `/${locale}/${nextProject.slug}/`
 								}
 							>
-								{Parser(marked(nextProject.title))[0].props.children}
+								<ReactMarkdown
+									source={nextProject.title}
+									escapeHtml={false}
+									allowedTypes={nowrapTypes}
+									unwrapDisallowed={true}
+								/>
 							</Link>
 						</div>
 					)}

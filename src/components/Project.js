@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import marked from 'marked';
-import createDOMPurify from 'dompurify';
-import Parser from 'html-react-parser';
+import ReactMarkdown from 'react-markdown/with-html';
 
 const Article = ({ project, size = '' }) => {
 	const classes = `project ${size}`;
@@ -32,25 +30,29 @@ const Article = ({ project, size = '' }) => {
 			</>
 		);
 
-	const [projectTitle, setProjectTitle] = useState('');
-	const [projectSubtitle, setProjectSubtitle] = useState('');
-	const [projectDescription, setProjectDescription] = useState('');
+	const nowrapTypes = ['text'];
 
-	useEffect(() => {
-		if (window && !projectDescription) {
-			const DOMPurify = createDOMPurify(window);
-			setProjectTitle(
-				Parser(DOMPurify.sanitize(marked(project.title)))[0].props.children
-			);
-			setProjectSubtitle(
-				Parser(DOMPurify.sanitize(marked(project.thumbnailSubtitle)))[0].props
-					.children
-			);
-			setProjectDescription(
-				Parser(DOMPurify.sanitize(marked(project.description)))
-			);
-		}
-	}, [projectTitle, projectSubtitle, projectDescription]);
+	const projectTitle = (
+		<ReactMarkdown
+			source={project.title}
+			escapeHtml={false}
+			allowedTypes={nowrapTypes}
+			unwrapDisallowed={true}
+		/>
+	);
+
+	const projectSubtitle = (
+		<ReactMarkdown
+			source={project.thumbnailSubtitle}
+			escapeHtml={false}
+			allowedTypes={nowrapTypes}
+			unwrapDisallowed={true}
+		/>
+	);
+
+	const projectDescription = (
+		<ReactMarkdown source={project.description} escapeHtml={false} />
+	);
 
 	return (
 		<article className={classes}>
