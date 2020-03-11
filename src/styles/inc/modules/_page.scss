@@ -18,7 +18,8 @@
 	p,
 	ol,
 	ul,
-	blockquote {
+	blockquote,
+	.react-pdf__message {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: $s-copy-width;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import ReactMarkdown from 'react-markdown/with-html';
+import { Document } from 'react-pdf';
 
 import SEO from '../components/SEO';
 import Page from '../components/Page';
@@ -19,7 +20,14 @@ function PageTemplate({ data }) {
 					escapeHtml={false}
 				/>
 			);
+		} else if ('DatoCmsPdf' === item.__typename) {
+			sectionContent = (
+				<figure className="document wide">
+					<Document file={item.url} />
+				</figure>
+			);
 		}
+
 		return (
 			<section
 				key={Buffer.from(item.id).toString('base64')}
@@ -59,7 +67,7 @@ PageTemplate.propTypes = {
 			content: PropTypes.arrayOf(
 				PropTypes.shape({
 					id: PropTypes.string.isRequired,
-					classes: PropTypes.string.isRequired,
+					classes: PropTypes.string,
 					content: PropTypes.string,
 				}).isRequired
 			).isRequired,
@@ -90,6 +98,10 @@ export const query = graphql`
 				}
 				... on DatoCmsCollection {
 					id
+				}
+				... on DatoCmsPdf {
+					id
+					url
 				}
 			}
 		}
