@@ -52,6 +52,16 @@ module.exports = {
 			},
 		},
 		{
+			resolve: 'gatsby-plugin-matomo',
+			options: {
+				siteId: '1',
+				matomoUrl: 'https://access.griffen.design/',
+				siteUrl: isNetlifyProduction
+					? siteUrl
+					: 'https://staging.griffen.design',
+			},
+		},
+		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
 				name: 'Griffen Schwiesow',
