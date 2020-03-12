@@ -140,25 +140,42 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 		<div className="site">
 			<Helmet>
 				<html lang={locale} className={colorScheme} />
-
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
 				/>
-
 				<meta
 					name="apple-mobile-web-app-status-bar-style"
 					content={'light' === colorScheme ? 'default' : 'black-translucent'}
 				/>
-
 				{(locale === 'ja' || jaFont) && (
 					<link
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;display=swap&amp;subset=japanese"
 					/>
 				)}
-
 				<link rel="preconnect" href="https://www.datocms-assets.com" />
+				<link
+					rel="alternate"
+					hrefLang="en"
+					href={`https://www.griffen.design${
+						variants && variants.en ? variants.en.link : '/'
+					}`}
+				/>
+				<link
+					rel="alternate"
+					hrefLang="de"
+					href={`https://www.griffen.design${
+						variants && variants.de ? variants.de.link : '/de'
+					}`}
+				/>
+				<link
+					rel="alternate"
+					hrefLang="ja"
+					href={`https://www.griffen.design${
+						variants && variants.ja ? variants.ja.link : '/ja'
+					}`}
+				/>{' '}
 			</Helmet>
 
 			<Header locale={locale} id={id} />
