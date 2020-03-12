@@ -130,6 +130,10 @@
 		padding: 1em 0 2em;
 		width: 6em;
 		writing-mode: vertical-lr;
+
+		&:lang(ja) {
+			writing-mode: vertical-rl;
+		}
 	}
 
 	@include reduced-motion {
