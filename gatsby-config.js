@@ -55,7 +55,7 @@ module.exports = {
 			resolve: 'gatsby-plugin-matomo',
 			options: {
 				siteId: isNetlifyProduction ? '1' : '2',
-				matomoUrl: 'https://access.griffen.design/',
+				matomoUrl: 'https://access.griffen.design',
 				disableCookies: true,
 				exclude: ['/offline-plugin-app-shell-fallback/'],
 				siteUrl: isNetlifyProduction
