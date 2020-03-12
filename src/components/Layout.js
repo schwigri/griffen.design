@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { graphql, useStaticQuery } from 'gatsby';
 import Helmet from 'react-helmet';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
@@ -33,6 +34,19 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 	const [colorSchemeListener, setColorSchemeListener] = useState(false);
 	const [userLanguage, setUserLanguage] = useState(null);
 	const [noticeVisible, setNoticeVisible] = useState(false);
+
+	const data = useStaticQuery(
+		graphql`
+			query LayoutQuery {
+				site {
+					siteMetadata {
+						siteUrl
+					}
+				}
+			}
+		`
+	);
+	const { siteUrl } = data.site.siteMetadata;
 
 	useEffect(() => {
 		if (!userLanguage) {
@@ -158,21 +172,19 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 				<link
 					rel="alternate"
 					hrefLang="en"
-					href={`https://www.griffen.design${
-						variants && variants.en ? variants.en.link : '/'
-					}`}
+					href={`${siteUrl}${variants && variants.en ? variants.en.link : '/'}`}
 				/>
 				<link
 					rel="alternate"
 					hrefLang="de"
-					href={`https://www.griffen.design${
+					href={`${siteUrl}${
 						variants && variants.de ? variants.de.link : '/de'
 					}`}
 				/>
 				<link
 					rel="alternate"
 					hrefLang="ja"
-					href={`https://www.griffen.design${
+					href={`${siteUrl}${
 						variants && variants.ja ? variants.ja.link : '/ja'
 					}`}
 				/>{' '}
