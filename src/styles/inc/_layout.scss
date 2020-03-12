@@ -1,0 +1,158 @@
+.sr-only {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
+}
+
+.wide {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $s-content-width;
+	width: 100%;
+}
+
+.full {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	width: 100%;
+}
+
+.md-plus {
+	@include breakpoint(md) {
+		display: initial;
+	}
+
+	display: none;
+}
+
+.heading {
+	font-family: $f-heading;
+}
+
+.centered {
+	text-align: center;
+}
+
+.subtitle {
+	color: var(--c-subtitle);
+	font-size: 1.2em;
+	font-family: $f-heading;
+}
+
+.section-header {
+	margin: 4em 0;
+	text-align: center;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+}
+
+.section {
+	margin-left: auto;
+	margin-right: auto;
+
+	& > h1,
+	& > .subtitle {
+		text-align: center;
+	}
+}
+
+.toggle {
+	appearance: none;
+	background-color: transparent;
+	border: 0;
+	margin: 0 0 0 1em;
+	padding: 0;
+
+	.icon {
+		fill: var(--c-copy);
+		height: 2em;
+		width: auto;
+	}
+}
+
+.language-notice {
+	@include double-breakpoint(md, md) {
+		padding: 2em 2em 2em 8em;
+		padding-top: 2em;
+	}
+
+	align-items: center;
+	background-color: var(--c-thread);
+	box-shadow: var(--c-card-shadow);
+	box-sizing: border-box;
+	display: flex;
+	justify-content: flex-end;
+	left: 0;
+	padding: 1em;
+	padding-top: 5em;
+	position: fixed;
+	top: 0;
+	// transition: transform .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	width: 100%;
+	z-index: 3;
+
+	// &[data-visible='true'] {
+	// 	animation: showNotice .3s .3s backwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	// }
+
+	// &[data-visible='false'] {
+	// 	animation: showNotice .3s reverse cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	// 	transform: translate3d(0, -200%, 0);
+	// }
+
+	p {
+		margin-bottom: 0;
+		text-align: right;
+	}
+}
+
+@keyframes showNotice {
+	from {
+		transform: translate3d(0, -200%, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+.main-content {
+	transition: transform .25s;
+}
+
+.site-main {
+	@include double-breakpoint(md, md) {
+		padding-left: calc(6em + var(--safe-area-inset-left));
+	}
+
+	background-color: var(--c-background);
+	box-sizing: border-box;
+	overflow: auto;
+	padding-bottom: 4em;
+	padding-left: var(--safe-area-inset-left);
+	padding-right: var(--safe-area-inset-right);
+	padding-top: 4em;
+	position: relative;
+	transform: translate3d(0, 0, 0);
+	z-index: 2;
+}
+
+.site {
+	min-width: 320px;
+}

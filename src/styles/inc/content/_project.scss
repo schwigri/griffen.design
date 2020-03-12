@@ -1,0 +1,82 @@
+.project-navigation {
+	@include breakpoint(sm) {
+		width: 45%;
+	}
+
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+
+	span {
+		font-size: .9em;
+	}
+
+	a {
+		font-size: 1.2em;
+		margin-top: .5em;
+
+		abbr[title] {
+			&::after {
+				@include no-hover {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.next-project {
+	align-items: flex-end;
+	float: right;
+}
+
+.previous-project {
+	float: left;
+}
+
+.project-navigation-container {
+	margin: 4em auto 0;
+	max-width: $s-copy-width;
+	width: calc(100% - 4em);
+}
+
+.project-intro {
+	@include breakpoint(sm) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	display: grid;
+	font-size: .9em;
+	gap: 1.6rem;
+	grid-template-columns: 1fr;
+	margin: 3.2rem auto;
+	max-width: $s-copy-width;
+	padding: 3.2rem 0;
+	position: relative;
+	width: calc(100% - 3.2rem);
+
+	&::after {
+		background-color: var(--c-separator);
+		bottom: 0;
+		content: '';
+		height: 1px;
+		left: 10%;
+		position: absolute;
+		width: 80%;
+	}
+
+	h2,
+	p {
+		width: 100%;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+
+	p {
+		margin-bottom: 0;
+	}
+}
