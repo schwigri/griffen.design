@@ -7,6 +7,7 @@
 		padding-top: 4em;
 	}
 
+	overflow: hidden;
 	padding-top: 2em;
 
 	h1,
@@ -18,8 +19,7 @@
 	p,
 	ol,
 	ul,
-	blockquote,
-	.react-pdf__message {
+	blockquote {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: $s-copy-width;
@@ -36,7 +36,18 @@
 	}
 }
 
+.pdf {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $s-content-width;
+	width: 100%;
+}
 
+.react-pdf__Page__textContent {
+	top: 0 !important;
+	left: 0 !important;
+	transform: none !important;
+}
 
 .accent-image {
 	@include breakpoint(sm) {

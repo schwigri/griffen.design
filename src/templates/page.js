@@ -1,15 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import ReactMarkdown from 'react-markdown/with-html';
-import { Document } from 'react-pdf';
+import { Document, Page } from 'react-pdf/dist/entry.webpack';
 
 import SEO from '../components/SEO';
-import Page from '../components/Page';
+import MyPage from '../components/Page';
 
 function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
 	const { metaTags, content } = data.page;
+
+	const [pdfWidth, setPdfWidth] = useState(320);
+
+	const [setInitial, setSetInitial] = useState(false);
+
+	useEffect(() => {
+		if (window && !setInitial) {
+			const firstWindowWidth = Math.max(
+				document.documentElement.clientWidth,
+				window.innerWidth || 0
+			);
+
+			let initialWidth = 320;
+			if (firstWindowWidth > 768) {
+				initialWidth = Math.min(960, firstWindowWidth - 96);
+			} else if (firstWindowWidth > 320) {
+				initialWidth = Math.min(960, firstWindowWidth);
+			}
+			setPdfWidth(initialWidth);
+			setSetInitial(true);
+		}
+	}, [setInitial, pdfWidth]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			const windowWidth = Math.max(
+				document.documentElement.clientWidth,
+				window.innerWidth || 0
+			);
+
+			const newPdfWidth =
+				windowWidth > 768
+					? Math.max(320, Math.min(960, windowWidth - 96))
+					: Math.max(320, Math.min(960, windowWidth));
+
+			if (newPdfWidth !== pdfWidth) setPdfWidth(newPdfWidth);
+		};
+
+		if (window) {
+			window.addEventListener('resize', handleResize);
+		}
+
+		return () => {
+			if (window) window.removeEventListener('resize', handleResize);
+		};
+	}, [pdfWidth]);
 
 	const pageContent = content.map(item => {
 		let sectionContent = null;
@@ -22,9 +68,11 @@ function PageTemplate({ data }) {
 			);
 		} else if ('DatoCmsPdf' === item.__typename) {
 			sectionContent = (
-				<figure className="document wide">
-					<Document file={item.url} />
-				</figure>
+				<div lang="en">
+					<Document file={item.url} className="pdf">
+						<Page pageNumber={1} width={pdfWidth} />
+					</Document>
+				</div>
 			);
 		}
 
@@ -46,7 +94,7 @@ function PageTemplate({ data }) {
 				description={metaTags.description}
 			/>
 
-			<Page>{pageContent}</Page>
+			<MyPage>{pageContent}</MyPage>
 		</>
 	);
 }
