@@ -10,7 +10,15 @@ import Page from '../components/Page';
 function ProjectTemplate({ data, pageContext }) {
 	const { locale } = pageContext;
 	const { titleSuffix } = data.site.globalSeo;
-	const { metaTags, position, title, subtitle, intro, content } = data.project;
+	const {
+		metaTags,
+		meta,
+		position,
+		title,
+		subtitle,
+		intro,
+		content,
+	} = data.project;
 	const projects = data.projects.edges;
 
 	const nextProject =
@@ -82,6 +90,7 @@ function ProjectTemplate({ data, pageContext }) {
 				title={metaTags.title}
 				titleSuffix={titleSuffix}
 				description={metaTags.description}
+				updated={meta.updatedAt}
 			/>
 
 			<Page>
@@ -160,6 +169,9 @@ ProjectTemplate.propTypes = {
 				title: PropTypes.string.isRequired,
 				description: PropTypes.string.isRequired,
 			}).isRequired,
+			meta: PropTypes.shape({
+				updatedAt: PropTypes.string.isRequired,
+			}).isRequired,
 			position: PropTypes.number.isRequired,
 			title: PropTypes.string.isRequired,
 			subtitle: PropTypes.string.isRequired,
@@ -224,6 +236,9 @@ export const query = graphql`
 			metaTags {
 				title
 				description
+			}
+			meta {
+				updatedAt
 			}
 			position
 			title

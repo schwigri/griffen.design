@@ -9,7 +9,7 @@ import MyPage from '../components/Page';
 
 function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
-	const { metaTags, content } = data.page;
+	const { metaTags, meta, content } = data.page;
 
 	const [pdfWidth, setPdfWidth] = useState(320);
 
@@ -92,6 +92,7 @@ function PageTemplate({ data }) {
 				title={metaTags.title}
 				titleSuffix={titleSuffix}
 				description={metaTags.description}
+				updated={meta.updatedAt}
 			/>
 
 			<MyPage>{pageContent}</MyPage>
@@ -110,6 +111,9 @@ PageTemplate.propTypes = {
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
 				description: PropTypes.string.isRequired,
+			}).isRequired,
+			meta: PropTypes.shape({
+				updatedAt: PropTypes.string.isRequired,
 			}).isRequired,
 			title: PropTypes.string.isRequired,
 			content: PropTypes.arrayOf(
@@ -136,6 +140,9 @@ export const query = graphql`
 			metaTags {
 				title
 				description
+			}
+			meta {
+				updatedAt
 			}
 			title
 			content {

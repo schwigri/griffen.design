@@ -8,7 +8,7 @@ import Page from '../components/Page';
 
 function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
-	const { metaTags, title, content } = data.privacyPolicy;
+	const { metaTags, meta, title, content } = data.privacyPolicy;
 
 	return (
 		<>
@@ -16,6 +16,7 @@ function PageTemplate({ data }) {
 				title={metaTags.title}
 				titleSuffix={titleSuffix}
 				description={metaTags.description}
+				updated={meta.updatedAt}
 			/>
 			<Page>
 				<h1 className="page-title">{title}</h1>
@@ -36,6 +37,9 @@ PageTemplate.propTypes = {
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
 				description: PropTypes.string.isRequired,
+			}).isRequired,
+			meta: PropTypes.shape({
+				updatedAt: PropTypes.string.isRequired,
 			}).isRequired,
 			title: PropTypes.string.isRequired,
 			content: PropTypes.string,
@@ -60,6 +64,9 @@ export const query = graphql`
 			metaTags {
 				title
 				description
+			}
+			meta {
+				updatedAt
 			}
 			title
 			content

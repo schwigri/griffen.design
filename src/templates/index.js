@@ -9,7 +9,7 @@ import { Article } from '../components/Project';
 
 function IndexTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
-	const { metaTags, content } = data.home;
+	const { metaTags, meta, content } = data.home;
 
 	const projectSizes = ['large', 'medium', 'medium', 'small'];
 	const pageContent = content.map(item => {
@@ -95,6 +95,7 @@ function IndexTemplate({ data }) {
 				title={metaTags.title}
 				titleSuffix={titleSuffix}
 				description={metaTags.description}
+				updated={meta.updatedAt}
 			/>
 
 			{pageContent}
@@ -113,6 +114,9 @@ IndexTemplate.propTypes = {
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
 				description: PropTypes.string.isRequired,
+			}).isRequired,
+			meta: PropTypes.shape({
+				updatedAt: PropTypes.string.isRequired,
 			}).isRequired,
 			content: PropTypes.arrayOf(
 				PropTypes.shape({
@@ -138,6 +142,9 @@ export const query = graphql`
 			metaTags {
 				title
 				description
+			}
+			meta {
+				updatedAt
 			}
 			content {
 				... on DatoCmsSection {
