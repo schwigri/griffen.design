@@ -36,11 +36,37 @@
 	}
 }
 
+.page-container {
+	position: relative;
+}
+
 .pdf {
+	margin-bottom: 1em;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: $s-content-width;
 	width: 100%;
+
+	&.grid {
+		display: block;
+
+		@include breakpoint(sm) {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+}
+
+.pdf-page-link {
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+}
+
+.react-pdf__Page {
+	position: relative;
+	z-index: 1;
 }
 
 .react-pdf__Page__textContent {

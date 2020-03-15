@@ -12,7 +12,6 @@ function PageTemplate({ data }) {
 	const { metaTags, meta, content } = data.page;
 
 	const [pdfWidth, setPdfWidth] = useState(320);
-
 	const [setInitial, setSetInitial] = useState(false);
 
 	useEffect(() => {
