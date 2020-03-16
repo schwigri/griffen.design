@@ -27,7 +27,9 @@ function SEO({ title, titleSuffix, description, updated }) {
 	const [userCountry, setUserCountry] = useState(false);
 	useEffect(() => {
 		if (window && window._paq && !userCountry) {
-			fetch(`https://ipinfo.io/country?token=${process.env.IPINFO_API_TOKEN}`)
+			fetch(
+				`https://ipinfo.io/country?token=${process.env.GATSBY_IPINFO_API_TOKEN}`
+			)
 				.then(response => {
 					return response.text();
 				})
