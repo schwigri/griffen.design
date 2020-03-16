@@ -18,6 +18,7 @@
 		"framer-motion": "^1.8.4",
 		"gatsby": "^2.19.19",
 		"gatsby-image": "^2.2.41",
+		"gatsby-plugin-canonical-urls": "^2.1.21",
 		"gatsby-plugin-manifest": "^2.2.41",
 		"gatsby-plugin-matomo": "^0.8.1",
 		"gatsby-plugin-offline": "^3.0.35",

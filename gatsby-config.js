@@ -64,6 +64,15 @@ module.exports = {
 			},
 		},
 		{
+			resolve: 'gatsby-plugin-canonical-urls',
+			options: {
+				siteUrl: isNetlifyProduction
+					? siteUrl
+					: 'https://staging.griffen.design',
+				stripQueryString: true,
+			},
+		},
+		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
 				name: 'Griffen Schwiesow',
