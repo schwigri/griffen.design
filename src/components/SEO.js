@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
@@ -23,6 +23,24 @@ function SEO({ title, titleSuffix, description, updated }) {
 	);
 
 	const defaultCover = data.datoCmsSite.globalSeo.fallbackSeo.image.url;
+
+	const [userCountry, setUserCountry] = useState(false);
+	useEffect(() => {
+		if (window && window._paq && !userCountry) {
+			fetch(`https://ipinfo.io/country?token=${process.env.IPINFO_API_TOKEN}`)
+				.then(response => {
+					return response.text();
+				})
+				.then(countryCode => {
+					if ('us' === countryCode.trim().toLowerCase()) {
+						window._paq.push(['setConsentGiven']);
+					}
+				})
+				.catch(() => {
+					setUserCountry(false);
+				});
+		}
+	}, [userCountry]);
 
 	return (
 		<Helmet>

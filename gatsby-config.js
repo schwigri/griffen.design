@@ -57,10 +57,11 @@ module.exports = {
 				siteId: isNetlifyProduction ? '1' : '2',
 				matomoUrl: 'https://access.griffen.design',
 				disableCookies: true,
-				exclude: ['/offline-plugin-app-shell-fallback/'],
 				siteUrl: isNetlifyProduction
 					? siteUrl
 					: 'https://staging.griffen.design',
+				requireConsent: true,
+				dev: isNetlifyProduction ? false : true,
 			},
 		},
 		{
