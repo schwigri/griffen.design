@@ -9,7 +9,8 @@
 		"clean": "gatsby clean",
 		"serve": "gatsby serve",
 		"develop": "gatsby develop -H 0.0.0.0 --port 3000",
-		"format": "prettier --config ./.prettierrc --write \"src/**/**/*.js\" && prettier --config ./.prettierrc --write \"src/**/*.js\""
+		"format": "prettier --config ./.prettierrc --write \"src/**/**/*.js\" && prettier --config ./.prettierrc --write \"src/**/*.js\"",
+		"test": "jest"
 	},
 	"dependencies": {
 		"detect-browser-language": "0.0.2",
@@ -42,6 +43,8 @@
 	},
 	"devDependencies": {
 		"babel-eslint": "^10.0.3",
+		"babel-jest": "^25.1.0",
+		"babel-preset-gatsby": "^0.2.36",
 		"eslint": "^6.8.0",
 		"eslint-config-prettier": "^6.10.0",
 		"eslint-loader": "^3.0.3",
@@ -50,6 +53,9 @@
 		"eslint-plugin-prettier": "^3.1.2",
 		"eslint-plugin-react": "^7.18.3",
 		"gatsby-plugin-eslint": "^2.0.8",
-		"prettier": "^1.19.1"
+		"identity-obj-proxy": "^3.0.0",
+		"jest": "^25.1.0",
+		"prettier": "^1.19.1",
+		"react-test-renderer": "^16.13.0"
 	}
 }
