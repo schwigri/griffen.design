@@ -123,3 +123,11 @@
 		}
 	}
 }
+
+.mastodon-link {
+	@include breakpoint(md) {
+		display: initial;
+	}
+
+	display: none;
+}
