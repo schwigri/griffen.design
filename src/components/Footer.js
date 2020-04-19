@@ -148,19 +148,6 @@ function Footer({ locale, id = '', variants }) {
 						</abbr>
 					</a>
 				</span>
-				<span className="privacy-link-container mastodon-link">
-					<a
-						href="https://pnw.life/@gs"
-						rel="me noopener noreferrer"
-						target="_blank"
-						title="@gs on Mastodon"
-					>
-						<span className="sr-only">@gs on Mastodon (pnw.life)</span>
-						<span className="emoji" role="img" aria-hidden="true">
-							🐘
-						</span>
-					</a>
-				</span>
 			</div>
 
 			<div className="locale-select">
