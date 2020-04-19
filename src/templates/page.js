@@ -70,6 +70,7 @@ function PageTemplate({ data }) {
 				<div lang="en">
 					<Document file={item.url} className="pdf">
 						<Page pageNumber={1} width={pdfWidth} />
+						<Page pageNumber={2} width={pdfWidth} />
 					</Document>
 				</div>
 			);
