@@ -5,7 +5,7 @@
 > Fine, fresh, fierce. A modern portfolio
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8b7e9850-f273-40f8-83cf-d7f6deab6b4a/deploy-status)](https://app.netlify.com/sites/schwigri/deploys)
-[![Build Status](https://travis-ci.org/schwigri/griffen.design.svg?branch=staging)](https://travis-ci.org/schwigri/griffen.design)
+[![Build Status](https://travis-ci.com/schwigri/griffen.design.svg?branch=master)](https://travis-ci.org/schwigri/griffen.design)
 
 ## Goals
 
