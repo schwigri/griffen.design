@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
-import ReactMarkdown from 'react-markdown/with-html';
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import ReactMarkdown from "react-markdown/with-html";
 
-import SEO from '../components/SEO';
-import Page from '../components/Page';
+import SEO from "../components/SEO";
+import Page from "../components/Page";
 
 function PageTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
@@ -30,25 +30,25 @@ PageTemplate.propTypes = {
 	data: PropTypes.shape({
 		site: PropTypes.shape({
 			globalSeo: PropTypes.shape({
-				titleSuffix: PropTypes.string.isRequired,
-			}).isRequired,
+				titleSuffix: PropTypes.string.isRequired
+			}).isRequired
 		}).isRequired,
 		privacyPolicy: PropTypes.shape({
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
-				description: PropTypes.string.isRequired,
+				description: PropTypes.string.isRequired
 			}).isRequired,
 			meta: PropTypes.shape({
-				updatedAt: PropTypes.string.isRequired,
+				updatedAt: PropTypes.string.isRequired
 			}).isRequired,
 			title: PropTypes.string.isRequired,
-			content: PropTypes.string,
-		}).isRequired,
+			content: PropTypes.string
+		}).isRequired
 	}).isRequired,
 	pageContext: PropTypes.shape({
 		id: PropTypes.string.isRequired,
-		locale: PropTypes.string.isRequired,
-	}).isRequired,
+		locale: PropTypes.string.isRequired
+	}).isRequired
 };
 
 export default PageTemplate;

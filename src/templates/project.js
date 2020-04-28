@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { graphql, Link } from 'gatsby';
-import ReactMarkdown from 'react-markdown/with-html';
-import ReactCompareImage from 'react-compare-image';
-import { Document, Page } from 'react-pdf/dist/entry.webpack';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { graphql, Link } from "gatsby";
+import ReactMarkdown from "react-markdown/with-html";
+import ReactCompareImage from "react-compare-image";
+import { Document, Page } from "react-pdf/dist/entry.webpack";
 
-import SEO from '../components/SEO';
-import MyPage from '../components/Page';
+import SEO from "../components/SEO";
+import MyPage from "../components/Page";
 
 function ProjectTemplate({ data, pageContext }) {
 	const { locale } = pageContext;
@@ -18,7 +18,7 @@ function ProjectTemplate({ data, pageContext }) {
 		title,
 		subtitle,
 		intro,
-		content,
+		content
 	} = data.project;
 	const projects = data.projects.edges;
 
@@ -29,7 +29,7 @@ function ProjectTemplate({ data, pageContext }) {
 		position !== 1 &&
 		projects.filter(x => position - 1 === x.node.position)[0].node;
 
-	const nowrapTypes = ['text', 'emphasis', 'strong', 'html'];
+	const nowrapTypes = ["text", "emphasis", "strong", "html"];
 
 	const projectTitle = (
 		<ReactMarkdown
@@ -95,16 +95,16 @@ function ProjectTemplate({ data, pageContext }) {
 		};
 
 		if (window) {
-			window.addEventListener('resize', handleResize);
+			window.addEventListener("resize", handleResize);
 		}
 
 		return () => {
-			if (window) window.removeEventListener('resize', handleResize);
+			if (window) window.removeEventListener("resize", handleResize);
 		};
 	}, [pdfWidth]);
 
 	const projectContent = content.map(contentSection => {
-		if ('DatoCmsImageComparison' === contentSection.__typename) {
+		if ("DatoCmsImageComparison" === contentSection.__typename) {
 			return (
 				<section className="section" key={contentSection.id}>
 					<figure className="wide">
@@ -121,15 +121,15 @@ function ProjectTemplate({ data, pageContext }) {
 					</figure>
 				</section>
 			);
-		} else if ('DatoCmsPdf' === contentSection.__typename) {
+		} else if ("DatoCmsPdf" === contentSection.__typename) {
 			const classes = contentSection.classes
 				? `pdf ${contentSection.classes}`
-				: 'pdf';
+				: "pdf";
 			const fileUrl = contentSection.url
 				? contentSection.url
 				: contentSection.file.url
 				? contentSection.file.url
-				: '';
+				: "";
 
 			return (
 				<Document
@@ -162,7 +162,7 @@ function ProjectTemplate({ data, pageContext }) {
 									pageNumber={index + 1}
 									width={
 										contentSection.classes &&
-										contentSection.classes.indexOf('grid') > -1 &&
+										contentSection.classes.indexOf("grid") > -1 &&
 										pdfWidth > 544
 											? pdfWidth / 2
 											: pdfWidth
@@ -207,15 +207,15 @@ function ProjectTemplate({ data, pageContext }) {
 					{previousProject && (
 						<div className="project-navigation previous-project">
 							<span>
-								{locale === 'de'
-									? 'Zurück'
-									: locale === 'ja'
-									? '前'
-									: 'Previous'}
+								{locale === "de"
+									? "Zurück"
+									: locale === "ja"
+									? "前"
+									: "Previous"}
 							</span>
 							<Link
 								to={
-									locale === 'en'
+									locale === "en"
 										? `/${previousProject.slug}/`
 										: `/${locale}/${previousProject.slug}/`
 								}
@@ -232,11 +232,11 @@ function ProjectTemplate({ data, pageContext }) {
 					{nextProject && (
 						<div className="project-navigation next-project">
 							<span>
-								{locale === 'de' ? 'Weiter' : locale === 'ja' ? '次' : 'Next'}
+								{locale === "de" ? "Weiter" : locale === "ja" ? "次" : "Next"}
 							</span>
 							<Link
 								to={
-									locale === 'en'
+									locale === "en"
 										? `/${nextProject.slug}/`
 										: `/${locale}/${nextProject.slug}/`
 								}
@@ -260,16 +260,16 @@ ProjectTemplate.propTypes = {
 	data: PropTypes.shape({
 		site: PropTypes.shape({
 			globalSeo: PropTypes.shape({
-				titleSuffix: PropTypes.string.isRequired,
-			}).isRequired,
+				titleSuffix: PropTypes.string.isRequired
+			}).isRequired
 		}).isRequired,
 		project: PropTypes.shape({
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
-				description: PropTypes.string.isRequired,
+				description: PropTypes.string.isRequired
 			}).isRequired,
 			meta: PropTypes.shape({
-				updatedAt: PropTypes.string.isRequired,
+				updatedAt: PropTypes.string.isRequired
 			}).isRequired,
 			position: PropTypes.number.isRequired,
 			title: PropTypes.string.isRequired,
@@ -278,7 +278,7 @@ ProjectTemplate.propTypes = {
 				PropTypes.shape({
 					id: PropTypes.string.isRequired,
 					title: PropTypes.string.isRequired,
-					description: PropTypes.string.isRequired,
+					description: PropTypes.string.isRequired
 				})
 			).isRequired,
 			content: PropTypes.arrayOf(
@@ -286,20 +286,20 @@ ProjectTemplate.propTypes = {
 					PropTypes.shape({
 						id: PropTypes.string.isRequired,
 						classes: PropTypes.string,
-						content: PropTypes.string.isRequired,
+						content: PropTypes.string.isRequired
 					}),
 					PropTypes.shape({
 						id: PropTypes.string.isRequired,
 						vertical: PropTypes.bool.isRequired,
 						imageOne: PropTypes.shape({
 							url: PropTypes.string.isRequired,
-							alt: PropTypes.string.isRequired,
+							alt: PropTypes.string.isRequired
 						}).isRequired,
 						imageTwo: PropTypes.shape({
 							url: PropTypes.string.isRequired,
-							alt: PropTypes.string.isRequired,
+							alt: PropTypes.string.isRequired
 						}).isRequired,
-						caption: PropTypes.string,
+						caption: PropTypes.string
 					}),
 					PropTypes.shape({
 						id: PropTypes.string.isRequired,
@@ -307,11 +307,11 @@ ProjectTemplate.propTypes = {
 						numPages: PropTypes.number.isRequired,
 						url: PropTypes.string,
 						file: PropTypes.shape({
-							url: PropTypes.string.isRequired,
-						}),
-					}),
+							url: PropTypes.string.isRequired
+						})
+					})
 				]).isRequired
-			).isRequired,
+			).isRequired
 		}),
 		projects: PropTypes.shape({
 			edges: PropTypes.arrayOf(
@@ -320,15 +320,15 @@ ProjectTemplate.propTypes = {
 						id: PropTypes.string.isRequired,
 						position: PropTypes.number.isRequired,
 						slug: PropTypes.string.isRequired,
-						title: PropTypes.string.isRequired,
-					}).isRequired,
+						title: PropTypes.string.isRequired
+					}).isRequired
 				})
-			).isRequired,
-		}).isRequired,
+			).isRequired
+		}).isRequired
 	}).isRequired,
 	pageContext: PropTypes.shape({
-		locale: PropTypes.string.isRequired,
-	}).isRequired,
+		locale: PropTypes.string.isRequired
+	}).isRequired
 };
 
 export default ProjectTemplate;

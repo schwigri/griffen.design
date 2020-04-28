@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 exports.createPages = async ({ graphql, actions }) => {
 	const { createPage } = actions;
@@ -61,22 +61,22 @@ exports.createPages = async ({ graphql, actions }) => {
 	`).then(result => {
 		result.data.homes.edges.forEach(item => {
 			const { id, locale } = item.node;
-			const homeSlug = locale === 'en' ? '/' : `/${locale}/`;
+			const homeSlug = locale === "en" ? "/" : `/${locale}/`;
 
 			createPage({
 				path: homeSlug,
-				component: path.resolve('./src/templates/index.js'),
+				component: path.resolve("./src/templates/index.js"),
 				context: {
 					id,
 					locale,
-					home: true,
-				},
+					home: true
+				}
 			});
 		});
 
 		result.data.pages.edges.forEach(item => {
 			const { id, locale, slug, _allSlugLocales } = item.node;
-			const pageSlug = locale === 'en' ? `/${slug}/` : `/${locale}/${slug}/`;
+			const pageSlug = locale === "en" ? `/${slug}/` : `/${locale}/${slug}/`;
 
 			let jaFont = false;
 			item.node.content.forEach(section => {
@@ -93,44 +93,44 @@ exports.createPages = async ({ graphql, actions }) => {
 
 			createPage({
 				path: pageSlug,
-				component: path.resolve('./src/templates/page.js'),
+				component: path.resolve("./src/templates/page.js"),
 				context: {
 					id,
 					locale,
 					_allSlugLocales,
-					jaFont,
-				},
+					jaFont
+				}
 			});
 		});
 
 		result.data.projects.edges.forEach(item => {
 			const { id, locale, slug, _allSlugLocales } = item.node;
-			const projectSlug = locale === 'en' ? `/${slug}/` : `/${locale}/${slug}/`;
+			const projectSlug = locale === "en" ? `/${slug}/` : `/${locale}/${slug}/`;
 
 			createPage({
 				path: projectSlug,
-				component: path.resolve('./src/templates/project.js'),
+				component: path.resolve("./src/templates/project.js"),
 				context: {
 					id,
 					locale,
-					_allSlugLocales,
-				},
+					_allSlugLocales
+				}
 			});
 		});
 
 		result.data.privacyPolicies.edges.forEach(item => {
 			const { id, locale, slug, _allSlugLocales } = item.node;
 			const privacyPolicySlug =
-				locale === 'en' ? `/${slug}` : `/${locale}/${slug}/`;
+				locale === "en" ? `/${slug}` : `/${locale}/${slug}/`;
 
 			createPage({
 				path: privacyPolicySlug,
-				component: path.resolve('./src/templates/privacy.js'),
+				component: path.resolve("./src/templates/privacy.js"),
 				context: {
 					id,
 					locale,
-					_allSlugLocales,
-				},
+					_allSlugLocales
+				}
 			});
 		});
 	});

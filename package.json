@@ -9,7 +9,7 @@
 		"clean": "gatsby clean",
 		"serve": "gatsby serve",
 		"develop": "gatsby develop -H 0.0.0.0 --port 3000",
-		"format": "prettier --config ./.prettierrc --write \"src/**/**/*.js\" && prettier --config ./.prettierrc --write \"src/**/*.js\""
+		"format": "prettier --write \"**/*.{js,jsx,json,md}\""
 	},
 	"dependencies": {
 		"detect-browser-language": "0.0.2",

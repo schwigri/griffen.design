@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { graphql, Link, useStaticQuery } from "gatsby";
 
-import * as Grahpics from '../graphics/graphics';
+import * as Grahpics from "../graphics/graphics";
 
 function Header({ locale }) {
 	const [isVertical, setIsVertical] = useState(true);
@@ -19,7 +19,7 @@ function Header({ locale }) {
 	useEffect(() => {
 		if (window && !resizeListener) {
 			setResizeListener(true);
-			window.addEventListener('resize', e => {
+			window.addEventListener("resize", e => {
 				if (e.innerWidth < 768 && !isVertical) {
 					setIsVertical(true);
 				} else if (isVertical) {
@@ -48,13 +48,13 @@ function Header({ locale }) {
 		`
 	);
 
-	const homeLink = locale === 'en' ? '/' : `/${locale}/`;
+	const homeLink = locale === "en" ? "/" : `/${locale}/`;
 
 	const navLinks = data.menus.edges
 		.filter(x => locale === x.node.locale)[0]
 		.node.links.map(item => {
 			const linkSlug =
-				locale === 'en' ? `/${item.slug}/` : `/${locale}/${item.slug}/`;
+				locale === "en" ? `/${item.slug}/` : `/${locale}/${item.slug}/`;
 
 			return (
 				<Link
@@ -77,7 +77,7 @@ function Header({ locale }) {
 
 			<div className="site-title-container">
 				<Link to={homeLink} className="site-title heading special-link">
-					{locale === 'ja' ? 'グリフィン・シュヴィーゾー' : 'Griffen Schwiesow'}
+					{locale === "ja" ? "グリフィン・シュヴィーゾー" : "Griffen Schwiesow"}
 				</Link>
 			</div>
 
@@ -89,7 +89,7 @@ function Header({ locale }) {
 }
 
 Header.propTypes = {
-	locale: PropTypes.string.isRequired,
+	locale: PropTypes.string.isRequired
 };
 
 export default Header;

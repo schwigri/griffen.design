@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql, Link, useStaticQuery } from 'gatsby';
-import { motion } from 'framer-motion';
-import uniqid from 'uniqid';
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, Link, useStaticQuery } from "gatsby";
+import { motion } from "framer-motion";
+import uniqid from "uniqid";
 
-function Footer({ locale, id = '', variants }) {
+function Footer({ locale, id = "", variants }) {
 	const data = useStaticQuery(
 		graphql`
 			query FooterQuery {
@@ -43,7 +43,7 @@ function Footer({ locale, id = '', variants }) {
 	const privacyLink = (
 		<Link
 			to={
-				locale === 'en'
+				locale === "en"
 					? `/${privacyPolicy.slug}`
 					: `/${locale}/${privacyPolicy.slug}/`
 			}
@@ -54,25 +54,25 @@ function Footer({ locale, id = '', variants }) {
 
 	const locales = [
 		{
-			name: 'English',
-			code: 'en',
+			name: "English",
+			code: "en"
 		},
 		{
-			name: 'Deutsch',
-			code: 'de',
+			name: "Deutsch",
+			code: "de"
 		},
 		{
-			name: '日本語',
-			code: 'ja',
-		},
+			name: "日本語",
+			code: "ja"
+		}
 	];
 
 	const localeLinks = locales.map(possibleLocale => {
-		let linkClasses = 'locale-link special-link';
-		if (locale === possibleLocale.code) linkClasses += ' current';
+		let linkClasses = "locale-link special-link";
+		if (locale === possibleLocale.code) linkClasses += " current";
 
 		let linkTo =
-			possibleLocale.code === 'en' ? '/' : `/${possibleLocale.code}/`;
+			possibleLocale.code === "en" ? "/" : `/${possibleLocale.code}/`;
 
 		if (variants && variants[possibleLocale.code]) {
 			linkTo = variants[possibleLocale.code].link;
@@ -95,25 +95,25 @@ function Footer({ locale, id = '', variants }) {
 
 	return (
 		<motion.footer
-			key={id ? id : uniqid('footer-')}
+			key={id ? id : uniqid("footer-")}
 			className="site-footer"
 			variants={{
 				hidden: {
-					opacity: 0,
+					opacity: 0
 				},
 				visible: {
 					opacity: 1,
 					transition: {
 						delay: 1,
-						duration: 0.25,
-					},
+						duration: 0.25
+					}
 				},
 				exit: {
 					opacity: 0,
 					transition: {
-						duration: 0.25,
-					},
-				},
+						duration: 0.25
+					}
+				}
 			}}
 			initial="hidden"
 			animate="visible"
@@ -162,15 +162,15 @@ Footer.propTypes = {
 	id: PropTypes.string,
 	variants: PropTypes.shape({
 		en: PropTypes.shape({
-			link: PropTypes.string.isRequired,
+			link: PropTypes.string.isRequired
 		}).isRequired,
 		de: PropTypes.shape({
-			link: PropTypes.string.isRequired,
+			link: PropTypes.string.isRequired
 		}).isRequired,
 		ja: PropTypes.shape({
-			link: PropTypes.string.isRequired,
-		}).isRequired,
-	}),
+			link: PropTypes.string.isRequired
+		}).isRequired
+	})
 };
 
 export default Footer;

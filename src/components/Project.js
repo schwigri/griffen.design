@@ -1,24 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import Img from 'gatsby-image';
-import ReactMarkdown from 'react-markdown/with-html';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "gatsby";
+import Img from "gatsby-image";
+import ReactMarkdown from "react-markdown/with-html";
 
-const Article = ({ project, size = '' }) => {
+const Article = ({ project, size = "" }) => {
 	const classes = `project ${size}`;
 
 	const projectSlug =
-		project.locale === 'en'
+		project.locale === "en"
 			? `/${project.slug}`
 			: `/${project.locale}/${project.slug}/`;
 
 	const readMoreLinkText =
-		project.locale === 'en' ? (
+		project.locale === "en" ? (
 			<>
 				Read more
 				<span className="sr-only"> about ${project.title}</span>
 			</>
-		) : project.locale === 'de' ? (
+		) : project.locale === "de" ? (
 			<>
 				Lesen Sie mehr
 				<span className="sr-only"> über ${project.title}</span>
@@ -30,7 +30,7 @@ const Article = ({ project, size = '' }) => {
 			</>
 		);
 
-	const nowrapTypes = ['text'];
+	const nowrapTypes = ["text"];
 
 	const projectTitle = (
 		<ReactMarkdown
@@ -84,10 +84,10 @@ Article.propTypes = {
 		thumbnailSubtitle: PropTypes.string.isRequired,
 		description: PropTypes.string.isRequired,
 		thumbnail: PropTypes.shape({
-			fluid: PropTypes.object.isRequired,
-		}).isRequired,
+			fluid: PropTypes.object.isRequired
+		}).isRequired
 	}).isRequired,
-	size: PropTypes.string.isRequired,
+	size: PropTypes.string.isRequired
 };
 
 export { Article };

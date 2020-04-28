@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import uniqid from 'uniqid';
+import React from "react";
+import PropTypes from "prop-types";
+import uniqid from "uniqid";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
 function wrapPageElement({ element, props }) {
 	const { pageContext } = props;
 
-	const locale = pageContext && pageContext.locale ? pageContext.locale : 'en';
+	const locale = pageContext && pageContext.locale ? pageContext.locale : "en";
 
 	const id =
 		pageContext && pageContext.id
-			? Buffer.from(pageContext.id).toString('base64')
+			? Buffer.from(pageContext.id).toString("base64")
 			: uniqid();
 
 	let variants = null;
@@ -21,9 +21,9 @@ function wrapPageElement({ element, props }) {
 		pageContext._allSlugLocales.forEach(slugLocale => {
 			variants[slugLocale.locale] = {
 				link:
-					slugLocale.locale === 'en'
+					slugLocale.locale === "en"
 						? `/${slugLocale.value}/`
-						: `/${slugLocale.locale}/${slugLocale.value}/`,
+						: `/${slugLocale.locale}/${slugLocale.value}/`
 			};
 		});
 	}
@@ -47,8 +47,8 @@ wrapPageElement.propTypes = {
 		pageContext: PropTypes.shape({
 			locale: PropTypes.string.isRequired,
 			id: PropTypes.string.isRequired,
-			home: PropTypes.bool,
-		}).isRequired,
+			home: PropTypes.bool
+		}).isRequired
 	}),
 	pageContext: PropTypes.shape({
 		locale: PropTypes.string.isRequired,
@@ -56,11 +56,11 @@ wrapPageElement.propTypes = {
 		_allSlugLocales: PropTypes.arrayOf(
 			PropTypes.shape({
 				locale: PropTypes.string.isRequired,
-				value: PropTypes.string.isRequired,
+				value: PropTypes.string.isRequired
 			})
 		),
-		jaFont: PropTypes.bool,
-	}).isRequired,
+		jaFont: PropTypes.bool
+	}).isRequired
 };
 
 export default wrapPageElement;

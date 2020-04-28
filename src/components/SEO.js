@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import { graphql, useStaticQuery } from 'gatsby';
+import React, { useEffect, useState } from "react";
+import Helmet from "react-helmet";
+import PropTypes from "prop-types";
+import { graphql, useStaticQuery } from "gatsby";
 
 function SEO({ title, titleSuffix, description, updated }) {
 	const pageTitle = `${title}${titleSuffix}`;
@@ -34,8 +34,8 @@ function SEO({ title, titleSuffix, description, updated }) {
 					return response.text();
 				})
 				.then(countryCode => {
-					if ('us' === countryCode.trim().toLowerCase()) {
-						window._paq.push(['setConsentGiven']);
+					if ("us" === countryCode.trim().toLowerCase()) {
+						window._paq.push(["setConsentGiven"]);
 					}
 				})
 				.catch(() => {
@@ -59,7 +59,7 @@ SEO.propTypes = {
 	title: PropTypes.string.isRequired,
 	titleSuffix: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
-	updated: PropTypes.string,
+	updated: PropTypes.string
 };
 
 export default SEO;

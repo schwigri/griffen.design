@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { graphql, useStaticQuery } from 'gatsby';
-import Helmet from 'react-helmet';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { graphql, useStaticQuery } from "gatsby";
+import Helmet from "react-helmet";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-import Header from './Header';
-import Footer from './Footer';
-import { Link } from 'gatsby';
+import Header from "./Header";
+import Footer from "./Footer";
+import { Link } from "gatsby";
 
-import * as Graphics from '../graphics/graphics';
+import * as Graphics from "../graphics/graphics";
 
-function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
+function Layout({ locale, id = "", jaFont = false, variants = {}, children }) {
 	const shouldReduceMotion = useReducedMotion();
 	const availableLanguages = {
 		en: {
-			name: 'English',
-			message: 'This page is available in English.',
-			close: 'Close this notice',
+			name: "English",
+			message: "This page is available in English.",
+			close: "Close this notice"
 		},
 		de: {
-			name: 'Deutsch',
-			message: 'Diese Seite ist in deutsch verfügbar.',
-			clost: 'Schliessen',
+			name: "Deutsch",
+			message: "Diese Seite ist in deutsch verfügbar.",
+			clost: "Schliessen"
 		},
 		ja: {
-			name: '日本語',
-			message: 'このページは日本語でも読めます。',
-			close: '閉じる',
-		},
+			name: "日本語",
+			message: "このページは日本語でも読めます。",
+			close: "閉じる"
+		}
 	};
 
-	const [colorScheme, setColorScheme] = useState('light');
+	const [colorScheme, setColorScheme] = useState("light");
 	const [colorSchemeListener, setColorSchemeListener] = useState(false);
 	const [userLanguage, setUserLanguage] = useState(null);
 	const [noticeVisible, setNoticeVisible] = useState(false);
@@ -50,11 +50,11 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 
 	useEffect(() => {
 		if (!userLanguage) {
-			const detectBrowserLanguage = require('detect-browser-language');
+			const detectBrowserLanguage = require("detect-browser-language");
 			setUserLanguage(detectBrowserLanguage().substring(0, 2));
 
-			const userSettings = sessionStorage.getItem('hide-lang-notice')
-				? JSON.parse(sessionStorage.getItem('hide-lang-notice'))
+			const userSettings = sessionStorage.getItem("hide-lang-notice")
+				? JSON.parse(sessionStorage.getItem("hide-lang-notice"))
 				: null;
 			if (
 				userSettings &&
@@ -72,9 +72,9 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 		setNoticeVisible(false);
 		const userSettings = {
 			hide: true,
-			lang: userLanguage,
+			lang: userLanguage
 		};
-		sessionStorage.setItem('hide-lang-notice', JSON.stringify(userSettings));
+		sessionStorage.setItem("hide-lang-notice", JSON.stringify(userSettings));
 	};
 
 	const langNotice = () => {
@@ -87,8 +87,8 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 			const toLink =
 				variants && variants[userLanguage]
 					? variants[userLanguage].link
-					: 'en' === userLanguage
-					? '/'
+					: "en" === userLanguage
+					? "/"
 					: `/${userLanguage}/`;
 
 			return (
@@ -99,15 +99,15 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 					variants={{
 						hidden: {
 							opacity: 0,
-							y: shouldReduceMotion ? 0 : -50,
+							y: shouldReduceMotion ? 0 : -50
 						},
 						visible: {
 							opacity: 1,
 							y: 0,
 							transition: {
-								delay: 0.9,
-							},
-						},
+								delay: 0.9
+							}
+						}
 					}}
 					initial="hidden"
 					animate="visible"
@@ -132,19 +132,19 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 
 		if (window && !colorSchemeListener) {
 			setColorSchemeListener(true);
-			colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+			colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 			if (colorSchemeQuery.matches) {
-				setColorScheme('dark');
+				setColorScheme("dark");
 			} else {
-				setColorScheme('light');
+				setColorScheme("light");
 			}
 
 			colorSchemeQuery.addListener(() => {
 				if (colorSchemeQuery.matches) {
-					setColorScheme('dark');
+					setColorScheme("dark");
 				} else {
-					setColorScheme('light');
+					setColorScheme("light");
 				}
 			});
 		}
@@ -160,9 +160,9 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 				/>
 				<meta
 					name="apple-mobile-web-app-status-bar-style"
-					content={'light' === colorScheme ? 'default' : 'black-translucent'}
+					content={"light" === colorScheme ? "default" : "black-translucent"}
 				/>
-				{(locale === 'ja' || jaFont) && (
+				{(locale === "ja" || jaFont) && (
 					<link
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;display=swap&amp;subset=japanese"
@@ -172,22 +172,22 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 				<link
 					rel="alternate"
 					hrefLang="en"
-					href={`${siteUrl}${variants && variants.en ? variants.en.link : '/'}`}
+					href={`${siteUrl}${variants && variants.en ? variants.en.link : "/"}`}
 				/>
 				<link
 					rel="alternate"
 					hrefLang="de"
 					href={`${siteUrl}${
-						variants && variants.de ? variants.de.link : '/de'
+						variants && variants.de ? variants.de.link : "/de"
 					}`}
 				/>
 				<link
 					rel="alternate"
 					hrefLang="ja"
 					href={`${siteUrl}${
-						variants && variants.ja ? variants.ja.link : '/ja'
+						variants && variants.ja ? variants.ja.link : "/ja"
 					}`}
-				/>{' '}
+				/>{" "}
 			</Helmet>
 
 			<Header locale={locale} id={id} />
@@ -205,23 +205,23 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 						variants={{
 							hidden: {
 								opacity: 0,
-								y: shouldReduceMotion ? 0 : 64,
+								y: shouldReduceMotion ? 0 : 64
 							},
 							visible: {
 								opacity: 1,
 								y: 0,
 								transition: {
 									delay: 0.6,
-									ease: 'easeIn',
-								},
+									ease: "easeIn"
+								}
 							},
 							exit: {
 								opacity: 0,
 								y: shouldReduceMotion ? 0 : 64,
 								transition: {
-									ease: 'easeOut',
-								},
-							},
+									ease: "easeOut"
+								}
+							}
 						}}
 					>
 						{children}
@@ -240,16 +240,16 @@ Layout.propTypes = {
 	jaFont: PropTypes.bool,
 	variants: PropTypes.shape({
 		en: PropTypes.shape({
-			link: PropTypes.string.isRequired,
+			link: PropTypes.string.isRequired
 		}).isRequired,
 		de: PropTypes.shape({
-			link: PropTypes.string.isRequired,
+			link: PropTypes.string.isRequired
 		}).isRequired,
 		ja: PropTypes.shape({
-			link: PropTypes.string.isRequired,
-		}).isRequired,
+			link: PropTypes.string.isRequired
+		}).isRequired
 	}),
-	children: PropTypes.node.isRequired,
+	children: PropTypes.node.isRequired
 };
 
 export default Layout;

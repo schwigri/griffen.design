@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import SEO from '../components/SEO';
-import Page from '../components/Page';
+import SEO from "../components/SEO";
+import Page from "../components/Page";
 
 function Error404Page() {
 	return (
@@ -14,7 +14,7 @@ function Error404Page() {
 
 			<Page>
 				<h1 className="page-title">
-					And I oop—{' '}
+					And I oop—{" "}
 					<span className="emoji" role="img" aria-label="Grimacing emoji">
 						😬
 					</span>
@@ -23,7 +23,7 @@ function Error404Page() {
 					I’m sorry, but the page you’re looking for isn’t here.
 				</p>
 				<p>
-					If you think this is a mistake, please let me know by emailing me at{' '}
+					If you think this is a mistake, please let me know by emailing me at{" "}
 					<a href="mailto:schwigri@pm.me">schwigri@pm.me</a> or creating an
 					issue on my GitHub repository. Sorry about that!
 				</p>

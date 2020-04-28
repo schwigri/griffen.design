@@ -1,28 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
-import ReactMarkdown from 'react-markdown/with-html';
-import uniqid from 'uniqid';
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import ReactMarkdown from "react-markdown/with-html";
+import uniqid from "uniqid";
 
-import SEO from '../components/SEO';
-import { Article } from '../components/Project';
+import SEO from "../components/SEO";
+import { Article } from "../components/Project";
 
 function IndexTemplate({ data }) {
 	const { titleSuffix } = data.site.globalSeo;
 	const { metaTags, meta, content } = data.home;
 
-	const projectSizes = ['large', 'medium', 'medium', 'small'];
+	const projectSizes = ["large", "medium", "medium", "small"];
 	const pageContent = content.map(item => {
 		let sectionContent = null;
 
-		if ('DatoCmsSection' === item.__typename) {
+		if ("DatoCmsSection" === item.__typename) {
 			sectionContent = (
 				<ReactMarkdown
-					source={item.content ? item.content : ''}
+					source={item.content ? item.content : ""}
 					escapeHtml={false}
 				/>
 			);
-		} else if ('DatoCmsCollection' === item.__typename) {
+		} else if ("DatoCmsCollection" === item.__typename) {
 			sectionContent = [];
 			if (item.title || item.description) {
 				sectionContent.push(
@@ -45,7 +45,7 @@ function IndexTemplate({ data }) {
 							size={projectSizes[index]}
 						/>
 					);
-					if (item.classes.indexOf('opposite') > -1) {
+					if (item.classes.indexOf("opposite") > -1) {
 						if (0 === index % 2) {
 							sectionRightContent.push(projectArticle);
 						} else {
@@ -65,8 +65,8 @@ function IndexTemplate({ data }) {
 
 			const sectionRight = <div className="right">{sectionRightContent}</div>;
 
-			let projectsClasses = 'projects';
-			if (item.classes.indexOf('opposite') > -1) projectsClasses += ' opposite';
+			let projectsClasses = "projects";
+			if (item.classes.indexOf("opposite") > -1) projectsClasses += " opposite";
 
 			sectionContent.push(
 				<div className={projectsClasses} key={uniqid()}>
@@ -76,12 +76,12 @@ function IndexTemplate({ data }) {
 			);
 		}
 
-		let sectionClasses = 'section';
+		let sectionClasses = "section";
 		if (item.classes) sectionClasses += ` ${item.classes}`;
 
 		return (
 			<section
-				key={Buffer.from(item.id).toString('base64')}
+				key={Buffer.from(item.id).toString("base64")}
 				className={sectionClasses}
 			>
 				{sectionContent}
@@ -107,26 +107,26 @@ IndexTemplate.propTypes = {
 	data: PropTypes.shape({
 		site: PropTypes.shape({
 			globalSeo: PropTypes.shape({
-				titleSuffix: PropTypes.string.isRequired,
-			}).isRequired,
+				titleSuffix: PropTypes.string.isRequired
+			}).isRequired
 		}).isRequired,
 		home: PropTypes.shape({
 			metaTags: PropTypes.shape({
 				title: PropTypes.string.isRequired,
-				description: PropTypes.string.isRequired,
+				description: PropTypes.string.isRequired
 			}).isRequired,
 			meta: PropTypes.shape({
-				updatedAt: PropTypes.string.isRequired,
+				updatedAt: PropTypes.string.isRequired
 			}).isRequired,
 			content: PropTypes.arrayOf(
 				PropTypes.shape({
 					id: PropTypes.string.isRequired,
 					classes: PropTypes.string,
-					content: PropTypes.string,
+					content: PropTypes.string
 				})
-			),
-		}).isRequired,
-	}).isRequired,
+			)
+		}).isRequired
+	}).isRequired
 };
 
 export default IndexTemplate;
