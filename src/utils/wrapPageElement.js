@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
-import Layout from './src/components/Layout';
+import Layout from '../components/Layout';
 
 function wrapPageElement({ element, props }) {
 	const { pageContext } = props;

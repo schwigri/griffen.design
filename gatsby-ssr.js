@@ -1,3 +1,1 @@
-import CustomLayout from './wrapPageElement';
-
-export const wrapPageElement = CustomLayout;
+export const wrapPageElement = require('./src/utils/wrapPageElement').default;

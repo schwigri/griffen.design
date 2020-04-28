@@ -1,11 +1,9 @@
-import './src/styles/design.scss';
-import 'typeface-prompt';
-import 'typeface-work-sans';
-import 'focus-within-polyfill';
+require('./src/styles/design.scss');
+require('typeface-prompt');
+require('typeface-work-sans');
+require('focus-within-polyfill');
 
-import CustomLayout from './wrapPageElement';
-
-export const wrapPageElement = CustomLayout;
+export const wrapPageElement = require('./src/utils/wrapPageElement').default;
 
 const transitionDelay = 500;
 
