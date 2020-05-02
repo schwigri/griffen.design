@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - staging
+    - refactor
 
 cache:
   directories:
