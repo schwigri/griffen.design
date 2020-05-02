@@ -1,8 +1,8 @@
-require("./src/styles/design.scss");
+// Require fonts
 require("typeface-prompt");
 require("typeface-work-sans");
-require("focus-within-polyfill");
 
+// Set wrapPageElement
 export const wrapPageElement = require("./src/utils/wrapPageElement").default;
 
 const transitionDelay = 500;
@@ -22,3 +22,9 @@ export const shouldUpdateScroll = ({
 	}
 	return false;
 };
+
+
+// Regsiter Prismic link resolver
+const { registerLinkResolver } = require("gatsby-source-prismic-graphql");
+const linkResolver = require("./src/utils/linkResolver").default;
+registerLinkResolver(linkResolver);

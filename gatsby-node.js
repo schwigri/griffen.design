@@ -1,136 +1,121 @@
 const path = require("path");
+const fs = require("fs");
+
+const pageTypes = {
+	home: "Home",
+	privacy: "Privacy",
+	page: "Page",
+};
+
+const langPrefixes = {
+	"en-us": "",
+	"ja-jp": "/ja",
+	"de-ch": "/de",
+};
+
+const cacheDir = "./.cache/caches/gatsby-source-prismic-graphql";
+
+exports.onPreBootstrap = () => {
+	if (!fs.existsSync(cacheDir)) {
+		fs.mkdirSync(cacheDir);
+	}
+};
 
 exports.createPages = async ({ graphql, actions }) => {
 	const { createPage } = actions;
 
 	await graphql(`
 		{
-			homes: allDatoCmsHome {
-				edges {
-					node {
-						id
-						locale
-					}
+			site {
+				siteMetadata {
+					title
+					description
+					siteUrl
 				}
 			}
-			pages: allDatoCmsPage {
-				edges {
-					node {
-						id
-						locale
-						slug
-						_allSlugLocales {
-							locale
-							value
+
+			prismic {
+				allLayouts {
+					edges {
+						node {
+							_meta {
+								lang
+							}
+							title_suffix
 						}
-						content {
-							... on DatoCmsSection {
-								content
+					}
+				}
+
+				allPages {
+					edges {
+						node {
+							type
+							_meta {
+								id
+								uid
+								lang
+								alternateLanguages {
+									uid
+									lang
+								}
 							}
 						}
 					}
 				}
-			}
-			projects: allDatoCmsProject {
-				edges {
-					node {
-						id
-						locale
-						slug
-						_allSlugLocales {
-							locale
-							value
-						}
-					}
-				}
-			}
-			privacyPolicies: allDatoCmsPrivacyPolicy {
-				edges {
-					node {
-						id
-						locale
-						slug
-						_allSlugLocales {
-							locale
-							value
+
+				allProjects {
+					edges {
+						node {
+							_meta {
+								id
+								uid
+								lang
+								alternateLanguages {
+									uid
+									lang
+								}
+							}
 						}
 					}
 				}
 			}
 		}
 	`).then(result => {
-		result.data.homes.edges.forEach(item => {
-			const { id, locale } = item.node;
-			const homeSlug = locale === "en" ? "/" : `/${locale}/`;
+		const { siteMetadata } = result.data.site;
+		const layouts = result.data.prismic.allLayouts.edges;
+
+		result.data.prismic.allPages.edges.forEach(page => {
+			const { type } = page.node;
+			const { uid, lang } = page.node._meta;
+			const slug = type === pageTypes.home ? `${langPrefixes[lang]}/` : `${langPrefixes[lang]}/${uid}`;
 
 			createPage({
-				path: homeSlug,
-				component: path.resolve("./src/templates/index.js"),
+				path: slug,
+				component: path.resolve("./src/templates/page.tsx"),
 				context: {
-					id,
-					locale,
-					home: true
-				}
+					uid,
+					lang,
+					siteMetadata,
+					titleSuffix: layouts.filter(x => x.node._meta.lang === lang)[0].node.title_suffix,
+					...page.node,
+				},
 			});
 		});
 
-		result.data.pages.edges.forEach(item => {
-			const { id, locale, slug, _allSlugLocales } = item.node;
-			const pageSlug = locale === "en" ? `/${slug}/` : `/${locale}/${slug}/`;
-
-			let jaFont = false;
-			item.node.content.forEach(section => {
-				if (
-					!jaFont &&
-					section.content &&
-					section.content.match(
-						/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/
-					)
-				) {
-					jaFont = true;
-				}
-			});
+		result.data.prismic.allProjects.edges.forEach(project => {
+			const { uid, lang } = project.node._meta;
+			const slug = `${langPrefixes[lang]}/${uid}`;
 
 			createPage({
-				path: pageSlug,
-				component: path.resolve("./src/templates/page.js"),
+				path: slug,
+				component: path.resolve("./src/templates/project.tsx"),
 				context: {
-					id,
-					locale,
-					_allSlugLocales,
-					jaFont
-				}
-			});
-		});
-
-		result.data.projects.edges.forEach(item => {
-			const { id, locale, slug, _allSlugLocales } = item.node;
-			const projectSlug = locale === "en" ? `/${slug}/` : `/${locale}/${slug}/`;
-
-			createPage({
-				path: projectSlug,
-				component: path.resolve("./src/templates/project.js"),
-				context: {
-					id,
-					locale,
-					_allSlugLocales
-				}
-			});
-		});
-
-		result.data.privacyPolicies.edges.forEach(item => {
-			const { id, locale, slug, _allSlugLocales } = item.node;
-			const privacyPolicySlug =
-				locale === "en" ? `/${slug}` : `/${locale}/${slug}/`;
-
-			createPage({
-				path: privacyPolicySlug,
-				component: path.resolve("./src/templates/privacy.js"),
-				context: {
-					id,
-					locale,
-					_allSlugLocales
-				}
+					uid,
+					lang,
+					siteMetadata,
+					titleSuffix: layouts.filter(x => x.node._meta.lang === lang)[0].node.title_suffix,
+					...project.node,
+				},
 			});
 		});
 	});

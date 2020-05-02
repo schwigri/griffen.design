@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ESNext",
+		"jsx": "preserve",
+		"lib": ["DOM", "ESNext"],
+		"strict": true,
+		"noEmit": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noUnusedLocals": false,
+		"allowJs": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "public", ".cache"]
+}
