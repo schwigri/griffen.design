@@ -125,7 +125,6 @@ class HeaderNav extends React.Component<InferProps<typeof HeaderNav.propTypes>> 
 	};
 
 	render() {
-		console.log("header nav lang", this.props.lang);
 		const layout = this.props.data.prismic.allLayouts.edges.filter(x => x.node._meta.lang === this.props.lang.lang)[0];
 
 		return (

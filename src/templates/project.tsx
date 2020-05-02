@@ -110,8 +110,6 @@ class ProjecTemplate extends React.Component<InferProps<typeof ProjecTemplate.pr
 			body,
 		} = this.props.data.prismic.project;
 
-		console.log(this.props.data.prismic.project);
-
 		return (
 			<Page>
 				<SEO

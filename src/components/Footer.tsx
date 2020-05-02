@@ -160,7 +160,6 @@ class Footer extends React.Component<InferProps<typeof Footer.propTypes>> {
 						if (link && link.page) {
 							const { _meta, type, nav_title } = link.page;
 							const slug = getSlug(getLanguageCode(_meta.lang || ""), getPageType(type), _meta.uid);
-							console.log('footer link slug:', slug);
 
 							return (
 								<span key={slug}>
@@ -250,7 +249,7 @@ export default () => {
 		{lang => (
 			<StaticQuery
 				query={`${query}`}
-				render={data => {console.log(data); return <Footer lang={lang} data={data} />;}}
+				render={data => <Footer lang={lang} data={data} />}
 			/>
 		)}
 		</LangContext.Consumer>

@@ -12,7 +12,6 @@ import { getLanguageCode, getPageType } from "./functions";
 function wrapPageElement({ element, props }: InferProps<typeof wrapPageElement.propTypes>): React.ReactNode {
 	const id = props.pageContext?._meta?.id || uniqid();
 	const lang = props.pageContext?._meta?.lang || "en-us";
-	console.log("page lang code", lang, getLanguageCode(lang));
 	const langContext: LanguageContext = {
 		lang: getLanguageCode(lang),
 		type: getPageType(props.pageContext?.type || props.pageContext?._meta?.type || PageTypes.PAGE),
