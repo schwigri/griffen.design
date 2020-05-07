@@ -1,24 +1,23 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { graphql, Link, StaticQuery } from "gatsby";
 
 import LangContext from "../LangContext";
 
 import { PageTypes } from "../../utils/enums";
-import { theme } from "../../utils/theme";
 import { getSlug, getLanguageCode } from "../../utils/functions";
 
 const HeaderTitleLink = styled(Link)`
 	background-color: transparent;
 	border-bottom: 0;
-	color: ${theme.colors.copy.light};
+	color: ${props => props.theme.colors.copy};
 	display: none;
-	font-family: ${theme.fonts.heading};
+	font-family: ${props => props.theme.fonts};
 	text-decoration: none;
 
 	@media only screen and (prefers-color-scheme: dark) {
-		color: ${theme.colors.copy.dark};
+		color: ${props => props.theme.colors.copy};
 	}
 
 	&:focus,
@@ -28,17 +27,11 @@ const HeaderTitleLink = styled(Link)`
 
 	&:focus {
 		box-shadow:
-			0 0 0 0.25em ${theme.colors.background.light},
-			0 0 0 0.5em ${theme.colors.copy.light};
-
-		@media only screen and (prefers-color-scheme: dark) {
-			box-shadow:
-				0 0 0 0.25em ${theme.colors.background.dark},
-				0 0 0 0.5em ${theme.colors.copy.dark};
-		}
+			0 0 0 0.25em ${props => props.theme.colors.background},
+			0 0 0 0.5em ${props => props.theme.colors.copy};
 	}
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		display: block;
 		transform: scale(-1);
 

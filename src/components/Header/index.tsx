@@ -1,16 +1,14 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { graphql, StaticQuery } from "gatsby";
 
 import Stars from "./Stars";
 import HeaderTitle from "./HeaderTitle";
 import HeaderNav from "./HeaderNav";
 
-import { theme } from "../../utils/theme";
-
 const HeaderWrapper = styled("header")`
 	align-items: center;
-	background-image: ${theme.gradients.header.light};
+	background-image: ${props => props.theme.gradients.header};
 	box-sizing: border-box;
 	display: flex;
 	height: 4em;
@@ -23,21 +21,17 @@ const HeaderWrapper = styled("header")`
 	z-index: 3;
 
 	@media only screen and (prefers-color-scheme: dark) {
-		background-image: ${theme.gradients.header.dark};
+		background-image: ${props => props.theme.gradients.header};
 	}
 
-	@media (min-width: ${theme.breakpoints.md}) {
-		background-color: ${theme.colors.background.light};
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
+		background-color: ${props => props.theme.colors.background};
 		background-image: none;
-		box-shadow: ${theme.shadows.card};
+		box-shadow: ${props => props.theme.shadows.card};
 		height: 100vh;
 		padding: 1em;
 		width: 6em;
 		writing-mode: vertical-lr;
-
-		@media only screen and (prefers-color-scheme: dark) {
-			background-color: ${theme.colors.background.dark};
-		}
 	}
 `;
 

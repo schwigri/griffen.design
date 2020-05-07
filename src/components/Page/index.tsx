@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import uniqid from "uniqid";
 

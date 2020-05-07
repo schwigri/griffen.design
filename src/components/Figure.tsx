@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const FigureWrapper = styled("figure")`
 	margin: 4em auto;

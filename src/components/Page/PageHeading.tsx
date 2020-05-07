@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Elements, RichText } from "prismic-reactjs";
 
 import LangContext from "../LangContext";
-
-import { theme } from "../../utils/theme";
 
 const ChallengeOutcome = styled("div")`
 	font-size: 0.9em;
@@ -31,7 +29,7 @@ const ChallengeOutcomeWrapper = styled("div")`
 	width: calc(100% - 3.2rem);
 
 	&::after {
-		background-color: ${theme.colors.separator.light};
+		background-color: ${props => props.theme.colors.separator};
 		bottom: 0;
 		content: "";
 		height: 1px;
@@ -40,11 +38,11 @@ const ChallengeOutcomeWrapper = styled("div")`
 		width: 80%;
 
 		@media only screen and (prefers-color-scheme: dark) {
-			background-color: ${theme.colors.separator.dark};
+			background-color: ${props => props.theme.colors.separator};
 		}
 	}
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		grid-template-columns: repeat(2, 1fr);
 	}
 `;
@@ -59,14 +57,10 @@ const PageHeadingWrapper = styled("header")`
 
 	// Subtitle
 	& h1 + p {
-		color: ${theme.colors.subtitle.light};
-		font-family: ${theme.fonts.heading};
+		color: ${props => props.theme.colors.subtitle};
+		font-family: ${props => props.theme.fonts.heading};
 		font-size: 1.2em;
 		text-align: center;
-
-		@media only screen and (prefers-color-scheme: dark) {
-			color: ${theme.colors.subtitle.dark};
-		}
 	}
 `;
 

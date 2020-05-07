@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes, { InferProps, string } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { graphql, Link, StaticQuery } from "gatsby";
 
 import LangContext from "./LangContext";
 
 import { AlternateLanguage, PageTypes, languages } from "../utils/enums";
-import { theme } from "../utils/theme";
 import { getSlug, getLanguageCode, getPageType } from "../utils/functions";
 
 interface FooterLocaleProps {
@@ -15,10 +14,10 @@ interface FooterLocaleProps {
 
 const FooterLocale = styled(Link)<FooterLocaleProps>`
 	align-items: center;
-	background-color: ${props => !!props.current ? theme.colors.background.light : "transparent"};
+	background-color: ${props => !!props.current ? props => props.theme.colors.background : "transparent"};
 	border: 0;
 	box-sizing: border-box;
-	color: ${theme.colors.copy.light};
+	color: ${props => props.theme.colors.copy};
 	display: inline-flex;
 	font-size: 0.9em;
 	font-weight: 400;
@@ -28,19 +27,10 @@ const FooterLocale = styled(Link)<FooterLocaleProps>`
 	width: 3.6rem;
 	z-index: 1;
 
-	@media only screen and (prefers-color-scheme: dark) {
-		background-color: ${props => !!props.current ? theme.colors.background.dark : "transparent"};
-		color: ${theme.colors.copy.dark};
-	}
-
 	&:focus,
 	&:hover {
-		background-color: ${props => !!props.current ? theme.colors.background.light : theme.colors.langLinkAccent.light};
+		background-color: ${props => !!props.current ? props.theme.colors.background : props.theme.colors.langLinkAccent};
 		z-index: 2;
-
-		@media only screen and (prefers-color-scheme: dark) {
-			background-color: ${props => !!props.current ? theme.colors.background.dark : theme.colors.langLinkAccent.dark};
-		}
 	}
 
 	&:focus {
@@ -58,7 +48,7 @@ const FooterSection = styled("div")`
 		margin-bottom: 1em;
 	}
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		display: block;
 
 		& > a,
@@ -71,14 +61,14 @@ const FooterSection = styled("div")`
 const FooterDivider = styled("span")`
 	display: none;
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		display: inline;
 	}
 `;
 
 const FooterWrapper = styled("footer")`
 	align-items: center;
-	background-color: ${theme.colors.accent.light};
+	background-color: ${props => props.theme.colors.accent};
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
@@ -86,17 +76,13 @@ const FooterWrapper = styled("footer")`
 	position: sticky;
 	z-index: 1;
 
-	@media only screen and (prefers-color-scheme: dark) {
-		background-color: ${theme.colors.accent.dark};
-	}
-
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		flex-direction: row;
 		justify-content: space-between;
 		padding-left: 8em;
 	}
 
-	@media (min-width: ${theme.breakpoints.lg}) {
+	@media (min-width: ${props => props.theme.breakpoints.lg}) {
 		padding: 4em 4em 4em 10em;
 	}
 `;

@@ -1,80 +1,49 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link, graphql, StaticQuery } from "gatsby";
 
 import LangContext from "../LangContext";
 
 import { PageTypes } from "../../utils/enums";
-import { theme } from "../../utils/theme";
 import { getSlug, getLanguageCode, getPageType } from "../../utils/functions";
 
 const HeaderNavLink = styled(Link)`
-	border-bottom: 2px solid ${theme.colors.headerLinkAccent.light};
-	color: ${theme.colors.copy.light};
+	border-bottom: 2px solid ${props => props.theme.colors.headerLinkAccent};
+	color: ${props => props.theme.colors.copy};
 	display: block;
 	font-weight: 500;
 	margin-left: 1em;
 	text-decoration: none;
 
-	@media only screen and (prefers-color-scheme: dark) {
-		border-bottom-color: ${theme.colors.headerLinkAccent.dark};
-		color: ${theme.colors.copy.dark};
-	}
-
 	&:focus,
 	&:hover {
-		background-color: ${theme.colors.headerLinkAccent.light};
-		border-bottom-color: ${theme.colors.copy.light};
-
-		@media only screen and (prefers-color-scheme: dark) {
-			background-color: ${theme.colors.headerLinkAccent.dark};
-			border-bottom-color: ${theme.colors.copy.dark};
-		}
+		background-color: ${props => props.theme.colors.headerLinkAccent};
+		border-bottom-color: ${props => props.theme.colors.copy};
 	}
 
 	&:focus {
 		box-shadow:
-			0 0 0 0.25em ${theme.colors.background.light},
-			0 0 0 0.5em ${theme.colors.copy.light};
-
-		@media only screen and (prefers-color-scheme: dark) {
-			box-shadow:
-				0 0 0 0.25em ${theme.colors.background.dark},
-				0 0 0 0.5em ${theme.colors.copy.dark};
-		}
+			0 0 0 0.25em ${props => props.theme.colors.background},
+			0 0 0 0.5em ${props => props.theme.colors.copy};
 	}
 
 	&[aria-current="page"] {
-		border-bottom-color: ${theme.colors.linkAccent.light};
-		color: ${theme.colors.theme.light};
-
-		@media only screen and (prefers-color-scheme: dark) {
-			border-bottom-color: ${theme.colors.linkAccent.dark};
-			color: ${theme.colors.theme.dark};
-		}
+		border-bottom-color: ${props => props.theme.colors.linkAccent};
+		color: ${props => props.theme.colors.theme};
 
 		&:hover {
-			background-color: ${theme.colors.linkAccent.light};
-			border-bottom-color: ${theme.colors.theme.light};
-
-			@media only screen and (prefers-color-scheme: dark) {
-				background-color: ${theme.colors.linkAccent.dark};
-				border-bottom-color: ${theme.colors.theme.dark};
-			}
+			background-color: ${props => props.theme.colors.linkAccent};
+			border-bottom-color: ${props => props.theme.colors.theme};
 		}
 	}
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		border-bottom: 0;
 		margin-bottom: 1em;
 		margin-left: 0;
 		transform: scale(-1);
-		border-left: 2px solid ${theme.colors.headerLinkAccent.light};
-
-		@media only screen and (prefers-color-scheme: dark) {
-			border-left: 2px solid ${theme.colors.headerLinkAccent.dark};
-		}
+		border-left: 2px solid ${props => props.theme.colors.headerLinkAccent};
 
 		&:lang(ja) {
 			transform: none;
@@ -85,7 +54,7 @@ const HeaderNavLink = styled(Link)`
 const HeaderNavWrapper = styled("nav")`
 	display: flex;
 
-	@media (min-width: ${theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		flex-direction: row-reverse;
 	}
 `;

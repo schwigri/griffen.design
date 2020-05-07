@@ -9,6 +9,7 @@ import Page, { PageHeading } from "../components/Page";
 import PDF from "../components/PDF";
 import SEO from "../components/SEO";
 import Figure from "../components/Figure";
+import Collection from "../components/Collection";
 
 import {
 	AlternateLanguage,
@@ -17,6 +18,7 @@ import {
 	PageBodyTextItem,
 	PageBodyPDFItem,
 	PageBodyImageItem,
+	PageBodyProjectCollectionItem,
 } from "../utils/enums";
 
 class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTypes>> {
@@ -58,6 +60,20 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 									PropTypes.shape({
 										content: PropTypes.array,
 									}),
+								),
+							}),
+
+							// Shape for project collection
+							PropTypes.shape({
+								type: PropTypes.string.isRequired,
+								fields: PropTypes.arrayOf(
+									PropTypes.shape({
+										project: PropTypes.shape({
+											title: PropTypes.array,
+											tile_subtitle: PropTypes.string,
+											tile_description: PropTypes.array,
+										}),
+									})
 								),
 							}),
 
@@ -116,6 +132,11 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 								const textBodyItem = section as PageBodyTextItem;
 								return textBodyItem.fields?.map(field => field ? <RichText key={uniqid()} render={field.content || null} /> : null);
 
+							case PageBodyItemTypes.PROJECT_COLLECTION:
+								const projectCollectionItem = section as PageBodyProjectCollectionItem;
+								const items = projectCollectionItem.fields?.map(field => field && field.project)
+								return <Collection key={uniqid()} items={items} itemElement="article" />;
+
 							case PageBodyItemTypes.PDF:
 								const pdfBodyItem = section as PageBodyPDFItem;
 								const url = pdfBodyItem.primary?.pdf_file?.url || pdfBodyItem.primary?.pdf_url?.url || null;
@@ -171,6 +192,18 @@ export const query = graphql`
 					}
 					... on PRISMIC_PageBodyImage {
 						type
+					}
+					... on PRISMIC_PageBodyProject_collection {
+						type
+						fields {
+							project {
+								... on PRISMIC_Project {
+									title
+									tile_subtitle
+									tile_description
+								}
+							}
+						}
 					}
 					... on PRISMIC_PageBodyPdf {
 						type

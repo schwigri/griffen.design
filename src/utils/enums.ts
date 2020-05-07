@@ -84,6 +84,7 @@ export interface Theme {
 
 export enum PageBodyItemTypes {
 	TEXT = "text",
+	PROJECT_COLLECTION = "project_collection",
 	PDF = "pdf",
 	IMAGE = "image",
 }
@@ -114,7 +115,18 @@ export type PageBodyImageItem = {
 	}[];
 };
 
-export type PageBodyItem = PageBodyTextItem | PageBodyPDFItem | PageBodyImageItem;
+export type PageBodyProjectCollectionItem = {
+	type: string;
+	fields?: {
+		project?: {
+			title?: [];
+			tile_subtitle?: string;
+			tile_description?: [];
+		};
+	}[];
+};
+
+export type PageBodyItem = PageBodyTextItem | PageBodyPDFItem | PageBodyImageItem | PageBodyProjectCollectionItem;
 
 export enum ProjectBodyItemTypes {
 	TEXT = "text",

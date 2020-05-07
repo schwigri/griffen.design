@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Document, Page } from "react-pdf/dist/entry.webpack";
 
 const PDFDocument = styled(Document)`
