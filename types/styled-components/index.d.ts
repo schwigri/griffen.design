@@ -33,6 +33,7 @@ declare module "styled-components" {
 			md: string;
 			lg: string;
 			xl: string;
+			v: string;
 		};
 
 		sizes: {

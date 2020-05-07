@@ -32,6 +32,7 @@ const theme: DefaultTheme = {
 		md: "768px",
 		lg: "1012px",
 		xl: "1280px",
+		v: "600px",
 	},
 
 	sizes: {
@@ -65,7 +66,7 @@ const darkTheme: DefaultTheme = {
 	},
 
 	shadows: {
-		card: "0 1px 2px rgba(46, 41, 51, 0.08), 0 2px 4px rgba(71, 63, 79, 0.08)",
+		card: "0 4px 8px rgba(46, 41, 51, 0.08), 0 8px 16px rgba(71, 63, 79, 0.16)",
 	},
 };
 
