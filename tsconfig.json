@@ -10,7 +10,14 @@
 		"esModuleInterop": true,
 		"noUnusedLocals": false,
 		"allowJs": true,
-		"typeRoots": ["./types", "./node_modules/@types"]
+		"typeRoots": ["./types", "./node_modules/@types"],
+		"plugins": [
+			{
+				"transform": "typescript-plugin-styled-components",
+				"type": "config",
+				"ssr": true,
+			}
+		]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "public", ".cache"]
