@@ -134,7 +134,7 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 
 							case PageBodyItemTypes.PROJECT_COLLECTION:
 								const projectCollectionItem = section as PageBodyProjectCollectionItem;
-								const items = projectCollectionItem.fields?.map(field => field && field.project)
+								const items = projectCollectionItem.fields?.map(field => field && field.project);
 								return <Collection key={uniqid()} items={items} itemElement="article" />;
 
 							case PageBodyItemTypes.PDF:
@@ -198,9 +198,15 @@ export const query = graphql`
 						fields {
 							project {
 								... on PRISMIC_Project {
+									_meta {
+										uid
+										type
+										lang
+									}
 									title
 									tile_subtitle
 									tile_description
+									thumbnail
 								}
 							}
 						}

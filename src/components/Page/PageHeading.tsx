@@ -5,6 +5,8 @@ import { Elements, RichText } from "prismic-reactjs";
 
 import LangContext from "../LangContext";
 
+import { getChallengeText, getOutcomeText } from "../../utils/functions";
+
 const ChallengeOutcome = styled("div")`
 	font-size: 0.9em;
 
@@ -86,13 +88,13 @@ class PageHeading extends React.Component<InferProps<typeof PageHeading.propType
 						{challenge && outcome && (
 							<ChallengeOutcomeWrapper>
 								<ChallengeOutcome>
-									{/* <h2>{getTranslation("Challenge", langContext.lang)}</h2> */}
+									<h2>{getChallengeText(langContext.lang)}</h2>
 									<RichText render={challenge} />
 								</ChallengeOutcome>
 
 
 								<ChallengeOutcome>
-									{/* <h2>{getTranslation("Outcome", langContext.lang)}</h2> */}
+									<h2>{getOutcomeText(langContext.lang)}</h2>
 									<RichText render={outcome} />
 								</ChallengeOutcome>
 							</ChallengeOutcomeWrapper>

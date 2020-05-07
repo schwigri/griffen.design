@@ -41,26 +41,19 @@ class Layout extends React.Component<InferProps<typeof Layout.propTypes>, Layout
 	constructor(props: InferProps<typeof Layout.propTypes>) {
 		super(props);
 
-		this.state = { currentTheme: theme };
-		this.updateTheme = this.updateTheme.bind(this);
-	}
-
-	updateTheme() {
-		if (this.state.darkModeQuery?.matches) {
-			this.setState({ currentTheme: darkTheme });
-		} else {
-			this.setState({ currentTheme: theme });
-		}
+		this.state = { currentTheme: darkTheme };
 	}
 
 	componentDidMount() {
-		const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-		this.setState({ darkModeQuery });
-		this.updateTheme();
-	}
+		const darkModeQuery = window.matchMedia("print, (prefers-color-scheme: light)");
 
-	componentDidUpdate() {
-		this.updateTheme();
+		const updateTheme = () => {
+			darkModeQuery.matches ? this.setState({ currentTheme: theme }) : this.setState({ currentTheme: darkTheme });
+		};
+
+		darkModeQuery.addListener(updateTheme);
+
+		updateTheme();
 	}
 
 	render() {
