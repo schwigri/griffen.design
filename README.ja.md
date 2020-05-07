@@ -7,11 +7,10 @@
 [![Build Status](https://travis-ci.com/schwigri/griffen.design.svg?branch=master)](https://travis-ci.com/schwigri/griffen.design)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8b7e9850-f273-40f8-83cf-d7f6deab6b4a/deploy-status)](https://app.netlify.com/sites/schwigri/deploys)
 
-## Goals
+## 目的
 
-With this project I aim to craft an experience that accurately portrays my academic achievements, design expertise, and dedication to language learning.
+このプロジェクトの目的は、自分の学力・デザインの専門知識・語学マニアをきちんと映し出すポートフォリを作りたいと思っています。
 
+## ライセンス
 
-## License
-
-The content of this project is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE).
+このプロジェクトのコンテンツは [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) ライセンスのもとで配布されています。そのコンテンツをフォーマットしたり表示したりするプログラミングは [MIT ライセンス](LICENSE) のもとで配布されています。
