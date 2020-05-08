@@ -115,7 +115,7 @@ class ProjectFooter extends React.Component<InferProps<typeof ProjectFooter.prop
 					<ProjectFooterEntry direction="next">
 						<span>{getNextText(lang)}</span>
 						<Link to={getSlug(lang, PageTypes.PROJECT, nextProject.project?._meta?.uid)}>
-							<RichText renderAsText={nextProject.project?.title} />
+							{RichText.asText(nextProject.project?.title)}
 						</Link>
 					</ProjectFooterEntry>
 				)}
