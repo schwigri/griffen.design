@@ -19,7 +19,12 @@ const ProjectFooterEntry = styled("div")<ProjectFooterEntryProps>`
 	flex-direction: column;
 	float: ${props => props.direction === "next" ? "right" : "left"};
 	justify-content: center;
-	width: 45%;
+	text-align: ${props => props.direction === "next" ? "right" : "left"};
+	width: 100%;
+
+	@media (min-width: ${props => props.theme.breakpoints.md}) {
+		width: 45%;
+	}
 
 	span {
 		font-size: 0.9em;
