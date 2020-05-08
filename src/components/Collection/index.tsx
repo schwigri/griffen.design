@@ -6,9 +6,9 @@ import uniqid from "uniqid";
 
 import Tile, { TileWrapper, TileSubtitle } from "./Tile";
 
-import { getSlug, getReadMoreText } from "../../utils/functions";
+import { PageHeading } from "../Page";
 
-const CollectionItem = styled("article")``;
+import { getSlug, getReadMoreText } from "../../utils/functions";
 
 const CollectionColumn = styled("div")`
 	display: flex;
@@ -47,7 +47,9 @@ const CollectionColumn = styled("div")`
 			}
 
 			${TileSubtitle} + p:not(:last-child) {
-				display: none;
+				@media (min-width: ${props => props.theme.breakpoints.xl}) {
+					display: none;
+				}
 			}
 		}
 	}
@@ -62,19 +64,19 @@ const CollectionWrapper = styled("div")`
 
 	@media (min-width: ${props => props.theme.breakpoints.md}) {
 		flex-direction: row;
-		width: calc(100% - 2em);
-	}
-
-	@media (min-width: ${props => props.theme.breakpoints.xl}) {
 		width: calc(100% - 4em);
 	}
 
 	&:hover {
 		${TileWrapper} {
-			transform: scale(0.95);
+			@media (min-width: ${props => props.theme.breakpoints.xl}) {
+				transform: scale(0.95);
+			}
 
 			&:hover {
-				transform: scale(1.05);
+				@media (min-width: ${props => props.theme.breakpoints.xl}) {
+					transform: scale(1.05);
+				}
 			}
 		}
 	}
@@ -99,6 +101,8 @@ class Collection extends React.Component<InferProps<typeof Collection.propTypes>
 			})
 		),
 		itemElement: PropTypes.string,
+		title: PropTypes.array,
+		subtitle: PropTypes.array,
 	};
 
 	render() {
@@ -140,10 +144,16 @@ class Collection extends React.Component<InferProps<typeof Collection.propTypes>
 		});
 
 		return (
-			<CollectionWrapper>
-				<CollectionColumn>{leftItems}</CollectionColumn>
-				<CollectionColumn>{rightItems}</CollectionColumn>
-			</CollectionWrapper>
+			<>
+				{this.props.title && (
+					<PageHeading title={this.props.title} subtitle={this.props.subtitle} />
+				)}
+
+				<CollectionWrapper>
+					<CollectionColumn>{leftItems}</CollectionColumn>
+					<CollectionColumn>{rightItems}</CollectionColumn>
+				</CollectionWrapper>
+			</>
 		);
 	}
 }

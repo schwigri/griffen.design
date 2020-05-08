@@ -85,3 +85,33 @@ export const getOutcomeText = (lang?: string): string => {
 			return "Outcome";
 	}
 };
+
+export const getPreviousText = (lang?: string): string => {
+	const langCode = getLanguageCode(lang);
+
+	switch (langCode) {
+		case LanguageCodes.JA:
+			return "前";
+
+		case LanguageCodes.DE:
+			return "Zurück";
+
+		default:
+			return "Previous";
+	}
+};
+
+export const getNextText = (lang?: string): string => {
+	const langCode = getLanguageCode(lang);
+
+	switch (langCode) {
+		case LanguageCodes.JA:
+			return "次";
+
+		case LanguageCodes.DE:
+			return "Weiter";
+
+		default:
+			return "Next";
+	}
+};

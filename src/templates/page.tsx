@@ -66,9 +66,18 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 							// Shape for project collection
 							PropTypes.shape({
 								type: PropTypes.string.isRequired,
+								primary: PropTypes.shape({
+									collection_title: PropTypes.array,
+									collection_subtitle: PropTypes.array,
+								}).isRequired,
 								fields: PropTypes.arrayOf(
 									PropTypes.shape({
 										project: PropTypes.shape({
+											_meta: PropTypes.shape({
+												uid: PropTypes.string.isRequired,
+												type: PropTypes.string.isRequired,
+												lang: PropTypes.string.isRequired,
+											}).isRequired,
 											title: PropTypes.array,
 											tile_subtitle: PropTypes.string,
 											tile_description: PropTypes.array,
@@ -135,7 +144,15 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 							case PageBodyItemTypes.PROJECT_COLLECTION:
 								const projectCollectionItem = section as PageBodyProjectCollectionItem;
 								const items = projectCollectionItem.fields?.map(field => field && field.project);
-								return <Collection key={uniqid()} items={items} itemElement="article" />;
+								return (
+									<Collection
+										key={uniqid()}
+										title={projectCollectionItem.primary?.collection_title}
+										subtitle={projectCollectionItem.primary?.collection_subtitle}
+										items={items}
+										itemElement="article"
+									/>
+								);
 
 							case PageBodyItemTypes.PDF:
 								const pdfBodyItem = section as PageBodyPDFItem;
@@ -195,6 +212,10 @@ export const query = graphql`
 					}
 					... on PRISMIC_PageBodyProject_collection {
 						type
+						primary {
+							collection_title
+							collection_subtitle
+						}
 						fields {
 							project {
 								... on PRISMIC_Project {

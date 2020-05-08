@@ -10,12 +10,12 @@ import { getChallengeText, getOutcomeText } from "../../utils/functions";
 const ChallengeOutcome = styled("div")`
 	font-size: 0.9em;
 
-	& h2,
-	& p {
+	h2,
+	p {
 		width: 100%;
 	}
 
-	& p {
+	p {
 		margin-bottom: 0;
 	}
 `;
@@ -52,13 +52,15 @@ const ChallengeOutcomeWrapper = styled("div")`
 const PageHeadingWrapper = styled("header")`
 	padding: 4em 0 0;
 
-	& h1 {
+	& > h1,
+	& > h2 {
 		max-width: 100%;
 		text-align: center;
 	}
 
 	// Subtitle
-	& h1 + p {
+	& > h1 + p,
+	& > h2 + p {
 		color: ${props => props.theme.colors.subtitle};
 		font-family: ${props => props.theme.fonts.heading};
 		font-size: 1.2em;

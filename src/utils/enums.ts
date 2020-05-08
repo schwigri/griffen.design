@@ -117,8 +117,17 @@ export type PageBodyImageItem = {
 
 export type PageBodyProjectCollectionItem = {
 	type: string;
+	primary: {
+		collection_title?: [];
+		collection_subtitle?: [];
+	};
 	fields?: {
 		project?: {
+			_meta: {
+				uid: string;
+				type: string;
+				lang: string;
+			};
 			title?: [];
 			tile_subtitle?: string;
 			tile_description?: [];

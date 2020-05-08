@@ -101,7 +101,9 @@ const TileWrapper = styled("div")`
 		}
 
 		${TileBackgroundImage} {
-			opacity: 0.1;
+			@media (min-width: ${props => props.theme.breakpoints.xl}) {
+				opacity: 0.1;
+			}
 		}
 	}
 `;

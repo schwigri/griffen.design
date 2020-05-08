@@ -9,6 +9,7 @@ import Page, { PageHeading } from "../components/Page";
 import SEO from "../components/SEO";
 import PDF from "../components/PDF";
 import Figure from "../components/Figure";
+import ProjectFooter from "../components/ProjectFooter";
 
 import {
 	AlternateLanguage,
@@ -142,7 +143,7 @@ class ProjecTemplate extends React.Component<InferProps<typeof ProjecTemplate.pr
 								return imageBodyItem.fields?.map(field => {
 									if (field) {
 										const image = <Img fluid={field.imageSharp?.childImageSharp.fluid} />;
-										return <Figure figure={image} caption={field.caption} />;
+										return <Figure key={uniqid()} figure={image} caption={field.caption} />;
 									}
 								});
 
@@ -151,6 +152,8 @@ class ProjecTemplate extends React.Component<InferProps<typeof ProjecTemplate.pr
 						}
 					}
 				})}
+
+				<ProjectFooter uid={_meta.uid} />
 			</Page>
 		);
 	}
