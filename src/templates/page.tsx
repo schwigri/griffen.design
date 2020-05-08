@@ -79,7 +79,7 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 												lang: PropTypes.string.isRequired,
 											}).isRequired,
 											title: PropTypes.array,
-											tile_subtitle: PropTypes.string,
+											tile_subtitle: PropTypes.array,
 											tile_description: PropTypes.array,
 										}),
 									})
@@ -139,35 +139,49 @@ class PageTemplate extends React.Component<InferProps<typeof PageTemplate.propTy
 						switch (section.type) {
 							case PageBodyItemTypes.TEXT:
 								const textBodyItem = section as PageBodyTextItem;
-								return textBodyItem.fields?.map(field => field ? <RichText key={uniqid()} render={field.content || null} /> : null);
+								return (
+									<section key={uniqid()}>
+										{textBodyItem.fields?.map(field => field ? <RichText key={uniqid()} render={field.content || null} /> : null)}
+									</section>
+								);
 
 							case PageBodyItemTypes.PROJECT_COLLECTION:
 								const projectCollectionItem = section as PageBodyProjectCollectionItem;
+								console.log(projectCollectionItem);
 								const items = projectCollectionItem.fields?.map(field => field && field.project);
 								return (
-									<Collection
-										key={uniqid()}
-										title={projectCollectionItem.primary?.collection_title}
-										subtitle={projectCollectionItem.primary?.collection_subtitle}
-										items={items}
-										itemElement="article"
-									/>
+									<section key={uniqid()}>
+										<Collection
+											title={projectCollectionItem.primary?.collection_title}
+											subtitle={projectCollectionItem.primary?.collection_subtitle}
+											items={items}
+											itemElement="article"
+										/>
+									</section>
 								);
 
 							case PageBodyItemTypes.PDF:
 								const pdfBodyItem = section as PageBodyPDFItem;
 								const url = pdfBodyItem.primary?.pdf_file?.url || pdfBodyItem.primary?.pdf_url?.url || null;
 								const numPages = pdfBodyItem.primary?.number_of_pages || 1;
-								if (url) return <PDF key={uniqid()} url={url} pages={numPages} />;
+								if (url) return (
+									<section key={uniqid()}>
+										<PDF url={url} pages={numPages} />
+									</section>
+								);
 
 							case PageBodyItemTypes.IMAGE:
 								const imageBodyItem = section as PageBodyImageItem;
-								return imageBodyItem.fields?.map(field => {
-									if (field) {
-										const image = <Img fluid={field.imageSharp?.childImageSharp.fluid} />;
-										return <Figure figure={image} caption={field.caption} />;
-									}
-								});
+								return (
+									<section key={uniqid()}>
+										{imageBodyItem.fields?.map(field => {
+											if (field) {
+												const image = <Img fluid={field.imageSharp?.childImageSharp.fluid} />;
+												return <Figure figure={image} caption={field.caption} />;
+											}
+										})}
+									</section>
+								);
 
 							default:
 								return null;

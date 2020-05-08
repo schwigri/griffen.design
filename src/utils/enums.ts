@@ -129,7 +129,7 @@ export type PageBodyProjectCollectionItem = {
 				lang: string;
 			};
 			title?: [];
-			tile_subtitle?: string;
+			tile_subtitle?: [];
 			tile_description?: [];
 		};
 	}[];

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import uniqid from "uniqid";
 
-import PageHeading from "./PageHeading";
+import PageHeading, { PageHeadingWrapper } from "./PageHeading";
 
 import needsReducedMotion from "../../utils/needsReducedMotion";
 
@@ -31,4 +31,4 @@ class Page extends React.Component<InferProps<typeof Page.propTypes>> {
 
 export default needsReducedMotion(Page);
 
-export { PageHeading };
+export { PageHeading, PageHeadingWrapper };

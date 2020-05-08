@@ -4,9 +4,9 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import uniqid from "uniqid";
 
-import Tile, { TileWrapper, TileSubtitle } from "./Tile";
+import Tile, { TileWrapper } from "./Tile";
 
-import { PageHeading } from "../Page";
+import { PageHeading, PageHeadingWrapper } from "../Page";
 
 import { getSlug, getReadMoreText } from "../../utils/functions";
 
@@ -46,7 +46,7 @@ const CollectionColumn = styled("div")`
 				width: 65%;
 			}
 
-			${TileSubtitle} + p:not(:last-child) {
+			p:nth-last-child(2) {
 				@media (min-width: ${props => props.theme.breakpoints.xl}) {
 					display: none;
 				}
@@ -80,6 +80,70 @@ const CollectionWrapper = styled("div")`
 			}
 		}
 	}
+
+	${PageHeadingWrapper} + & {
+		${CollectionColumn} {
+			&:first-child {
+				margin-top: 0;
+
+				@media (min-width: ${props => props.theme.breakpoints.xl}) {
+					margin-top: 2em;
+				}
+
+				${TileWrapper} {
+					&:first-child {
+						@media (min-width: ${props => props.theme.breakpoints.xl}) {
+							padding-bottom: 47.8125%;
+							width: 85%;
+						}
+					}
+
+					&:last-child {
+						@media (min-width: ${props => props.theme.breakpoints.xl}) {
+							padding-bottom: 36.5625%;
+							width: 65%;
+						}
+
+						p:nth-last-child(2) {
+							@media (min-width: ${props => props.theme.breakpoints.xl}) {
+								display: none;
+							}
+						}
+					}
+				}
+			}
+
+			&:last-child {
+				margin-top: 2em;
+
+				@media (min-width: ${props => props.theme.breakpoints.xl}) {
+					margin-top: 0;
+				}
+
+				${TileWrapper} {
+					&:first-child {
+						@media (min-width: ${props => props.theme.breakpoints.xl}) {
+							padding-bottom: calc(9 / 16 * 100%);
+							width: 100%;
+						}
+					}
+
+					&:last-child {
+						@media (min-width: ${props => props.theme.breakpoints.xl}) {
+							padding-bottom: 47.8125%;
+							width: 85%;
+						}
+
+						p:nth-last-child(2) {
+							@media (min-width: ${props => props.theme.breakpoints.xl}) {
+								display: initial;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 `;
 
 class Collection extends React.Component<InferProps<typeof Collection.propTypes>> {
@@ -92,7 +156,7 @@ class Collection extends React.Component<InferProps<typeof Collection.propTypes>
 					uid: PropTypes.string.isRequired,
 				}).isRequired,
 				title: PropTypes.array,
-				tile_subtitle: PropTypes.string,
+				tile_subtitle: PropTypes.array,
 				tile_description: PropTypes.array,
 				thumbnail: PropTypes.shape({
 					url: PropTypes.string,

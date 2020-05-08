@@ -109,3 +109,5 @@ class PageHeading extends React.Component<InferProps<typeof PageHeading.propType
 }
 
 export default PageHeading;
+
+export { PageHeadingWrapper };

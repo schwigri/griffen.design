@@ -3,12 +3,6 @@ import PropTypes, { InferProps } from "prop-types";
 import styled from "styled-components";
 import { RichText } from "prismic-reactjs";
 
-const TileSubtitle = styled("p")`
-	color: ${props => props.theme.colors.subtitle};
-	font-family: ${props => props.theme.fonts.heading};
-	font-size: 1.2em;
-`;
-
 const TileForeground = styled("div")`
 	box-sizing: border-box;
 	padding: 1em;
@@ -27,15 +21,6 @@ const TileForeground = styled("div")`
 		position: absolute;
 		text-align: center;
 		width: 100%;
-
-		${TileSubtitle} {
-			color: inherit;
-		}
-
-		p {
-			box-sizing: border-box;
-			padding: 0 3em;
-		}
 	}
 
 	h1,
@@ -48,8 +33,25 @@ const TileForeground = styled("div")`
 		margin-top: 0;
 	}
 
-	p:last-child {
-		margin-bottom: 0;
+	p {
+		@media (min-width: ${props => props.theme.breakpoints.xl}) {
+			box-sizing: border-box;
+			padding: 0 3em;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:nth-child(2):not(:nth-last-child(2)) {
+			color: ${props => props.theme.colors.subtitle};
+			font-family: ${props => props.theme.fonts.heading};
+			font-size: 1.2em;
+
+			@media (min-width: ${props => props.theme.breakpoints.xl}) {
+				color: inherit;
+			}
+		}
 	}
 `;
 
@@ -113,7 +115,7 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 		element: PropTypes.string,
 		image: PropTypes.string,
 		title: PropTypes.array,
-		subtitle: PropTypes.string,
+		subtitle: PropTypes.array,
 		description: PropTypes.array,
 		link: PropTypes.node,
 	};
@@ -121,6 +123,8 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 	render() {
 		const element = this.props.element || "div";
 		const { image, title, subtitle, description, link } = this.props;
+
+		console.log(title, subtitle);
 
 		return (
 			<TileWrapper as={element}>
@@ -130,7 +134,7 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 
 				<TileForeground>
 					{title && <RichText render={title} />}
-					{subtitle && <TileSubtitle>{subtitle}</TileSubtitle>}
+					{subtitle && <RichText render={subtitle} />}
 					{description && <RichText render={description} />}
 					{link && <p>{link}</p>}
 				</TileForeground>
@@ -141,4 +145,4 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 
 export default Tile;
 
-export { TileWrapper, TileForeground, TileSubtitle };
+export { TileWrapper, TileForeground };
