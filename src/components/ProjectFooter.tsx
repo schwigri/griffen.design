@@ -82,6 +82,7 @@ class ProjectFooter extends React.Component<InferProps<typeof ProjectFooter.prop
 	};
 
 	render() {
+		console.log("FOOTER:", typeof RichText);
 		const { uid } = this.props;
 		const { lang } = this.props.lang || "en-us";
 		const layout = this.props.data?.prismic.allLayouts.edges
@@ -114,7 +115,7 @@ class ProjectFooter extends React.Component<InferProps<typeof ProjectFooter.prop
 					<ProjectFooterEntry direction="next">
 						<span>{getNextText(lang)}</span>
 						<Link to={getSlug(lang, PageTypes.PROJECT, nextProject.project?._meta?.uid)}>
-							{RichText.asText(nextProject.project?.title)}
+							<RichText renderAsText={nextProject.project?.title} />
 						</Link>
 					</ProjectFooterEntry>
 				)}

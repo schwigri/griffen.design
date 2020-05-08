@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes, { InferProps } from "prop-types";
 import styled from "styled-components";
-import { Elements, RichText } from "prismic-reactjs";
+import { RichText } from "prismic-reactjs";
 
 import LangContext from "../LangContext";
 
@@ -70,8 +70,14 @@ const PageHeadingWrapper = styled("header")`
 
 class PageHeading extends React.Component<InferProps<typeof PageHeading.propTypes>> {
 	static propTypes = {
-		title: PropTypes.array,
-		subtitle: PropTypes.array,
+		title: PropTypes.oneOfType([
+			PropTypes.array,
+			PropTypes.string,
+		]),
+		subtitle: PropTypes.oneOfType([
+			PropTypes.array,
+			PropTypes.string,
+		]),
 		challenge: PropTypes.array,
 		outcome: PropTypes.array,
 	};
@@ -84,8 +90,8 @@ class PageHeading extends React.Component<InferProps<typeof PageHeading.propType
 				{langContext => (
 					<>
 						<PageHeadingWrapper>
-							{title ? <RichText render={title} /> : <h1>Untitled</h1>}
-							{subtitle && <RichText render={subtitle} />}
+							{title && (typeof title === "string" ? <h1>{title}</h1> : <RichText render={title} />) || <h1>Untitled</h1>}
+							{subtitle && (typeof subtitle === "string" ? <p>{subtitle}</p> : <RichText render={subtitle} />)}
 						</PageHeadingWrapper>
 						{challenge && outcome && (
 							<ChallengeOutcomeWrapper>
