@@ -122,9 +122,7 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 
 	render() {
 		const element = (this.props.element || "div") as React.ElementType;
-		const { image, title, subtitle, description, link } = this.props;
-
-		console.log(title, subtitle);
+		const { image, title, subtitle, description, link } = this.props;z
 
 		return (
 			<TileWrapper as={element}>
