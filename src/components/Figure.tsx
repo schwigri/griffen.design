@@ -19,7 +19,7 @@ class Figure extends React.Component<InferProps<typeof Figure.propTypes>> {
 			<FigureWrapper>
 				{figure}
 				{caption && (
-					<figcaption>{caption}</figcaption>
+					<figcaption data-testid="caption">{caption}</figcaption>
 				)}
 			</FigureWrapper>
 		);

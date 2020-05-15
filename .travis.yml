@@ -4,12 +4,6 @@ node_js:
   - "stable"
   - "lts/*"
 
-branches:
-  only:
-    - master
-    - staging
-    - refactor
-
 cache:
   directories:
     - node_modules
@@ -18,4 +12,5 @@ before_script:
   - "npm install"
 
 script:
+  - "npm test"
   - "npm run build"
