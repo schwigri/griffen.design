@@ -83,7 +83,11 @@ const FooterWrapper = styled("footer")`
 	}
 
 	@media (min-width: ${props => props.theme.breakpoints.lg}) {
-		padding: 4em 4em 4em 10em;
+		padding: 4em;
+	}
+
+	@media (min-width: ${props => props.theme.breakpoints.lg}) and (min-height: ${props => props.theme.breakpoints.v}) {
+		padding-left: 10em;
 	}
 `;
 

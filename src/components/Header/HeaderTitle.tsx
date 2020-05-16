@@ -31,7 +31,7 @@ const HeaderTitleLink = styled(Link)`
 			0 0 0 0.5em ${props => props.theme.colors.copy};
 	}
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		display: block;
 		transform: scale(-1);
 

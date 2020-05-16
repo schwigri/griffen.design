@@ -10,6 +10,7 @@ const theme: DefaultTheme = {
 		theme: "#1467ff",
 		accent: "#fff8db",
 		linkAccent: "rgba(20, 103, 255, 0.15)",
+		linkAccentOnDark: "rgba(255, 248, 219, 0.15)",
 		langLinkAccent: "rgba(255, 255, 255, 0.5)",
 		separator: "#ddd",
 	},
@@ -49,6 +50,7 @@ const darkTheme: DefaultTheme = {
 	...theme,
 
 	colors: {
+		...theme.colors,
 		background: "#000",
 		copy: "#ddd",
 		heading: "#eee",
@@ -62,10 +64,12 @@ const darkTheme: DefaultTheme = {
 	},
 
 	gradients: {
+		...theme.gradients,
 		header: "linear-gradient(180deg, #000, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0))",
 	},
 
 	shadows: {
+		...theme.shadows,
 		card: "0 4px 8px rgba(46, 41, 51, 0.08), 0 8px 16px rgba(71, 63, 79, 0.16)",
 	},
 };

@@ -24,7 +24,7 @@ const HeaderWrapper = styled("header")`
 		background-image: ${props => props.theme.gradients.header};
 	}
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		background-color: ${props => props.theme.colors.background};
 		background-image: none;
 		box-shadow: ${props => props.theme.shadows.card};

@@ -8,7 +8,7 @@ const HeaderStars = styled(Graphics.Stars)`
 	height: 100%;
 	width: auto;
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		height: auto;
 		width: 100%;
 	}
@@ -25,7 +25,7 @@ const HeaderStarsLink = styled(Link)`
 		background-color: transparent;
 	}
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		height: auto;
 		width: 100%;
 	}

@@ -38,7 +38,7 @@ const HeaderNavLink = styled(Link)`
 		}
 	}
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		border-bottom: 0;
 		margin-bottom: 1em;
 		margin-left: 0;
@@ -54,7 +54,7 @@ const HeaderNavLink = styled(Link)`
 const HeaderNavWrapper = styled("nav")`
 	display: flex;
 
-	@media (min-width: ${props => props.theme.breakpoints.md}) {
+	@media (min-width: ${props => props.theme.breakpoints.md}) and (min-height: ${props => props.theme.breakpoints.v}) {
 		flex-direction: row-reverse;
 	}
 `;

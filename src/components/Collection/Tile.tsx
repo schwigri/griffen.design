@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes, { InferProps } from "prop-types";
 import styled from "styled-components";
 import { RichText } from "prismic-reactjs";
+import { Link } from "gatsby";
 
 const TileForeground = styled("div")`
 	box-sizing: border-box;
@@ -21,6 +22,29 @@ const TileForeground = styled("div")`
 		position: absolute;
 		text-align: center;
 		width: 100%;
+
+		h1 {
+			color: #fff;
+		}
+
+		a {
+			border-bottom-color: ${props => props.theme.colors.linkAccentOnDark};
+			color: ${props => props.theme.colors.accent};
+
+			&:focus,
+			&:hover {
+				background-color: ${props => props.theme.colors.linkAccentOnDark};
+				border-bottom-color: ${props => props.theme.colors.accent};
+			}
+
+			&:focus {
+				border-radius: 2px;
+				box-shadow:
+					0 0 0 0.25em #000,
+					0 0 0 0.5em ${props => props.theme.colors.accent};
+				outline: none;
+			}
+		}
 	}
 
 	h1,
@@ -53,6 +77,17 @@ const TileForeground = styled("div")`
 			}
 		}
 	}
+`;
+
+const TileBackgroundLink = styled(Link)`
+	box-sizing: border-box;
+	display: block;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 2;
 `;
 
 const TileBackgroundImage = styled("img")`
@@ -117,17 +152,29 @@ class Tile extends React.Component<InferProps<typeof Tile.propTypes>> {
 		title: PropTypes.array,
 		subtitle: PropTypes.array,
 		description: PropTypes.array,
-		link: PropTypes.node,
+		link: PropTypes.shape({
+			props: PropTypes.shape({
+				to: PropTypes.string.isRequired,
+				children: PropTypes.node,
+			}).isRequired,
+		}),
 	};
 
 	render() {
 		const element = (this.props.element || "div") as React.ElementType;
 		const { image, title, subtitle, description, link } = this.props;
 
+		console.log(link);
+
 		return (
 			<TileWrapper as={element}>
 				<TileBackground>
 					{image && <TileBackgroundImage src={image} />}
+					{link && (
+						<TileBackgroundLink to={link.props.to}>
+							<span className="sr-only">{link.props.children}</span>
+						</TileBackgroundLink>
+					)}
 				</TileBackground>
 
 				<TileForeground>

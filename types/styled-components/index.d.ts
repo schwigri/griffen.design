@@ -11,6 +11,7 @@ declare module "styled-components" {
 			theme: string;
 			accent: string;
 			linkAccent: string;
+			linkAccentOnDark: string;
 			langLinkAccent: string;
 			separator: string;
 		};
