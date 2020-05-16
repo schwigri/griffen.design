@@ -87,7 +87,7 @@ const FooterWrapper = styled("footer")`
 	}
 `;
 
-class Footer extends React.Component<InferProps<typeof Footer.propTypes>> {
+class PureFooter extends React.Component<InferProps<typeof PureFooter.propTypes>> {
 	static propTypes = {
 		lang: PropTypes.shape({
 			lang: PropTypes.string.isRequired,
@@ -232,12 +232,14 @@ export default () => {
 
 	return (
 		<LangContext.Consumer>
-		{lang => (
-			<StaticQuery
-				query={`${query}`}
-				render={data => <Footer lang={lang} data={data} />}
-			/>
-		)}
+			{lang => (
+				<StaticQuery
+					query={`${query}`}
+					render={data => <PureFooter lang={lang} data={data} />}
+				/>
+			)}
 		</LangContext.Consumer>
 	);
 };
+
+export { PureFooter };
