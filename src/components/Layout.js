@@ -190,6 +190,55 @@ function Layout({ locale, id = '', jaFont = false, variants = {}, children }) {
 				/>{' '}
 			</Helmet>
 
+			<div
+				style={{
+					alignItems: 'center',
+					backgroundColor: '#000000',
+					boxSizing: 'border-box',
+					color: '#fff',
+					flexDirection: 'column',
+					fontSize: '1em',
+					display: 'flex',
+					height: '100%',
+					justifyContent: 'center',
+					padding: '2em',
+					position: 'fixed',
+					textAlign: 'center',
+					width: '100%',
+					zIndex: 9,
+				}}
+			>
+				<h1 style={{ color: '#fff' }}>Black Lives Matter</h1>
+				<p
+					className="subtitle"
+					style={{
+						color: '#757575',
+					}}
+				>
+					#BlackoutTuesday
+				</p>
+				<p style={{ maxWidth: 540 }}>
+					All lives cannot matter until Black lives matter.
+				</p>
+				<p style={{ maxWidth: 540 }}>
+					Please take a moment out of your day to support Black Americans by
+					signing petitions, donating, and standing up for those who are
+					oppresed. Learn more by visiting{' '}
+					<a
+						href="https://blacklivesmatters.carrd.co/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						https://blacklivesmatters.carrd.co/
+					</a>
+				</p>
+				<p style={{ maxWidth: 540 }}>
+					I am matching donations up to $1,000; send a screenshot of your
+					donation to <a href="mailto:schwigri@pm.me">schwigri@pm.me</a> and I
+					will match it.
+				</p>
+			</div>
+
 			<Header locale={locale} id={id} />
 
 			<AnimatePresence>
