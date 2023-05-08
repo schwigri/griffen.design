@@ -16,7 +16,7 @@
 		"dotenv": "^8.2.0",
 		"focus-within-polyfill": "^5.0.9",
 		"framer-motion": "^1.11.0",
-		"gatsby": "^2.22.17",
+		"gatsby": "^2.32.13",
 		"gatsby-image": "^2.4.6",
 		"gatsby-plugin-canonical-urls": "^2.3.3",
 		"gatsby-plugin-manifest": "^2.4.10",
